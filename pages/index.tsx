@@ -8,7 +8,6 @@ const Home: NextPage = () => {
                 <title>Home</title>
                 <meta name="description" content="Macos clone" />
                 <link rel="icon" href="/favicon.ico" />
-                {/* TODO: icon  */}
             </Head>
 
             <main> Main Page</main>
