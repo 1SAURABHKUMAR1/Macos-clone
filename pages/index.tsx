@@ -10,18 +10,7 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className="wrapper">
-                {/* <StatusBar toggleAppleMenu={toggleAppleMenu} />
-                    <div className="inner_wrapper" onClick={closeAppleMenu}>
-                        <Folders openFolderContent={openFolderContent} />
-                        <FolderContent
-                            isFolderOpen={isFolderOpen}
-                            closeFolderContent={closeFolderContent}
-                        />
-                        <AppleMenu isAppleMenuOpen={isAppleMenuOpen} />
-                    </div>
-                    <MenuBar /> */}
-            </main>
+            <div id="root"></div>
         </div>
     );
 };
