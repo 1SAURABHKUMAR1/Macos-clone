@@ -186,8 +186,3 @@ section {
     --system-z-index-system-dialog: 90;
     --system-z-index-menubar-menu-parent: 160;
 }
-
-#root {
-    width: 100%;
-    height: 100%;
-}
