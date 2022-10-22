@@ -10,12 +10,12 @@ import {
     MainWindowArea,
 } from '@components/index';
 
-const Main = styled.div`
+const Container = styled.div`
     height: 100%;
     width: 100%;
 `;
 
-const Container = styled.div`
+const Main = styled.div`
     height: 100%;
     width: 100%;
     display: flex;
@@ -24,24 +24,24 @@ const Container = styled.div`
 
 const Home: NextPage = () => {
     return (
-        <Main>
+        <>
             <Head>
                 <title>Home</title>
                 <meta name="description" content="Macos clone" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Main>
-                <Container>
+            <Container>
+                <Main>
                     <TopBarArea />
                     <MainWindowArea />
                     <DockArea />
-                </Container>
+                </Main>
 
                 <Wallpaper />
                 <BootupScreen />
-            </Main>
-        </Main>
+            </Container>
+        </>
     );
 };
 

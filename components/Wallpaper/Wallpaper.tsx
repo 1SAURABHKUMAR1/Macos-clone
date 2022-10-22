@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
+import { WallpaperDiv } from './styled';
 
 const Wallpaper: NextPage = () => {
-    return <></>;
+    return <WallpaperDiv></WallpaperDiv>;
 };
 
 export default Wallpaper;
