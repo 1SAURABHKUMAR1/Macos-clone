@@ -1,7 +1,12 @@
 import type { NextPage } from 'next';
+import { WindowArea } from './styled';
 
 const MainWindowArea: NextPage = () => {
-    return <></>;
+    return (
+        <>
+            <WindowArea></WindowArea>
+        </>
+    );
 };
 
 export default MainWindowArea;
