@@ -1,14 +1,37 @@
 import type { NextPage } from 'next';
 import { MenuConfig } from 'helper/menu-bar.config';
-import { Container, FullDiv, IconButton, MenuContainer } from './styled';
+import { useState } from 'react';
+
+import {
+    Container,
+    FullDiv,
+    IconButton,
+    MenuContainer,
+    Menu,
+    MenuItem,
+    MenuDivider,
+} from './styled';
+
+import { useDetectClickOutside } from 'react-detect-click-outside';
+
+import { menuBarKeys } from 'types';
 
 const MenuBar: NextPage = () => {
+    const [activeMenu, setActiveMenu] = useState<menuBarKeys | ''>('');
+    const innerRef = useDetectClickOutside({
+        onTriggered: () => setActiveMenu(''),
+    });
+
     return (
-        <Container>
+        <Container ref={innerRef}>
             {Object.entries(MenuConfig).map(([key, value]) => (
                 <FullDiv key={key}>
                     <FullDiv>
                         <IconButton
+                            onClick={() => setActiveMenu(key as menuBarKeys)}
+                            onMouseOver={() => {
+                                activeMenu && setActiveMenu(key as menuBarKeys);
+                            }}
                             IconType={
                                 key === 'apple'
                                     ? 'apple'
@@ -37,8 +60,20 @@ const MenuBar: NextPage = () => {
                         </IconButton>
                     </FullDiv>
 
-                    <MenuContainer>{JSON.stringify(value)}</MenuContainer>
-                    {/* TODO: */}
+                    {activeMenu === key && (
+                        <MenuContainer>
+                            <Menu>
+                                {Object.entries(value.menu).map(([, value]) => (
+                                    <>
+                                        <MenuItem disabled={value.disabled}>
+                                            {value.title}
+                                        </MenuItem>
+                                        {value.break && <MenuDivider />}
+                                    </>
+                                ))}
+                            </Menu>
+                        </MenuContainer>
+                    )}
                 </FullDiv>
             ))}
         </Container>

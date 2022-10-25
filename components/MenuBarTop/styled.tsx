@@ -1,12 +1,5 @@
 import styled from 'styled-components';
 
-const MenuContainer = styled.div`
-    position: absolute;
-    margin-top: 0.2rem;
-
-    display: none; //FIXME:
-`;
-
 const Container = styled.div`
     height: 100%;
     display: flex;
@@ -45,4 +38,64 @@ const IconButton = styled.button<{ IconType: 'apple' | 'text' | 'Finder' }>`
     }
 `;
 
-export { MenuContainer, IconButton, FullDiv, Container };
+const MenuContainer = styled.div`
+    position: absolute;
+    margin-top: 0.2rem;
+`;
+
+const Menu = styled.div`
+    min-width: 14rem;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    padding: 0.55rem;
+    position: relative;
+    user-select: none;
+    background-color: hsla(var(--system-header-hsl), 0.3);
+    backdrop-filter: blur(26px);
+    border-radius: 0.5rem;
+    box-shadow: hsla(0, 0%, 0%, 0.3) 0px 0px 11px 0px,
+        var(--additional-box-shadow);
+`;
+
+const MenuItem = styled.button`
+    display: flex;
+    justify-content: flex-start;
+    width: auto;
+    padding: 0.3rem 0.4rem;
+    letter-spacing: 0.4px;
+    margin: 0.1rem;
+    font-weight: 500 !important;
+    font-size: 0.9rem !important;
+    border-radius: 0.3rem;
+    color: hsla(var(--system-color-dark-hsl), 1);
+
+    :disabled {
+        color: hsla(var(--system-color-dark-hsl), 0.5);
+    }
+
+    :not(:disabled) {
+        :hover,
+        :focus-visible {
+            background-color: var(--system-color-primary);
+            color: var(--system-color-primary-contrast);
+        }
+    }
+`;
+
+const MenuDivider = styled.div`
+    width: 100%;
+    height: 0.1rem;
+    background-color: hsla(var(--system-color-dark-hsl), 0.55);
+    margin: 2px 0;
+`;
+
+export {
+    MenuContainer,
+    IconButton,
+    FullDiv,
+    Container,
+    Menu,
+    MenuItem,
+    MenuDivider,
+};

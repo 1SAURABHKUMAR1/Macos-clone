@@ -10,3 +10,13 @@ export type menuConfig = {
         };
     };
 };
+
+export type menuBarKeys =
+    | 'apple'
+    | 'finder'
+    | 'file'
+    | 'edit'
+    | 'view'
+    | 'go'
+    | 'window'
+    | 'help';

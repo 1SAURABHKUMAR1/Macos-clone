@@ -26,7 +26,7 @@ const Home: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Home</title>
+                <title>Macos</title>
                 <meta name="description" content="Macos clone" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
