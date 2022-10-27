@@ -61,7 +61,7 @@ const MenuBar: NextPage = () => {
                     </FullDiv>
 
                     {activeMenu === key && (
-                        <MenuContainer>
+                        <MenuContainer menuType={key}>
                             <Menu>
                                 {Object.entries(value.menu).map(([, value]) => (
                                     <>

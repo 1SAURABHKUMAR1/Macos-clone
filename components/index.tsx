@@ -6,6 +6,7 @@ import MainWindowArea from '@components/MainWindowArea/MainWindowArea';
 import ActionCenter from '@components/ActionCenter/ActionCenter';
 import MenuBar from '@components/MenuBarTop/MenuBar';
 import TopBarTime from '@components/TopBarTime/TopBarTime';
+import DisplaySlider from '@components/DisplaySlider/DisplaySlider';
 
 export {
     BootupScreen,
@@ -16,4 +17,5 @@ export {
     ActionCenter,
     MenuBar,
     TopBarTime,
+    DisplaySlider,
 };

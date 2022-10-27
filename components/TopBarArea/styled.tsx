@@ -7,7 +7,6 @@ const Header = styled.header`
     height: 1.65rem;
     background-color: hsla(var(--system-header-hsl), 0.3);
     color: var(--system-text-white);
-    backdrop-filter: blur(12px);
     font-weight: 500;
 
     button {
@@ -17,6 +16,18 @@ const Header = styled.header`
 
     svg {
         font-size: 1rem;
+    }
+
+    ::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        backdrop-filter: blur(12px);
     }
 `;
 

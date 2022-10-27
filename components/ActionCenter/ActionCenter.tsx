@@ -2,14 +2,18 @@ import type { NextPage } from 'next';
 import { useState } from 'react';
 import ActionCenterMenu from 'components/ActionCenterMenu/ActionCenterMenu';
 import { Container, FullDiv } from './styled';
+import { useDetectClickOutside } from 'react-detect-click-outside';
 
 const ActionCenter: NextPage = () => {
     const [isActionVisible, setIsActionVisible] = useState<boolean>(false);
+    const actionMenuRef = useDetectClickOutside({
+        onTriggered: () => setIsActionVisible(false),
+    });
 
     const toggleActionDisplay = () => setIsActionVisible((visible) => !visible);
 
     return (
-        <FullDiv>
+        <FullDiv ref={actionMenuRef}>
             <Container onClick={toggleActionDisplay}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +28,6 @@ const ActionCenter: NextPage = () => {
             </Container>
 
             {isActionVisible && <ActionCenterMenu />}
-            {/* TODO: */}
         </FullDiv>
     );
 };

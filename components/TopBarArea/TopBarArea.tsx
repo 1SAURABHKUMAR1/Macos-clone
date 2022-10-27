@@ -8,8 +8,6 @@ const TopBarArea: NextPage = () => {
         <Header>
             <MenuBar />
 
-            {/* TODO: notch */}
-
             <GroupTimeAction>
                 <IconButton>
                     <IconImage
@@ -21,7 +19,7 @@ const TopBarArea: NextPage = () => {
                 <IconButton>
                     <IconImage
                         src="/app-icons/apple-account/icon.png"
-                        alt="apple-search"
+                        alt="apple-account"
                     />
                 </IconButton>
 

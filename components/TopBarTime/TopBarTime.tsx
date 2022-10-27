@@ -14,7 +14,7 @@ const TopBarTime: NextPage = () => {
 
     return (
         <TimeContainer>
-            {format(timeDate, 'EEE')} {format(timeDate, 'h:mm aa')}
+            {format(timeDate, 'EEE MMM dd')} {format(timeDate, 'h:mm aa')}
         </TimeContainer>
     );
 };

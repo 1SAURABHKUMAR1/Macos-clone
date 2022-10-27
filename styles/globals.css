@@ -188,6 +188,8 @@ section {
     --system-z-index-system-updates-available: 60;
     --system-z-index-system-dialog: 90;
     --system-z-index-menubar-menu-parent: 160;
+    --additional-box-shadow: inset 0 0 0 .9px hsla(var(--system-color-dark-hsl), .3), 0 0 0 1.2px hsla(var(--system-color-light-hsl), .3);
+    --svg-color: #ffff;
 }
 
 #__next {

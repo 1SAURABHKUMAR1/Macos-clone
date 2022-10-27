@@ -38,9 +38,11 @@ const IconButton = styled.button<{ IconType: 'apple' | 'text' | 'Finder' }>`
     }
 `;
 
-const MenuContainer = styled.div`
+const MenuContainer = styled.div<{ menuType: string }>`
     position: absolute;
-    margin-top: 0.2rem;
+    margin-top: 0.4rem;
+
+    ${({ menuType }) => menuType === 'apple' && 'left : 0.8rem;'}
 `;
 
 const Menu = styled.div`
@@ -52,7 +54,7 @@ const Menu = styled.div`
     position: relative;
     user-select: none;
     background-color: hsla(var(--system-header-hsl), 0.3);
-    backdrop-filter: blur(26px);
+    backdrop-filter: blur(12px);
     border-radius: 0.5rem;
     box-shadow: hsla(0, 0%, 0%, 0.3) 0px 0px 11px 0px,
         var(--additional-box-shadow);
@@ -87,7 +89,7 @@ const MenuDivider = styled.div`
     width: 100%;
     height: 0.1rem;
     background-color: hsla(var(--system-color-dark-hsl), 0.55);
-    margin: 2px 0;
+    margin: 0.13rem 0;
 `;
 
 export {

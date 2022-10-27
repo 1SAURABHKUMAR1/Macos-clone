@@ -20,3 +20,19 @@ export type menuBarKeys =
     | 'go'
     | 'window'
     | 'help';
+
+export type colorConfig = {
+    [color: string]: {
+        hsl: string;
+    };
+};
+
+export type colors =
+    | 'orange'
+    | 'green'
+    | 'cyan'
+    | 'blue'
+    | 'blue'
+    | 'indigo'
+    | 'purple'
+    | 'pink';
