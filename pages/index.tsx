@@ -26,7 +26,7 @@ const Main = styled.div`
 `;
 
 const Home: NextPage = () => {
-    const [isBootupOver, setIsBootupOver] = useState<boolean>(true);
+    const [isBootupOver, setIsBootupOver] = useState<boolean>(false);
 
     return (
         <>
