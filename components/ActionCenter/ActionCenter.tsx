@@ -1,8 +1,10 @@
 import type { NextPage } from 'next';
+
 import { useState } from 'react';
-import ActionCenterMenu from 'components/ActionCenterMenu/ActionCenterMenu';
-import { Container, FullDiv } from './styled';
 import { useDetectClickOutside } from 'react-detect-click-outside';
+
+import ActionCenterMenu from '@components/ActionCenterMenu/ActionCenterMenu';
+import { Container, FullDiv } from './styled';
 
 const ActionCenter: NextPage = () => {
     const [isActionVisible, setIsActionVisible] = useState<boolean>(false);

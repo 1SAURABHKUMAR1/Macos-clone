@@ -9,10 +9,13 @@ import {
     Wallpaper,
     MainWindowArea,
 } from '@components/index';
+import { useState } from 'react';
 
 const Container = styled.div`
     height: 100%;
     width: 100%;
+    /* filter: brightness(40%); */
+    /* FIXME: */
 `;
 
 const Main = styled.div`
@@ -23,6 +26,8 @@ const Main = styled.div`
 `;
 
 const Home: NextPage = () => {
+    const [isBootupOver, setIsBootupOver] = useState<boolean>(true);
+
     return (
         <>
             <Head>
@@ -32,14 +37,19 @@ const Home: NextPage = () => {
             </Head>
 
             <Container>
-                <Main>
-                    <TopBarArea />
-                    <MainWindowArea />
-                    <DockArea />
-                </Main>
-
-                <Wallpaper />
-                <BootupScreen />
+                {isBootupOver ? (
+                    <>
+                        <Main>
+                            <TopBarArea />
+                            <MainWindowArea />
+                            <DockArea />
+                        </Main>
+                        <Wallpaper />
+                    </>
+                ) : (
+                    <BootupScreen setIsBootupOver={setIsBootupOver} />
+                    //  TODO: fade out while going
+                )}
             </Container>
         </>
     );

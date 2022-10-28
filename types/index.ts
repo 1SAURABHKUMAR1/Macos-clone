@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type menuConfig = {
     [string: string]: {
         title: string;
@@ -36,3 +38,7 @@ export type colors =
     | 'indigo'
     | 'purple'
     | 'pink';
+
+export interface bootupScreenProps {
+    setIsBootupOver: React.Dispatch<React.SetStateAction<boolean>>;
+}

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { MenuConfig } from 'helper/menu-bar.config';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import {
     Container,
@@ -47,7 +47,6 @@ const MenuBar: NextPage = () => {
                                     height="1.2em"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    fontSize="1rem"
                                 >
                                     <path
                                         fill="currentColor"
@@ -62,15 +61,17 @@ const MenuBar: NextPage = () => {
 
                     {activeMenu === key && (
                         <MenuContainer menuType={key}>
-                            <Menu>
-                                {Object.entries(value.menu).map(([, value]) => (
-                                    <>
-                                        <MenuItem disabled={value.disabled}>
-                                            {value.title}
-                                        </MenuItem>
-                                        {value.break && <MenuDivider />}
-                                    </>
-                                ))}
+                            <Menu key={key}>
+                                {Object.entries(value.menu).map(
+                                    ([key, value]) => (
+                                        <React.Fragment key={key}>
+                                            <MenuItem disabled={value.disabled}>
+                                                {value.title}
+                                            </MenuItem>
+                                            {value.break && <MenuDivider />}
+                                        </React.Fragment>
+                                    ),
+                                )}
                             </Menu>
                         </MenuContainer>
                     )}
