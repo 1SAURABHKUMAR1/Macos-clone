@@ -7,14 +7,14 @@ const BootupContainer = styled.div`
     bottom: 0;
     height: 100vh;
     width: 100vw;
-    /* cursor: none; */
+    cursor: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1.25rem;
-    transition: all 10ms ease-in;
-    animation-fill-mode: forwards;
+    z-index: 1000;
+    transition: all 100ms linear;
 `;
 
 const BootupIcon = styled.button`

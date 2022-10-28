@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { bootupScreenProps } from 'types';
 
 import {
@@ -20,31 +20,34 @@ const BootupScreen: NextPage<bootupScreenProps> = ({ setIsBootupOver }) => {
         return finalValue * (currentTime /= total) * currentTime;
     }
 
-    const transitionValue = (
-        animationDifference: number = 50,
-        animationDuration: number = 3000,
-    ) => {
-        const currentTime = Date.now();
+    const transitionValue = useCallback(
+        (
+            animationDifference: number = 50,
+            animationDuration: number = 3000,
+        ) => {
+            const currentTime = Date.now();
 
-        const animationInterval = setInterval(() => {
-            const now = Date.now();
+            const animationInterval = setInterval(() => {
+                const now = Date.now();
 
-            if (now - currentTime > animationDuration) {
-                clearInterval(animationInterval);
-                setIsBootupOver(() => true);
-            }
+                if (now - currentTime > animationDuration) {
+                    clearInterval(animationInterval);
+                    setIsBootupOver(() => true);
+                }
 
-            const progress = animationEaseIn(
-                now - currentTime,
-                100,
-                animationDuration,
-            );
-            setTranslateValue(() => 100 - Math.round(progress));
-        }, animationDifference);
-    };
+                const progress = animationEaseIn(
+                    now - currentTime,
+                    100,
+                    animationDuration,
+                );
+                setTranslateValue(() => 100 - Math.round(progress));
+            }, animationDifference);
+        },
+        [setIsBootupOver],
+    );
 
     useEffect(() => {
-        transitionValue();
+        transitionValue(50, 3000);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

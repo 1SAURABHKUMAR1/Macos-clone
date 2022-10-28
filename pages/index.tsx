@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { useState } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 
@@ -9,7 +10,6 @@ import {
     Wallpaper,
     MainWindowArea,
 } from '@components/index';
-import { useState } from 'react';
 
 const Container = styled.div`
     height: 100%;
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
                     </>
                 ) : (
                     <BootupScreen setIsBootupOver={setIsBootupOver} />
-                    //  TODO: fade out while going
+                    //  TODO: fade out while going + vercel
                 )}
             </Container>
         </>
