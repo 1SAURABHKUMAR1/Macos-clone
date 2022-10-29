@@ -10,6 +10,7 @@ import {
     Wallpaper,
     MainWindowArea,
 } from '@components/index';
+import { useDelayUnmount } from '@hooks/index';
 
 const Container = styled.div`
     height: 100%;
@@ -27,6 +28,7 @@ const Main = styled.div`
 
 const Home: NextPage = () => {
     const [isBootupOver, setIsBootupOver] = useState<boolean>(false);
+    const showBootupContainer = useDelayUnmount(!isBootupOver, 700);
 
     return (
         <>
@@ -44,8 +46,11 @@ const Home: NextPage = () => {
                 </Main>
                 <Wallpaper />
 
-                {isBootupOver && (
-                    <BootupScreen setIsBootupOver={setIsBootupOver} />
+                {showBootupContainer && (
+                    <BootupScreen
+                        isBootupOver={isBootupOver}
+                        setIsBootupOver={setIsBootupOver}
+                    />
                 )}
             </Container>
         </>

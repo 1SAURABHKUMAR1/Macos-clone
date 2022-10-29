@@ -9,7 +9,10 @@ import {
     BootupLoading,
 } from './styled';
 
-const BootupScreen: NextPage<bootupScreenProps> = ({ setIsBootupOver }) => {
+const BootupScreen: NextPage<bootupScreenProps> = ({
+    isBootupOver,
+    setIsBootupOver,
+}) => {
     const [translateValue, setTranslateValue] = useState(100);
 
     function animationEaseIn(
@@ -53,7 +56,7 @@ const BootupScreen: NextPage<bootupScreenProps> = ({ setIsBootupOver }) => {
 
     return (
         <>
-            <BootupContainer>
+            <BootupContainer isBootupOver={isBootupOver}>
                 <BootupIcon>
                     <svg
                         viewBox="0 0 24 24"

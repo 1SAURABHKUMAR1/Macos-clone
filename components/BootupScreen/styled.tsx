@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const BootupContainer = styled.div`
+const BootupContainer = styled.div<{ isBootupOver: boolean }>`
     background-color: var(--system-color-light-contrast);
     position: fixed;
     top: 0;
@@ -15,6 +15,19 @@ const BootupContainer = styled.div`
     gap: 1.25rem;
     z-index: 1000;
     transition: all 100ms linear;
+    opacity: 1;
+
+    ${({ isBootupOver }) =>
+        isBootupOver && 'animation: outAnimation 700ms ease-out forwards;'}
+
+    @keyframes outAnimation {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
 `;
 
 const BootupIcon = styled.button`
