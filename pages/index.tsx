@@ -37,18 +37,15 @@ const Home: NextPage = () => {
             </Head>
 
             <Container>
-                {isBootupOver ? (
-                    <>
-                        <Main>
-                            <TopBarArea />
-                            <MainWindowArea />
-                            <DockArea />
-                        </Main>
-                        <Wallpaper />
-                    </>
-                ) : (
+                <Main>
+                    <TopBarArea />
+                    <MainWindowArea />
+                    <DockArea />
+                </Main>
+                <Wallpaper />
+
+                {isBootupOver && (
                     <BootupScreen setIsBootupOver={setIsBootupOver} />
-                    //  TODO: fade out while going + vercel
                 )}
             </Container>
         </>
