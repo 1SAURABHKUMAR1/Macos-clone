@@ -7,6 +7,7 @@ import ActionCenter from '@components/ActionCenter/ActionCenter';
 import MenuBar from '@components/MenuBarTop/MenuBar';
 import TopBarTime from '@components/TopBarTime/TopBarTime';
 import DisplaySlider from '@components/DisplaySlider/DisplaySlider';
+import DockAppItem from './DockAppItem/DockAppItem';
 
 export {
     BootupScreen,
@@ -18,4 +19,5 @@ export {
     MenuBar,
     TopBarTime,
     DisplaySlider,
+    DockAppItem,
 };

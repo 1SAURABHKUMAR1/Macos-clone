@@ -5,7 +5,7 @@ const Header = styled.header`
     align-items: center;
     justify-content: space-between;
     height: 1.65rem;
-    background-color: hsla(var(--system-header-hsl), 0.3);
+    background-color: hsla(var(--system-header-hsl), 0.35);
     color: var(--system-text-white);
     font-weight: 500;
 

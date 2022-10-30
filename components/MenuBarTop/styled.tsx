@@ -41,6 +41,7 @@ const IconButton = styled.button<{ IconType: 'apple' | 'text' | 'Finder' }>`
 const MenuContainer = styled.div<{ menuType: string }>`
     position: absolute;
     margin-top: 0.4rem;
+    z-index: 4000;
 
     ${({ menuType }) => menuType === 'apple' && 'left : 0.8rem;'}
 `;
@@ -53,7 +54,7 @@ const Menu = styled.div`
     padding: 0.55rem;
     position: relative;
     user-select: none;
-    background-color: hsla(var(--system-header-hsl), 0.3);
+    background-color: hsla(var(--system-header-hsl), 0.35);
     backdrop-filter: blur(12px);
     border-radius: 0.5rem;
     box-shadow: hsla(0, 0%, 0%, 0.3) 0px 0px 11px 0px,

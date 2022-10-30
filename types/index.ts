@@ -43,3 +43,17 @@ export interface bootupScreenProps {
     isBootupOver: boolean;
     setIsBootupOver: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export type dockConfig = {
+    [string: string]: {
+        title: string;
+        imageSrc: string;
+        break?: boolean;
+    };
+};
+
+export interface dockItemProps {
+    title: string;
+    appIconsFolderName: string;
+    mouseXPostion: number | null;
+}

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 const ActionMenuContainer = styled.div`
+    z-index: 5000;
     position: absolute;
     margin: 0.4rem 0rem 0rem 0rem;
     right: 1rem;
     color: var(--system-color-grey-900);
-    background-color: hsla(var(--system-header-hsl), 0.3);
-    border-radius: 0.5rem;
+    background-color: hsla(var(--system-header-hsl), 0.35);
+    border-radius: 1rem;
     box-shadow: hsla(0, 0%, 0%, 0.3) 0px 0px 11px 0px,
         var(--additional-box-shadow);
     backdrop-filter: blur(12px);
@@ -24,7 +25,7 @@ const ActionMenuItemCard = styled.section<{
 }>`
     width: 100%;
     background-color: hsla(var(--system-color-light-hsl), 0.6);
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     padding: 0.5rem;
     box-shadow: #0000004d 0 1px 4px -1px,
         inset 0 0 0 0.5px hsla(var(--system-color-dark-hsl), 0.3),
