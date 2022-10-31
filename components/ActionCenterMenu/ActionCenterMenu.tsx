@@ -6,26 +6,41 @@ import {
     ActionMenuColorsContainer,
     ActionMenuColorItem,
     ActionMenuWallpaperContainer,
+    ActionMenuItemCardSmall,
 } from './styled';
 import Image from 'next/image';
-import { Wifi, Check } from 'react-feather';
-
+import { Wifi, Check, Sun, Maximize, Bluetooth, Rss } from 'react-feather';
 import { DisplaySlider } from '@components/index';
-
 import { colorsConfig } from 'helper/action-colors.config';
 
 const ActionCenterMenu: NextPage = () => {
     return (
         <ActionMenuContainer>
-            <ActionMenuItemCard cardType="wifi">
-                <ActionMenuItemSvg>
-                    <Wifi size="1.2em" />
-                </ActionMenuItemSvg>
-                Wifi
+            <ActionMenuItemCard cardType="wifi_bluetooth_airdrop">
+                <ActionMenuItemCardSmall>
+                    <ActionMenuItemSvg icon="medium">
+                        <Wifi size="1.2em" />
+                    </ActionMenuItemSvg>
+                    Wifi
+                </ActionMenuItemCardSmall>
+
+                <ActionMenuItemCardSmall>
+                    <ActionMenuItemSvg icon="medium">
+                        <Bluetooth size="1.2em" />
+                    </ActionMenuItemSvg>
+                    Bluetooth
+                </ActionMenuItemCardSmall>
+
+                <ActionMenuItemCardSmall>
+                    <ActionMenuItemSvg icon="medium">
+                        <Rss size="1.2em" />
+                    </ActionMenuItemSvg>
+                    AirDrop
+                </ActionMenuItemCardSmall>
             </ActionMenuItemCard>
 
             <ActionMenuItemCard cardType="animation">
-                <ActionMenuItemSvg>
+                <ActionMenuItemSvg icon="small">
                     <svg viewBox="0 0 24 24" width="1.2em" height="1.2em">
                         <path
                             fill="currentColor"
@@ -34,6 +49,25 @@ const ActionCenterMenu: NextPage = () => {
                     </svg>
                 </ActionMenuItemSvg>
                 Animations
+            </ActionMenuItemCard>
+
+            <ActionMenuItemCard cardType="keyboard_brightness">
+                <ActionMenuItemSvg icon="small">
+                    <Sun size="1.2em" />
+                </ActionMenuItemSvg>
+                Keyboard Brightness
+            </ActionMenuItemCard>
+
+            <ActionMenuItemCard cardType="full_screen">
+                <ActionMenuItemSvg icon="small">
+                    <Maximize size="1.2em" />
+                </ActionMenuItemSvg>
+                Full Screen
+            </ActionMenuItemCard>
+
+            <ActionMenuItemCard cardType="display">
+                <p>Display</p>
+                <DisplaySlider />
             </ActionMenuItemCard>
 
             <ActionMenuItemCard cardType="system-color">
@@ -61,11 +95,6 @@ const ActionCenterMenu: NextPage = () => {
                     />
                     <p>Big Sur Graphic</p>
                 </ActionMenuWallpaperContainer>
-            </ActionMenuItemCard>
-
-            <ActionMenuItemCard cardType="display">
-                <p>Display</p>
-                <DisplaySlider />
             </ActionMenuItemCard>
         </ActionMenuContainer>
     );

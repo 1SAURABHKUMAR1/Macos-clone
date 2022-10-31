@@ -12,16 +12,24 @@ const ActionMenuContainer = styled.div`
         var(--additional-box-shadow);
     backdrop-filter: blur(12px);
     user-select: none;
-    padding: 0.75rem;
+    padding: 0.7rem;
     min-width: 20rem;
     width: auto;
     display: grid;
     gap: 0.55rem;
-    grid-auto-rows: minmax(1.55rem, auto);
+    grid-template-columns: repeat(4, 5rem);
+    grid-template-rows: repeat(5, 5rem);
 `;
 
 const ActionMenuItemCard = styled.section<{
-    cardType: 'wifi' | 'animation' | 'system-color' | 'wallpaper' | 'display';
+    cardType:
+        | 'wifi_bluetooth_airdrop'
+        | 'animation'
+        | 'keyboard_brightness'
+        | 'full_screen'
+        | 'display'
+        | 'system-color'
+        | 'wallpaper';
 }>`
     width: 100%;
     background-color: hsla(var(--system-color-light-hsl), 0.6);
@@ -34,46 +42,59 @@ const ActionMenuItemCard = styled.section<{
     font-size: 0.87rem;
 
     ${({ cardType }) =>
-        cardType === 'wifi'
+        cardType === 'wifi_bluetooth_airdrop'
             ? `
-                grid-column: 1 / span 6;
-                grid-row: 1 / span 2;
+                grid-column: span 2 / span 2;
+                grid-row:span 2 / span 2;
                 display: flex;
-                gap: 0.5rem;
-                align-items: center;
-                justify-content: center;
+                flex-direction: column;
+                justify-content: space-around;
+                padding: 0.5rem 0.75rem;
+
             `
             : cardType === 'animation'
             ? `
-                grid-column: 7 / span 6;
-                grid-row: 1 / span 2;
+                grid-column: span 2/span 2;
+                grid-row: span 1 / span 1;
                 display: flex;
                 gap: 0.5rem;
                 align-items: center;
                 justify-content: center;
-            `
+                `
+            : cardType === 'display'
+            ? `
+                grid-column: span 4/span 4;
+                grid-row: span 1 / span 1;
+                padding : 0.75rem;
+                `
             : cardType === 'system-color'
             ? `
-                grid-column: 1 / span 12;
-                grid-row: 3 / span 2;
+                grid-column: span 4/span 4;
+                grid-row: span 1 / span 1;
                 padding : 0.75rem;
                 `
             : cardType === 'wallpaper'
             ? `
-                grid-column: 1 / span 12;
-                grid-row: 5 / span 3;
+                grid-column: span 4/span 4;
+                grid-row: span 1 / span 1;
                 padding : 0.75rem;
             `
-            : cardType === 'display'
+            : cardType === 'keyboard_brightness' || cardType === 'full_screen'
             ? `
-                grid-column: 1 / span 12;
-                grid-row: 8 / span 2;
                 padding : 0.75rem;
+                font-size: 0.75rem;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                gap: 0.5rem;
+                justify-content: center;
+                text-align: center;
+                font-weight:600;
             `
             : ''}
 `;
 
-const ActionMenuItemSvg = styled.span`
+const ActionMenuItemSvg = styled.span<{ icon: 'small' | 'medium' }>`
     --svg-background-color: 0%, 1%, 11%;
     --span-background-color: 240, 3%, 11%;
     --span-aplha: 0.1;
@@ -82,14 +103,25 @@ const ActionMenuItemSvg = styled.span`
     --span-aplha: 1;
     --span-background-color: 211, 100%, 50%; */
 
-    height: 1.7rem !important;
-    width: 1.7rem !important;
     display: flex;
     justify-content: center;
     background-color: hsla(var(--span-background-color), 0.1);
     border-radius: 50%;
     transition: all 0.3s ease;
     align-items: center;
+
+    ${({ icon }) =>
+        icon === 'small'
+            ? `
+                height: 1.7rem !important;
+                width: 1.7rem !important;
+                `
+            : icon === 'medium'
+            ? `
+                height: 2.2rem !important;
+                width: 2.2rem !important;
+            `
+            : ''}
 
     svg {
         color: hsl(var(--svg-background-color));
@@ -133,8 +165,8 @@ const ActionMenuWallpaperContainer = styled.div`
     align-items: center;
 
     span:first-child {
-        width: 4.75rem !important;
-        height: 4.75rem !important;
+        width: 4rem !important;
+        height: 4rem !important;
         object-fit: contain;
         border-radius: 0.5rem;
         aspect-ratio: 1/1;
@@ -149,6 +181,12 @@ const ActionMenuWallpaperContainer = styled.div`
     }
 `;
 
+const ActionMenuItemCardSmall = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+`;
+
 export {
     ActionMenuContainer,
     ActionMenuItemCard,
@@ -156,4 +194,5 @@ export {
     ActionMenuColorsContainer,
     ActionMenuColorItem,
     ActionMenuWallpaperContainer,
+    ActionMenuItemCardSmall,
 };

@@ -5,6 +5,7 @@ const TimeContainer = styled.div`
     transition: 100ms all ease;
     display: flex;
     gap: 0.5rem;
+    padding: 0 0 0 0.3rem;
 `;
 
 export { TimeContainer };
