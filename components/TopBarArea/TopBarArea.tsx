@@ -1,7 +1,13 @@
 import type { NextPage } from 'next';
 import { MenuBar, ActionCenter, TopBarTime } from '@components/index';
-
-import { Header, GroupTimeAction, IconImage, IconButton } from './styled';
+import {
+    Header,
+    GroupTimeAction,
+    IconImage,
+    IconButton,
+    IconText,
+} from './styled';
+import { Wifi } from 'react-feather';
 
 const TopBarArea: NextPage = () => {
     return (
@@ -10,22 +16,22 @@ const TopBarArea: NextPage = () => {
 
             <GroupTimeAction>
                 <IconButton>
+                    <IconText>100%</IconText>
                     <IconImage
-                        src="/app-icons/apple-search/icon.png"
+                        height={70}
+                        src="/app-icons/apple-battery/icon.png"
                         alt="apple-search"
                     />
                 </IconButton>
 
                 <IconButton>
-                    <IconImage
-                        src="/app-icons/apple-account/icon.png"
-                        alt="apple-account"
-                    />
+                    <Wifi size="1.05em" />
                 </IconButton>
 
                 <IconButton>
                     <IconImage
-                        src="/app-icons/apple-cast/icon.png"
+                        height={55}
+                        src="/app-icons/apple-search/icon.png"
                         alt="apple-search"
                     />
                 </IconButton>

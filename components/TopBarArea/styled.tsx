@@ -44,14 +44,21 @@ const IconButton = styled.button`
     border-radius: 0.25rem;
     padding: 0 0.5rem;
     height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 
     :hover {
         background-color: hsla(var(--system-color-dark-hsl), 0.2);
     }
 `;
 
-const IconImage = styled.img`
-    height: 55%;
+const IconText = styled.span`
+    font-size: 0.75rem;
 `;
 
-export { Header, GroupTimeAction, IconImage, IconButton };
+const IconImage = styled.img<{ height: number }>`
+    ${({ height }) => `height:${height}%`}
+`;
+
+export { Header, GroupTimeAction, IconImage, IconButton, IconText };
