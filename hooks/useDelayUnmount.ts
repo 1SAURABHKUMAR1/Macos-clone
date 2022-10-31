@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-const useDelayUnmount = (isMounted: boolean, delay: number) => {
-    const [showDiv, setShowDiv] = useState(false);
+const useDelayUnmount = (isMounted: boolean, delay: number): boolean => {
+    const [showDiv, setShowDiv] = useState<boolean>(true);
 
     useEffect(() => {
         let timeoutId: any;

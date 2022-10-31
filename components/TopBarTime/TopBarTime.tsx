@@ -5,16 +5,17 @@ import { format } from 'date-fns';
 import { TimeContainer } from './styled';
 
 const TopBarTime: NextPage = () => {
-    const [timeDate, setTimeDate] = useState<Date>(() => new Date());
+    const [timeDate, setTimeDate] = useState<Date | null>(null);
 
     useEffect(() => {
-        let timeInterval = setInterval(() => setTimeDate(new Date()), 6000);
+        let timeInterval = setInterval(() => setTimeDate(new Date()), 1500);
         return () => clearInterval(timeInterval);
     }, [timeDate]);
 
     return (
         <TimeContainer>
-            {format(timeDate, 'EEE MMM dd')} {format(timeDate, 'h:mm aa')}
+            {timeDate && format(timeDate as Date, 'EEE MMM dd')}{' '}
+            {timeDate && format(timeDate as Date, 'h:mm aa')}
         </TimeContainer>
     );
 };

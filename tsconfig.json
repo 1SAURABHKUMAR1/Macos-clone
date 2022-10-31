@@ -22,7 +22,8 @@
             "@db/*": ["db/*"],
             "@pages/*": ["pages/*"],
             "@styles/*": ["styles/*"],
-            "@hooks/*": ["hooks/*"]
+            "@hooks/*": ["hooks/*"],
+            "@types/*": ["types/*"]
         },
         "newLine": "crlf"
     },

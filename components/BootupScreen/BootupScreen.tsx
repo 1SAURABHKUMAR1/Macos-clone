@@ -34,8 +34,8 @@ const BootupScreen: NextPage<bootupScreenProps> = ({
                 const now = Date.now();
 
                 if (now - currentTime > animationDuration) {
-                    clearInterval(animationInterval);
                     setIsBootupOver(() => true);
+                    clearInterval(animationInterval);
                 }
 
                 const progress = animationEaseIn(

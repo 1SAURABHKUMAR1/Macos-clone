@@ -1,8 +1,7 @@
 import type { NextPage } from 'next';
-import { useState } from 'react';
 import Head from 'next/head';
+import { useState } from 'react';
 import styled from 'styled-components';
-
 import {
     BootupScreen,
     DockArea,
@@ -33,7 +32,7 @@ const Home: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Macos</title>
+                <title>Mac-OS</title>
                 <meta name="description" content="Macos clone" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>

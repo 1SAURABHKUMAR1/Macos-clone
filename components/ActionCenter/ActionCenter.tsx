@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { useState } from 'react';
 import { useDetectClickOutside } from 'react-detect-click-outside';
 
-import ActionCenterMenu from '@components/ActionCenterMenu/ActionCenterMenu';
+import { ActionCenterMenu } from '@components/index';
 import { Container, FullDiv } from './styled';
 
 const ActionCenter: NextPage = () => {

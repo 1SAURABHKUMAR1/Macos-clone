@@ -6,7 +6,6 @@ const nextConfig = {
         styledComponents: {
             ssr: true,
         },
-        removeConsole: true,
     },
 };
 
