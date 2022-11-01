@@ -10,6 +10,7 @@ import {
     MainWindowArea,
 } from '@components/index';
 import { AnimatePresence } from 'framer-motion';
+import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 
 const Container = styled.div`
     height: 100%;
@@ -27,6 +28,15 @@ const Main = styled.div`
 
 const Home: NextPage = () => {
     const [isBootupOver, setIsBootupOver] = useState<boolean>(true);
+    const fullScreenHandle = useFullScreenHandle();
+
+    // const toggleFullScreen = () => {
+    //     if (fullScreenHandle.active) {
+    //         fullScreenHandle.exit();
+    //         return;
+    //     }
+    //     fullScreenHandle.enter();
+    // }; //FIXME:
 
     return (
         <>
@@ -37,12 +47,17 @@ const Home: NextPage = () => {
             </Head>
 
             <Container>
-                <Main>
-                    <TopBarArea />
-                    <MainWindowArea />
-                    <DockArea />
-                </Main>
-                <Wallpaper />
+                <FullScreen handle={fullScreenHandle}>
+                    <Main>
+                        <TopBarArea />
+
+                        <MainWindowArea />
+
+                        <DockArea />
+                    </Main>
+
+                    <Wallpaper />
+                </FullScreen>
 
                 <AnimatePresence>
                     {isBootupOver && (

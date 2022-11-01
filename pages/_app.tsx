@@ -213,6 +213,10 @@ const GlobalStyle = createGlobalStyle`
         height: 100%;
     }
 
+    .fullscreen {
+        height: 100%;
+    }
+
     button {
         color: inherit;
         background-color: transparent;
