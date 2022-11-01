@@ -101,11 +101,20 @@ const GlobalStyle = createGlobalStyle`
         display: block;
     }
 
-    *:focus,
-    *:focus-within,
-    *:visited,
-    *:focus-visible,
-    *:active {
+    button:focus,
+    button:focus-within,
+    button:visited,
+    button:focus-visible,
+    button:active {
+        outline: none;
+        box-shadow: none;
+    }
+    
+    input:focus,
+    input:focus-within,
+    input:visited,
+    input:focus-visible,
+    input:active {
         outline: none;
         box-shadow: none;
     }

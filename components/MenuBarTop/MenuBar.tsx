@@ -65,9 +65,7 @@ const MenuBar: NextPage = () => {
                                 {Object.entries(value.menu).map(
                                     ([key, value]) => (
                                         <React.Fragment key={key}>
-                                            <MenuItem disabled={value.disabled}>
-                                                {value.title}
-                                            </MenuItem>
+                                            <MenuItem>{value.title}</MenuItem>
                                             {value.break && <MenuDivider />}
                                         </React.Fragment>
                                     ),

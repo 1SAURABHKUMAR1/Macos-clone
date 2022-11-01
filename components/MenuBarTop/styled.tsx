@@ -73,16 +73,10 @@ const MenuItem = styled.button`
     border-radius: 0.3rem;
     color: hsla(var(--system-color-dark-hsl), 1);
 
-    :disabled {
-        color: hsla(var(--system-color-dark-hsl), 0.5);
-    }
-
-    :not(:disabled) {
-        :hover,
-        :focus-visible {
-            background-color: var(--system-color-primary);
-            color: var(--system-color-primary-contrast);
-        }
+    :hover,
+    :focus-visible {
+        background-color: var(--system-color-primary);
+        color: var(--system-color-primary-contrast);
     }
 `;
 

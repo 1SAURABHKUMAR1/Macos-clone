@@ -18,8 +18,7 @@ const DockContainer = styled.div`
     padding: 0.3rem;
     background-color: hsla(var(--system-header-hsl), 0.5);
     display: flex;
-    align-items: center;
-    transition: all 250ms ease-in-out;
+    align-items: flex-end;
     box-shadow: var(--shadow-action-menu);
 `;
 

@@ -1,4 +1,5 @@
-import React from 'react';
+import type { MotionValue } from 'framer-motion';
+import type { Dispatch, SetStateAction } from 'react';
 
 export type menuConfig = {
     [string: string]: {
@@ -6,7 +7,6 @@ export type menuConfig = {
         menu: {
             [menuTitle: string]: {
                 title: string;
-                disabled?: boolean;
                 break?: boolean;
             };
         };
@@ -40,7 +40,7 @@ export type colors =
     | 'pink';
 
 export interface bootupScreenProps {
-    setIsBootupOver: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsBootupOver: Dispatch<SetStateAction<boolean>>;
 }
 
 export type dockConfig = {
@@ -54,5 +54,7 @@ export type dockConfig = {
 export interface dockItemProps {
     title: string;
     appIconsFolderName: string;
-    mouseXPostion: number | null;
+    mouseXPostion: MotionValue;
+    dockWidth: number;
+    distanceLimit: number;
 }

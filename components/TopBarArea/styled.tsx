@@ -42,7 +42,7 @@ const GroupTimeAction = styled.div`
 
 const IconButton = styled.button`
     border-radius: 0.25rem;
-    padding: 0 0.5rem;
+    padding: 0 0.4rem;
     height: 100%;
     display: flex;
     align-items: center;

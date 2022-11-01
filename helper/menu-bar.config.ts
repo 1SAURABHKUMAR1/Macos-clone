@@ -64,7 +64,6 @@ export const MenuConfig: menuConfig = {
             },
             'show-all': {
                 title: 'Show All',
-                disabled: true,
             },
         },
     },
@@ -79,7 +78,6 @@ export const MenuConfig: menuConfig = {
             },
             'new-folder-with-selection': {
                 title: 'New Folder with Selection',
-                disabled: true,
             },
             'new-smart-folder': {
                 title: 'New Smart Folder',
@@ -89,19 +87,15 @@ export const MenuConfig: menuConfig = {
             },
             open: {
                 title: 'Open',
-                disabled: true,
             },
             'open-with': {
                 title: 'Open With',
-                disabled: true,
             },
             print: {
                 title: 'Print',
-                disabled: true,
             },
             'close-window': {
                 title: 'Close Window',
-                disabled: true,
                 break: true,
             },
 
@@ -110,45 +104,36 @@ export const MenuConfig: menuConfig = {
             },
             rename: {
                 title: 'Rename',
-                disabled: true,
                 break: true,
             },
 
             compress: {
                 title: 'Compress',
-                disabled: true,
                 break: true,
             },
 
             duplicate: {
                 title: 'Duplicate',
-                disabled: true,
             },
             'make-alias': {
                 title: 'Make Alias',
-                disabled: true,
             },
             'quick-look': {
                 title: 'Quick Look',
-                disabled: true,
             },
             'show-original': {
                 title: 'Show Original',
-                disabled: true,
             },
             'add-to-sidebar': {
                 title: 'Add to Sidebar',
-                disabled: true,
                 break: true,
             },
 
             'move-to-trash': {
                 title: 'Move to Trash',
-                disabled: true,
             },
             eject: {
                 title: 'Eject',
-                disabled: true,
                 break: true,
             },
 
@@ -159,7 +144,6 @@ export const MenuConfig: menuConfig = {
 
             tags: {
                 title: 'Tags...',
-                disabled: true,
             },
         },
     },
@@ -168,29 +152,23 @@ export const MenuConfig: menuConfig = {
         menu: {
             undo: {
                 title: 'Undo',
-                disabled: true,
             },
             redo: {
                 title: 'Redo',
-                disabled: true,
                 break: true,
             },
 
             cut: {
                 title: 'Cut',
-                disabled: true,
             },
             copy: {
                 title: 'Copy',
-                disabled: true,
             },
             paste: {
                 title: 'Paste',
-                disabled: true,
             },
             'select-all': {
                 title: 'Select All',
-                disabled: true,
                 break: true,
             },
 
@@ -212,19 +190,15 @@ export const MenuConfig: menuConfig = {
         menu: {
             'as-icons': {
                 title: 'As Icons',
-                disabled: true,
             },
             'as-list': {
                 title: 'As List',
-                disabled: true,
             },
             'as-columns': {
                 title: 'As Columns',
-                disabled: true,
             },
             'as-gallery': {
                 title: 'As Gallery',
-                disabled: true,
                 break: true,
             },
 
@@ -236,49 +210,39 @@ export const MenuConfig: menuConfig = {
             },
             'clean-up': {
                 title: 'Clean Up',
-                disabled: true,
             },
             'clean-up-by': {
                 title: 'Clean Up By',
-                disabled: true,
                 break: true,
             },
 
             'hide-sidebar': {
                 title: 'Hide Sidebar',
-                disabled: true,
             },
             'show-preview': {
                 title: 'Show Preview',
-                disabled: true,
                 break: true,
             },
 
             'hide-toolbar': {
                 title: 'Hide Toolbar',
-                disabled: true,
             },
             'show-all-tabs': {
                 title: 'Show All Tabs',
-                disabled: true,
             },
             'show-tab-bar': {
                 title: 'Show Tab Bar',
-                disabled: true,
             },
             'show-path-bar': {
                 title: 'Show Path Bar',
-                disabled: true,
             },
             'show-status-bar': {
                 title: 'Show Status Bar',
-                disabled: true,
                 break: true,
             },
 
             'customize-toolbar': {
                 title: 'Customize Toolbar...',
-                disabled: true,
                 break: true,
             },
 
@@ -287,13 +251,11 @@ export const MenuConfig: menuConfig = {
             },
             'show-preview-options': {
                 title: 'Show Preview Options',
-                disabled: true,
                 break: true,
             },
 
             'enter-full-screen': {
                 title: 'Enter Full Screen',
-                disabled: true,
             },
         },
     },
@@ -302,11 +264,9 @@ export const MenuConfig: menuConfig = {
         menu: {
             back: {
                 title: 'Back',
-                disabled: true,
             },
             forward: {
                 title: 'Forward',
-                disabled: true,
             },
             'enclosing-folder': {
                 title: 'Enclosing Folder',
@@ -361,19 +321,15 @@ export const MenuConfig: menuConfig = {
         menu: {
             minimize: {
                 title: 'Minimize',
-                disabled: true,
             },
             zoom: {
                 title: 'Zoom',
-                disabled: true,
             },
             'move-window-to-left-side-of-screen': {
                 title: 'Move Window to Left Side of Screen',
-                disabled: true,
             },
             'move-window-to-right-side-of-screen': {
                 title: 'Move Window to Right Side of Screen',
-                disabled: true,
             },
             'cycle-through-windows': {
                 title: 'Cycle Through Windows',
@@ -382,19 +338,15 @@ export const MenuConfig: menuConfig = {
 
             'show-previous-tab': {
                 title: 'Show Previous Tab',
-                disabled: true,
             },
             'show-next-tab': {
                 title: 'Show Next Tab',
-                disabled: true,
             },
             'move-tab-to-new-window': {
                 title: 'Move Tab to New Window',
-                disabled: true,
             },
             'merge-all-windows': {
                 title: 'Merge all Windows',
-                disabled: true,
                 break: true,
             },
 

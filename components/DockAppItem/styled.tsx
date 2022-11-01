@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 const DockItem = styled.button`
@@ -7,7 +8,6 @@ const DockItem = styled.button`
     position: relative;
     border: 0.5rem;
     align-items: center;
-    transition: all 200ms ease;
     margin: 0rem 0.05rem;
 `;
 
@@ -26,10 +26,13 @@ const DockTooltip = styled.span`
     font-size: 0.9rem;
     letter-spacing: 0.01rem;
     z-index: 70;
+    top: -2.5rem;
 `;
 
-const DockAppImage = styled.span`
+const DockAppImage = styled(motion.div)`
     will-change: width;
+    width: 100%;
+    height: 100%;
 
     span:first-child {
         width: 100% !important;

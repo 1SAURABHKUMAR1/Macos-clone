@@ -19,6 +19,7 @@
         "react-dom": "18.2.0",
         "react-feather": "^2.0.10",
         "react-rangeslider": "^2.2.0",
+        "rooks": "^7.4.1",
         "styled-components": "^5.3.6",
         "zustand": "^4.1.3"
     },
