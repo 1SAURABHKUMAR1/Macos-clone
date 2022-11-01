@@ -9,7 +9,7 @@ import {
     Wallpaper,
     MainWindowArea,
 } from '@components/index';
-import { useDelayUnmount } from '@hooks/index';
+import { AnimatePresence } from 'framer-motion';
 
 const Container = styled.div`
     height: 100%;
@@ -26,8 +26,7 @@ const Main = styled.div`
 `;
 
 const Home: NextPage = () => {
-    const [isBootupOver, setIsBootupOver] = useState<boolean>(false);
-    const showBootupContainer = useDelayUnmount(!isBootupOver, 700);
+    const [isBootupOver, setIsBootupOver] = useState<boolean>(true);
 
     return (
         <>
@@ -45,12 +44,11 @@ const Home: NextPage = () => {
                 </Main>
                 <Wallpaper />
 
-                {showBootupContainer && (
-                    <BootupScreen
-                        isBootupOver={isBootupOver}
-                        setIsBootupOver={setIsBootupOver}
-                    />
-                )}
+                <AnimatePresence>
+                    {isBootupOver && (
+                        <BootupScreen setIsBootupOver={setIsBootupOver} />
+                    )}
+                </AnimatePresence>
             </Container>
         </>
     );

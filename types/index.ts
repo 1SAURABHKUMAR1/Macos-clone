@@ -40,7 +40,6 @@ export type colors =
     | 'pink';
 
 export interface bootupScreenProps {
-    isBootupOver: boolean;
     setIsBootupOver: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
