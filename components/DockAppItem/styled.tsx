@@ -11,7 +11,7 @@ const DockItem = styled.button`
     margin: 0rem 0.05rem;
 `;
 
-const DockTooltip = styled.span`
+const DockTooltip = styled(motion.span)`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,7 +29,7 @@ const DockTooltip = styled.span`
     top: -2.5rem;
 `;
 
-const DockAppImage = styled(motion.div)`
+const DockAppImage = styled(motion.span)`
     will-change: width;
     width: 100%;
     height: 100%;

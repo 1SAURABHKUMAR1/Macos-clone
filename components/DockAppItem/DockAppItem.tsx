@@ -3,7 +3,12 @@ import Image from 'next/image';
 import { dockItemProps } from 'types';
 import { useRef, useState } from 'react';
 import { useRaf } from 'rooks';
-import { useMotionValue, useSpring, useTransform } from 'framer-motion';
+import {
+    useAnimationControls,
+    useMotionValue,
+    useSpring,
+    useTransform,
+} from 'framer-motion';
 import {
     DockItem,
     DockTooltip,
@@ -21,6 +26,9 @@ const DockAppItem: NextPage<dockItemProps> = ({
     const [tooltipEnabled, setToolTipEnabled] = useState<boolean>(false);
     const containerRef = useRef<HTMLButtonElement | null>(null);
     const distance = useMotionValue(distanceLimit);
+
+    const bouncingControls = useAnimationControls();
+
     const width = useSpring(
         useTransform(
             distance,
@@ -43,7 +51,7 @@ const DockAppItem: NextPage<dockItemProps> = ({
                 dockWidth,
             ],
         ),
-        { damping: 25, stiffness: 275 },
+        { damping: 35, stiffness: 275 },
     );
 
     useRaf(() => {
@@ -61,15 +69,32 @@ const DockAppItem: NextPage<dockItemProps> = ({
         distance.set(distanceLimit);
     }, true); //FIXME:
 
+    const openApp = async () => {
+        // const isAlreadyOpen = openedApps[app] //FIXME:
+        // if(isAlreadyOpen) return ; //FIXME:
+
+        bouncingControls.start({
+            y: [0, -42, 0],
+            transition: { duration: 1.2, ease: 'easeInOut' },
+        });
+
+        // openApps[app] = true //FIXME:
+    };
+
     return (
         <>
             <DockItem
                 ref={containerRef}
                 onMouseEnter={() => setToolTipEnabled(true)}
                 onMouseLeave={() => setToolTipEnabled(false)}
+                onClick={openApp}
             >
-                {tooltipEnabled && <DockTooltip>{title}</DockTooltip>}
-                <DockAppImage style={{ width: width }}>
+                {tooltipEnabled && (
+                    <DockTooltip animate={bouncingControls}>
+                        {title}
+                    </DockTooltip>
+                )}
+                <DockAppImage style={{ width }} animate={bouncingControls}>
                     <Image
                         alt={title}
                         layout="fixed"
