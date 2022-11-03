@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { AppWindow } from '@components/index';
 import { useRef } from 'react';
 import Draggable from 'react-draggable';
+import { Resizable } from 're-resizable';
 import {
     WindowArea,
     AppContainer,
@@ -40,15 +41,15 @@ const MainWindowArea: NextPage = () => {
                 {/* TODO: open apps based on state using Object.keys */}
                 <Draggable
                     defaultPosition={{
-                        x:
-                            ((windowRef.current?.clientWidth ?? 1000) -
-                                37.15 * 12) /
-                            //TODO: according to app width
-                            2,
                         y:
                             ((windowRef.current?.clientHeight ?? 599) -
-                                37.5 * 12) /
+                                37.5 * 16) /
                             //TODO: according to app height
+                            2,
+                        x:
+                            ((windowRef.current?.clientWidth ?? 1000) -
+                                37.15 * 16) /
+                            //TODO: according to app width
                             2,
                     }}
                     // onStart={() => focusApp()} //FIXME:
@@ -59,56 +60,65 @@ const MainWindowArea: NextPage = () => {
                         bottom: windowRef.current?.clientHeight,
                     }}
                     handle=".app-handle"
+                    defaultClassName="absolute"
                 >
-                    <AppContainer
-                        style={{
-                            //   TODO: width and height changes based on height and based on appConfig with minWidth and minHeight */}
-                            width: '37.5rem',
-                            height: '31.25rem',
-                            //    TODO: background color based on appConfig
-                            backgroundColor: '#fff',
-                            // zIndex: TODO:
+                    <Resizable
+                        bounds="window"
+                        //   TODO: width and height changes based on height and based on appConfig with minWidth and minHeight */}
+                        defaultSize={{
+                            width: `${37.5 * 16}px`,
+                            height: `${31.25 * 16}px`,
                         }}
-
-                        // onClick={() => focusApp()} //FIXME:
-
-                        // closeAnimation scale to 0 TODO:
-                        // minmize App move down TODO:
+                        minWidth="500"
+                        minHeight="250"
                     >
-                        <AppHeader className="app-handle">
-                            <AppControlContainer>
-                                <ControlButton
-                                    buttonType="close"
-                                    onClick={closeApp}
-                                >
-                                    <IoClose />
-                                </ControlButton>
+                        <AppContainer
+                            style={{
+                                //    TODO: background color based on appConfig
+                                backgroundColor: '#fff',
+                                // zIndex: TODO:
+                            }}
 
-                                <ControlButton
-                                    buttonType="minmize"
-                                    onClick={minimizeApp}
-                                >
-                                    <HiMinus />
-                                </ControlButton>
+                            // onClick={() => focusApp()} //FIXME:
 
-                                <ControlButton
-                                    buttonType="maximize"
-                                    onClick={maximizeApp}
-                                >
-                                    <GrFormAdd />
-                                </ControlButton>
-                            </AppControlContainer>
+                            // closeAnimation scale to 0 TODO:
+                            // minmize App move down TODO:
+                        >
+                            <AppHeader className="app-handle">
+                                <AppControlContainer>
+                                    <ControlButton
+                                        buttonType="close"
+                                        onClick={closeApp}
+                                    >
+                                        <IoClose />
+                                    </ControlButton>
 
-                            <AppName>
-                                System Prefernc
-                                {/* FIXME: */}
-                            </AppName>
-                        </AppHeader>
+                                    <ControlButton
+                                        buttonType="minmize"
+                                        onClick={minimizeApp}
+                                    >
+                                        <HiMinus />
+                                    </ControlButton>
 
-                        <MainAppArea>
-                            <AppWindow />
-                        </MainAppArea>
-                    </AppContainer>
+                                    <ControlButton
+                                        buttonType="maximize"
+                                        onClick={maximizeApp}
+                                    >
+                                        <GrFormAdd />
+                                    </ControlButton>
+                                </AppControlContainer>
+
+                                <AppName>
+                                    System Prefernc
+                                    {/* FIXME: */}
+                                </AppName>
+                            </AppHeader>
+
+                            <MainAppArea>
+                                <AppWindow />
+                            </MainAppArea>
+                        </AppContainer>
+                    </Resizable>
                 </Draggable>
             </WindowArea>
         </>

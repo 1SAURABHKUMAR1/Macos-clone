@@ -223,6 +223,10 @@ const GlobalStyle = createGlobalStyle`
         background-color: transparent;
         all: unset;
     }
+
+    .absolute {
+        position: absolute !important;
+    }
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
