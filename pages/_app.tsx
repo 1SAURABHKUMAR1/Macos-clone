@@ -207,6 +207,7 @@ const GlobalStyle = createGlobalStyle`
             #0000004d 2px 5px 19px 7px;
         --shadow-tooltip-dock: #0000004d 0 1px 5px 2px,
             0 0 0 0 #fff;
+        --shadow-app : 0px 8.5px 10px #0000001f, 0px 68px 80px #00000080;
     }
 
     #__next {

@@ -8,7 +8,8 @@ import ActionCenterMenu from '@components/ActionCenterMenu/ActionCenterMenu';
 import MenuBar from '@components/MenuBarTop/MenuBar';
 import TopBarTime from '@components/TopBarTime/TopBarTime';
 import DisplaySlider from '@components/DisplaySlider/DisplaySlider';
-import DockAppItem from './DockAppItem/DockAppItem';
+import DockAppItem from '@components/DockAppItem/DockAppItem';
+import AppWindow from '@components/AppsWIndow/AppWindow';
 
 export {
     BootupScreen,
@@ -22,4 +23,5 @@ export {
     DisplaySlider,
     DockAppItem,
     ActionCenterMenu,
+    AppWindow,
 };
