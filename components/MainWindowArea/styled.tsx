@@ -21,7 +21,7 @@ const AppContainer = styled(motion.div)`
 `;
 
 const AppHeader = styled.div`
-    padding: 0.9rem 1rem;
+    padding: 0.6rem 1rem;
     width: 100%;
     top: 0;
     left: 0;
@@ -30,6 +30,7 @@ const AppHeader = styled.div`
     border-bottom: solid 0.9px #1b1b1d4d;
     background-color: #f8fafc;
     display: flex;
+    align-items: center;
 `;
 
 const AppName = styled.span`

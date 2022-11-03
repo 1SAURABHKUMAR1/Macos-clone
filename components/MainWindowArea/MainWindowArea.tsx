@@ -1,5 +1,7 @@
 import type { NextPage } from 'next';
 import { AppWindow } from '@components/index';
+import { useRef } from 'react';
+import Draggable from 'react-draggable';
 import {
     WindowArea,
     AppContainer,
@@ -14,9 +16,11 @@ import { HiMinus } from 'react-icons/hi';
 import { GrFormAdd } from 'react-icons/gr';
 
 const MainWindowArea: NextPage = () => {
-    const focusApp = () => {
-        //FIXME: put focused app with appId
-    };
+    const windowRef = useRef<HTMLDivElement>(null);
+
+    // const focusApp = (appId : number) => {
+    //     //FIXME: put focused app with appId
+    // };
 
     const closeApp = () => {
         //
@@ -32,55 +36,80 @@ const MainWindowArea: NextPage = () => {
 
     return (
         <>
-            <WindowArea>
+            <WindowArea ref={windowRef}>
                 {/* TODO: open apps based on state using Object.keys */}
-                <AppContainer
-                    style={{
-                        //   TODO: width and height changes based on height and based on appConfig with minWidth and minHeight */}
-                        width: '37.5rem',
-                        height: '31.25rem',
-                        //    TODO: background color based on appConfig
-                        backgroundColor: '#fff',
-                        // zIndex: TODO:
+                <Draggable
+                    defaultPosition={{
+                        x:
+                            ((windowRef.current?.clientWidth ?? 1000) -
+                                37.15 * 12) /
+                            //TODO: according to app width
+                            2,
+                        y:
+                            ((windowRef.current?.clientHeight ?? 599) -
+                                37.5 * 12) /
+                            //TODO: according to app height
+                            2,
                     }}
-                    onClick={focusApp}
-                    // closeAnimation scale to 0 TODO:
-                    // minmize App move down TODO:
+                    // onStart={() => focusApp()} //FIXME:
+                    bounds={{
+                        left: 0,
+                        right: windowRef.current?.clientWidth,
+                        top: windowRef.current?.clientTop,
+                        bottom: windowRef.current?.clientHeight,
+                    }}
+                    handle=".app-handle"
                 >
-                    <AppHeader>
-                        <AppControlContainer>
-                            <ControlButton
-                                buttonType="close"
-                                onClick={closeApp}
-                            >
-                                <IoClose />
-                            </ControlButton>
+                    <AppContainer
+                        style={{
+                            //   TODO: width and height changes based on height and based on appConfig with minWidth and minHeight */}
+                            width: '37.5rem',
+                            height: '31.25rem',
+                            //    TODO: background color based on appConfig
+                            backgroundColor: '#fff',
+                            // zIndex: TODO:
+                        }}
 
-                            <ControlButton
-                                buttonType="minmize"
-                                onClick={minimizeApp}
-                            >
-                                <HiMinus />
-                            </ControlButton>
+                        // onClick={() => focusApp()} //FIXME:
 
-                            <ControlButton
-                                buttonType="maximize"
-                                onClick={maximizeApp}
-                            >
-                                <GrFormAdd />
-                            </ControlButton>
-                        </AppControlContainer>
+                        // closeAnimation scale to 0 TODO:
+                        // minmize App move down TODO:
+                    >
+                        <AppHeader className="app-handle">
+                            <AppControlContainer>
+                                <ControlButton
+                                    buttonType="close"
+                                    onClick={closeApp}
+                                >
+                                    <IoClose />
+                                </ControlButton>
 
-                        <AppName>
-                            System Prefernc
-                            {/* FIXME: */}
-                        </AppName>
-                    </AppHeader>
+                                <ControlButton
+                                    buttonType="minmize"
+                                    onClick={minimizeApp}
+                                >
+                                    <HiMinus />
+                                </ControlButton>
 
-                    <MainAppArea>
-                        <AppWindow />
-                    </MainAppArea>
-                </AppContainer>
+                                <ControlButton
+                                    buttonType="maximize"
+                                    onClick={maximizeApp}
+                                >
+                                    <GrFormAdd />
+                                </ControlButton>
+                            </AppControlContainer>
+
+                            <AppName>
+                                System Prefernc
+                                {/* FIXME: */}
+                            </AppName>
+                        </AppHeader>
+
+                        <MainAppArea>
+                            <AppWindow />
+                        </MainAppArea>
+                    </AppContainer>
+                </Draggable>
             </WindowArea>
         </>
     );
