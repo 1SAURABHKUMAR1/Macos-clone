@@ -27,7 +27,7 @@ const Main = styled.div`
 `;
 
 const Home: NextPage = () => {
-    const [isBootupOver, setIsBootupOver] = useState<boolean>(true);
+    const [isBootupLoading, setIsBootupLoading] = useState<boolean>(true);
     const fullScreenHandle = useFullScreenHandle();
 
     // const toggleFullScreen = () => {
@@ -47,21 +47,23 @@ const Home: NextPage = () => {
             </Head>
 
             <Container>
-                <FullScreen handle={fullScreenHandle}>
-                    <Main>
-                        <TopBarArea />
+                {!isBootupLoading && (
+                    <FullScreen handle={fullScreenHandle}>
+                        <Main>
+                            <TopBarArea />
 
-                        <MainWindowArea />
+                            <MainWindowArea />
 
-                        <DockArea />
-                    </Main>
+                            <DockArea />
+                        </Main>
 
-                    <Wallpaper />
-                </FullScreen>
+                        <Wallpaper />
+                    </FullScreen>
+                )}
 
                 <AnimatePresence>
-                    {isBootupOver && (
-                        <BootupScreen setIsBootupOver={setIsBootupOver} />
+                    {isBootupLoading && (
+                        <BootupScreen setIsBootupLoading={setIsBootupLoading} />
                     )}
                 </AnimatePresence>
             </Container>

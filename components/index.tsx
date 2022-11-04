@@ -10,6 +10,7 @@ import TopBarTime from '@components/TopBarTime/TopBarTime';
 import DisplaySlider from '@components/DisplaySlider/DisplaySlider';
 import DockAppItem from '@components/DockAppItem/DockAppItem';
 import AppWindow from '@components/AppsWIndow/AppWindow';
+import SingleWindow from '@components/SingleWindow/SingleWindow';
 
 export {
     BootupScreen,
@@ -24,4 +25,5 @@ export {
     DockAppItem,
     ActionCenterMenu,
     AppWindow,
+    SingleWindow,
 };

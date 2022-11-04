@@ -9,7 +9,7 @@ import {
     BootupLoading,
 } from './styled';
 
-const BootupScreen: NextPage<bootupScreenProps> = ({ setIsBootupOver }) => {
+const BootupScreen: NextPage<bootupScreenProps> = ({ setIsBootupLoading }) => {
     const [translateValue, setTranslateValue] = useState(100);
 
     function animationEaseIn(
@@ -31,7 +31,7 @@ const BootupScreen: NextPage<bootupScreenProps> = ({ setIsBootupOver }) => {
                 const now = Date.now();
 
                 if (now - currentTime > animationDuration) {
-                    setIsBootupOver(() => false);
+                    setIsBootupLoading(() => false);
                     clearInterval(animationInterval);
                 }
 
@@ -43,7 +43,7 @@ const BootupScreen: NextPage<bootupScreenProps> = ({ setIsBootupOver }) => {
                 setTranslateValue(() => 100 - Math.round(progress));
             }, animationDifference);
         },
-        [setIsBootupOver],
+        [setIsBootupLoading],
     );
 
     useEffect(() => {

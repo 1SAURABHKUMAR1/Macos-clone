@@ -40,7 +40,7 @@ export type colors =
     | 'pink';
 
 export interface bootupScreenProps {
-    setIsBootupOver: Dispatch<SetStateAction<boolean>>;
+    setIsBootupLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 export type dockConfig = {
