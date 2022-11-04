@@ -10,6 +10,7 @@ const AppContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
     position: absolute;
+    opacity: 1;
 `;
 
 const AppHeader = styled.div`

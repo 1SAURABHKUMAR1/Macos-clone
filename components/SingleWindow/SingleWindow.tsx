@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 import Draggable from 'react-draggable';
 import { Resizable } from 're-resizable';
 import { AppWindow } from '@components/index';
-// import { useAnimationControls } from 'framer-motion';
+import { useAnimationControls } from 'framer-motion';
 import {
     AppContainer,
     AppHeader,
@@ -21,6 +21,8 @@ const SingleWindow: NextPage<{}, RefObject<HTMLDivElement>> = (
     _props,
     windowRef,
 ) => {
+    const containerMinimize = useAnimationControls();
+
     // const focusApp = (appId : number) => {
     //     //FIXME: put focused app with appId
     // };
@@ -31,6 +33,10 @@ const SingleWindow: NextPage<{}, RefObject<HTMLDivElement>> = (
 
     const minimizeApp = () => {
         //TODO:
+        containerMinimize.start({
+            transform: 'translateY(100vh)',
+            width: '0px',
+        });
     };
 
     const maximizeApp = () => {
@@ -79,7 +85,7 @@ const SingleWindow: NextPage<{}, RefObject<HTMLDivElement>> = (
                         }}
                         // onClick={() => focusApp()} //FIXME:
 
-                        animate={{ opacity: 1 }}
+                        animate={containerMinimize}
                         exit={{ opacity: 0, scale: 0 }}
                         transition={{ duration: 0.6, ease: 'anticipate' }}
 
