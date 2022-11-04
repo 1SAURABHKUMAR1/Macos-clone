@@ -4,6 +4,7 @@ import { forwardRef } from 'react';
 import Draggable from 'react-draggable';
 import { Resizable } from 're-resizable';
 import { AppWindow } from '@components/index';
+// import { useAnimationControls } from 'framer-motion';
 import {
     AppContainer,
     AppHeader,
@@ -16,9 +17,9 @@ import { IoClose } from 'react-icons/io5';
 import { HiMinus } from 'react-icons/hi';
 import { GrFormAdd } from 'react-icons/gr';
 
-const SingleWindow: NextPage = (
-    _props: {},
-    windowRef: RefObject<HTMLDivElement>,
+const SingleWindow: NextPage<{}, RefObject<HTMLDivElement>> = (
+    _props,
+    windowRef,
 ) => {
     // const focusApp = (appId : number) => {
     //     //FIXME: put focused app with appId
@@ -62,7 +63,7 @@ const SingleWindow: NextPage = (
             >
                 <Resizable
                     bounds="window"
-                    //   TODO: width and height changes based on height and based on appConfig with minWidth and minHeight */}
+                    //   TODO: width and height changes based on height and based on appConfig with minWidth and minHeight
                     defaultSize={{
                         width: `${37.5 * 16}px`,
                         height: `${31.25 * 16}px`,
@@ -78,7 +79,10 @@ const SingleWindow: NextPage = (
                         }}
                         // onClick={() => focusApp()} //FIXME:
 
-                        // closeAnimation scale to 0 TODO:
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0, scale: 0 }}
+                        transition={{ duration: 0.6, ease: 'anticipate' }}
+
                         // minmize App move down TODO:
                     >
                         <AppHeader className="app-handle">
