@@ -58,3 +58,10 @@ export interface dockItemProps {
     dockWidth: number;
     distanceLimit: number;
 }
+
+export type contextMenuConfig = {
+    [name: string]: {
+        title: string;
+        breakAfter: boolean;
+    };
+};
