@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import type { MotionValue } from 'framer-motion';
 import type { Dispatch, SetStateAction } from 'react';
 
@@ -65,3 +66,18 @@ export type contextMenuConfig = {
         breakAfter: boolean;
     };
 };
+
+export type wallpaperType = {
+    image: '';
+    id: '';
+};
+
+export interface systemStores {
+    wallpaper: wallpaperType;
+    brightness: number;
+    animation: boolean;
+
+    changeWallpaper: (wallpaper: wallpaperType) => void;
+    changeBrightness: (brightness: number) => void;
+    toggleAnimaion: () => void;
+}
