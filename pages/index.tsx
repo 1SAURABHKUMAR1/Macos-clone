@@ -11,12 +11,11 @@ import {
 } from '@components/index';
 import { AnimatePresence } from 'framer-motion';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
+import { useSystemStore } from '@store/index';
 
 const Container = styled.div`
     height: 100%;
     width: 100%;
-    /* filter: brightness(40%); */
-    /* FIXME: */
 `;
 
 const Main = styled.div`
@@ -29,6 +28,7 @@ const Main = styled.div`
 const Home: NextPage = () => {
     const [isBootupLoading, setIsBootupLoading] = useState<boolean>(true);
     const fullScreenHandle = useFullScreenHandle();
+    const { brightness } = useSystemStore((state) => state);
 
     // const toggleFullScreen = () => {
     //     if (fullScreenHandle.active) {
@@ -46,7 +46,7 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Container>
+            <Container style={{ filter: `brightness(${brightness}%)` }}>
                 {!isBootupLoading && (
                     <FullScreen handle={fullScreenHandle}>
                         <Main>

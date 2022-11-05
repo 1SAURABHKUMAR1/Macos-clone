@@ -5,7 +5,7 @@ import { systemStores } from 'types';
 const useSystemStore = create<systemStores>()(
     devtools((set) => ({
         wallpaper: { id: '', image: '' },
-        brightness: 0,
+        brightness: 100,
         animation: true,
 
         changeWallpaper: (wallpaper) => {

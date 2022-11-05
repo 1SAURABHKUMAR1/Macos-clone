@@ -1,15 +1,14 @@
 import type { NextPage } from 'next';
-
-import { DisplaySliderContainer, DisplaySliderIcon } from './styled';
-
-import { useState } from 'react';
+import { useSystemStore } from '@store/index';
 import { Sun } from 'react-feather';
 import Slider from 'react-rangeslider';
-
 import 'react-rangeslider/lib/index.css';
+import { DisplaySliderContainer, DisplaySliderIcon } from './styled';
 
 const DisplaySlider: NextPage = () => {
-    const [brightness, setBrightness] = useState<number>(100);
+    const { brightness, changeBrightness } = useSystemStore((state) => state);
+
+    const toggleBrightness = (value: number) => changeBrightness(value);
 
     return (
         <>
@@ -19,11 +18,11 @@ const DisplaySlider: NextPage = () => {
                 </DisplaySliderIcon>
                 <Slider
                     min={20}
-                    max={100}
+                    max={120}
                     value={brightness}
                     tooltip={false}
                     orientation="horizontal"
-                    onChange={(value) => setBrightness(value)}
+                    onChange={toggleBrightness}
                 />
             </DisplaySliderContainer>
         </>
