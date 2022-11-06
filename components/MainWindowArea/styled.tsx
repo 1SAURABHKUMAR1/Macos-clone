@@ -25,7 +25,7 @@ const RightClickContextMenuContainer = styled(motion.section)`
     color: #ffffff;
 `;
 
-const RightClickMenuItem = styled.div`
+const RightClickMenuItem = styled.span`
     display: flex;
     justify-content: flex-start;
     width: 100%;

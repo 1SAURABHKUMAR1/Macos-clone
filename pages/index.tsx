@@ -47,7 +47,7 @@ const Home: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Mac-sOS</title>
+                <title>Mac-OS</title>
                 <meta name="description" content="Macos clone" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
                 style={
                     {
                         filter: `brightness(${brightness}%)`,
-                        '--system-primary-color': `hsl(${colorsConfig[systemColor].hsl})`,
+                        '--system-color-primary': `hsl(${colorsConfig[systemColor].hsl})`,
                     } as systemPrimaryCss
                 }
             >

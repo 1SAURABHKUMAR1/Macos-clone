@@ -13,14 +13,20 @@ import {
     ActionMenuWallpaperContainer,
     ActionMenuItemCardSmall,
 } from './styled';
-import { actionCenterMenuProps } from 'types/index';
+import { actionCenterMenuProps, colors } from 'types/index';
 
 const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
     menuActive,
     setMenuActive,
 }) => {
-    const { animation, toggleAnimation, fullScreen, toggleFullScreen } =
-        useSystemStore((state) => state);
+    const {
+        animation,
+        toggleAnimation,
+        fullScreen,
+        toggleFullScreen,
+        systemColor,
+        changeSystemColor,
+    } = useSystemStore((state) => state);
 
     const changeAnimation = () => toggleAnimation();
 
@@ -33,6 +39,8 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
             ...state,
             [type]: !state[type],
         }));
+
+    const toggleSystemColor = (color: colors) => changeSystemColor(color);
 
     return (
         <ActionMenuContainer>
@@ -121,8 +129,9 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
                         <ActionMenuColorItem
                             key={key}
                             backgroundHsl={value.hsl}
+                            onClick={() => toggleSystemColor(key as colors)}
                         >
-                            <Check size="1.2em" />
+                            {key === systemColor && <Check size="1.2em" />}
                         </ActionMenuColorItem>
                     ))}
                 </ActionMenuColorsContainer>

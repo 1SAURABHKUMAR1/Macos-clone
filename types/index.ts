@@ -25,7 +25,7 @@ export type menuBarKeys =
     | 'help';
 
 export type colorConfig = {
-    [color: string]: {
+    [color in colors]: {
         hsl: string;
     };
 };
@@ -79,14 +79,15 @@ export interface systemStores {
     fullScreen: boolean;
     systemColor: colors;
 
-    changeWallpaper: (wallpaper: wallpaperType) => void;
     changeBrightness: (brightness: number) => void;
     toggleAnimation: () => void;
     toggleFullScreen: () => void;
+    changeSystemColor: (color: colors) => void;
+    changeWallpaper: (wallpaper: wallpaperType) => void;
 }
 
 export interface systemPrimaryCss extends CSSProperties {
-    '--system-primary-color': string;
+    '--system-color-primary': string;
 }
 
 export type menuActiveType = {

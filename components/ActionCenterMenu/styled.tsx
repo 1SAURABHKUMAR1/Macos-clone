@@ -104,7 +104,7 @@ const ActionMenuItemSvg = styled.span<{
             ? `
             --svg-background-color: 240, 24%, 100%;
             --svg-aplha: 1;
-            background-color: var(--system-primary-color);
+            background-color: var(--system-color-primary);
             `
             : `
             --svg-background-color: 0%, 1%, 11%;

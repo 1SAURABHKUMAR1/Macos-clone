@@ -10,13 +10,6 @@ const useSystemStore = create<systemStores>()(
         systemColor: 'cyan',
         wallpaper: { id: '', image: '' },
 
-        changeWallpaper: (wallpaper) => {
-            set((state) => ({
-                ...state,
-                wallpaper: wallpaper,
-            }));
-        },
-
         changeBrightness: (brightness) => {
             set((state) => ({
                 ...state,
@@ -35,6 +28,20 @@ const useSystemStore = create<systemStores>()(
             set((state) => ({
                 ...state,
                 fullScreen: !state.fullScreen,
+            }));
+        },
+
+        changeSystemColor: (color) => {
+            set((state) => ({
+                ...state,
+                systemColor: color,
+            }));
+        },
+
+        changeWallpaper: (wallpaper) => {
+            set((state) => ({
+                ...state,
+                wallpaper: wallpaper,
             }));
         },
     })),

@@ -48,9 +48,8 @@ const MainWindowArea: NextPage = () => {
                 onClick={hideContextMenu}
                 onContextMenu={handleRightClick}
             >
-                {/* TODO: open apps based on state using Object.keys */}
-
                 <AnimatePresence>
+                    {/* TODO: open apps based on state using Object.keys */}
                     <SingleWindow ref={windowRef} />
                 </AnimatePresence>
             </WindowArea>
