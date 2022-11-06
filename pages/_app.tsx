@@ -148,7 +148,7 @@ const GlobalStyle = createGlobalStyle`
     /* variables */
     :root {
         --system-text-white: hsl(240, 24%, 100%);
-        --system-header-hsl: 240deg, 0%, 90%;
+        --system-header-hsl:240, 0.4%, 49.2%;
         --system-color-dark-hsl: 240, 24%, 100%;
         --system-color-primary: hsl(199deg, 78%, 55%);
         --system-color-primary-hsl: 211, 100%, 50%;

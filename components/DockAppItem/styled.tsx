@@ -17,8 +17,8 @@ const DockTooltip = styled(motion.span)`
     align-items: center;
     white-space: nowrap;
     position: absolute;
-    background-color: hsla(var(--system-header-hsl), 0.5);
-    backdrop-filter: blur(7px);
+    background-color: hsla(240deg, 0%, 90%, 0.5);
+    backdrop-filter: blur(12px);
     padding: 0.5rem 0.75rem;
     border-radius: 0.4rem;
     box-shadow: var(--shadow-tooltip-dock);

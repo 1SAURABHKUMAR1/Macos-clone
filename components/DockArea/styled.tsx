@@ -16,10 +16,11 @@ const DockContainer = styled.div`
     height: 100%;
     border-radius: 1.25rem;
     padding: 0.3rem;
-    background-color: hsla(var(--system-header-hsl), 0.5);
+    background-color: hsla(var(--system-header-hsl), 0.27);
     display: flex;
     align-items: flex-end;
     box-shadow: var(--shadow-action-menu);
+    backdrop-filter: blur(12px);
 `;
 
 const DockDivider = styled.div`

@@ -18,7 +18,7 @@ const DisplaySlider: NextPage = () => {
                 </DisplaySliderIcon>
                 <Slider
                     min={20}
-                    max={120}
+                    max={110}
                     value={brightness}
                     tooltip={false}
                     orientation="horizontal"

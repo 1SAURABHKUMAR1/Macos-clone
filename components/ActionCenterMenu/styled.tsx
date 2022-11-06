@@ -6,7 +6,7 @@ const ActionMenuContainer = styled.div`
     margin: 0.4rem 0rem 0rem 0rem;
     right: 1rem;
     color: var(--system-color-grey-900);
-    background-color: hsla(var(--system-header-hsl), 0.35);
+    background-color: hsla(var(--system-header-hsl), 0.27);
     border-radius: 1rem;
     box-shadow: hsla(0, 0%, 0%, 0.3) 0px 0px 11px 0px,
         var(--additional-box-shadow);
@@ -32,7 +32,7 @@ const ActionMenuItemCard = styled.section<{
         | 'wallpaper';
 }>`
     width: 100%;
-    background-color: hsla(var(--system-color-light-hsl), 0.6);
+    background-color: hsla(var(--system-color-light-hsl), 0.83);
     border-radius: 1rem;
     padding: 0.5rem;
     box-shadow: #0000004d 0 1px 4px -1px,
@@ -40,6 +40,7 @@ const ActionMenuItemCard = styled.section<{
         0 0 0 0.5px hsla(var(--system-color-light-hsl), 0.3);
     font-weight: 700;
     font-size: 0.87rem;
+    backdrop-filter: blur(12px);
 
     ${({ cardType }) =>
         cardType === 'wifi_bluetooth_airdrop'

@@ -54,7 +54,7 @@ const Menu = styled.div`
     padding: 0.55rem;
     position: relative;
     user-select: none;
-    background-color: hsla(var(--system-header-hsl), 0.35);
+    background-color: hsla(var(--system-header-hsl), 0.27);
     backdrop-filter: blur(12px);
     border-radius: 0.5rem;
     box-shadow: hsla(0, 0%, 0%, 0.3) 0px 0px 11px 0px,

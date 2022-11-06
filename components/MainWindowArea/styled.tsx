@@ -17,8 +17,8 @@ const RightClickContextMenuContainer = styled(motion.section)`
     top: 0;
     left: 0;
     user-select: none;
-    background-color: hsla(240, 3%, 11%, 0.3); //TODO:
-    backdrop-filter: blur(15px); //TODO:
+    background-color: hsla(var(--system-header-hsl), 0.27);
+    backdrop-filter: blur(12px);
     border-radius: 0.5rem;
     box-shadow: var(--shadow-context-menu);
     z-index: 150;
