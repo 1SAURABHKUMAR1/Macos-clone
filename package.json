@@ -20,10 +20,10 @@
         "react-dom": "18.2.0",
         "react-draggable": "^4.4.5",
         "react-feather": "^2.0.10",
-        "react-full-screen": "^1.1.1",
         "react-icons": "^4.6.0",
         "react-rangeslider": "^2.2.0",
         "rooks": "^7.4.1",
+        "screenfull": "^6.0.2",
         "styled-components": "^5.3.6",
         "zustand": "^4.1.3"
     },

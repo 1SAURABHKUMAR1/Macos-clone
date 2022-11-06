@@ -16,7 +16,8 @@ import {
 } from './styled';
 
 const ActionCenterMenu: NextPage = () => {
-    const { animation, toggleAnimation } = useSystemStore((state) => state);
+    const { animation, toggleAnimation, fullScreen, toggleFullScreen } =
+        useSystemStore((state) => state);
     const [menuActive, setMenuActive] = useState({
         wifi: false,
         bluetooth: false,
@@ -25,6 +26,8 @@ const ActionCenterMenu: NextPage = () => {
     });
 
     const changeAnimation = () => toggleAnimation();
+
+    const changeFullScreen = () => toggleFullScreen();
 
     const toggleMenuItems = (
         type: 'wifi' | 'bluetooth' | 'airdrop' | 'keyboard_brightness',
@@ -99,8 +102,11 @@ const ActionCenterMenu: NextPage = () => {
                 Keyboard Brightness
             </ActionMenuItemCard>
 
-            <ActionMenuItemCard cardType="full_screen">
-                <ActionMenuItemSvg icon="small" buttonActive={false}>
+            <ActionMenuItemCard
+                cardType="full_screen"
+                onClick={changeFullScreen}
+            >
+                <ActionMenuItemSvg icon="small" buttonActive={fullScreen}>
                     <Maximize size="1.2em" />
                 </ActionMenuItemSvg>
                 Full Screen

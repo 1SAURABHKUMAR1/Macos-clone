@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
     BootupScreen,
@@ -10,10 +10,10 @@ import {
     MainWindowArea,
 } from '@components/index';
 import { AnimatePresence } from 'framer-motion';
-import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import { useSystemStore } from '@store/index';
 import { systemPrimaryCss } from 'types';
 import { colorsConfig } from 'helper/action-colors.config';
+import screenfull from 'screenfull';
 
 const Container = styled.div`
     height: 100%;
@@ -29,21 +29,25 @@ const Main = styled.div`
 
 const Home: NextPage = () => {
     const [isBootupLoading, setIsBootupLoading] = useState<boolean>(true);
-    const fullScreenHandle = useFullScreenHandle();
-    const { brightness, systemColor } = useSystemStore((state) => state);
+    const { brightness, systemColor, fullScreen } = useSystemStore(
+        (state) => state,
+    );
 
-    // const toggleFullScreen = () => {
-    //     if (fullScreenHandle.active) {
-    //         fullScreenHandle.exit();
-    //         return;
-    //     }
-    //     fullScreenHandle.enter();
-    // }; //FIXME:
+    useEffect(() => {
+        if (screenfull.isEnabled) {
+            if (fullScreen && !screenfull.isFullscreen) {
+                screenfull.request();
+                return;
+            }
+
+            screenfull.exit();
+        }
+    }, [fullScreen]);
 
     return (
         <>
             <Head>
-                <title>Mac-OS</title>
+                <title>Mac-sOS</title>
                 <meta name="description" content="Macos clone" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
@@ -57,7 +61,7 @@ const Home: NextPage = () => {
                 }
             >
                 {!isBootupLoading && (
-                    <FullScreen handle={fullScreenHandle}>
+                    <>
                         <Main>
                             <TopBarArea />
 
@@ -67,7 +71,7 @@ const Home: NextPage = () => {
                         </Main>
 
                         <Wallpaper />
-                    </FullScreen>
+                    </>
                 )}
 
                 <AnimatePresence>

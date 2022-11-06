@@ -90,6 +90,7 @@ const ActionMenuItemCard = styled.section<{
                 justify-content: center;
                 text-align: center;
                 font-weight:600;
+                padding : 0.7rem 0.75rem;
             `
             : ''}
 `;
