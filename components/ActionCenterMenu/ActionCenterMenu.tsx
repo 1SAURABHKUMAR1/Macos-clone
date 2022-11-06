@@ -1,4 +1,10 @@
 import type { NextPage } from 'next';
+import Image from 'next/image';
+import { useState } from 'react';
+import { Wifi, Check, Sun, Maximize, Bluetooth, Rss } from 'react-feather';
+import { DisplaySlider } from '@components/index';
+import { colorsConfig } from 'helper/action-colors.config';
+import { useSystemStore } from '@store/index';
 import {
     ActionMenuContainer,
     ActionMenuItemCard,
@@ -8,36 +14,60 @@ import {
     ActionMenuWallpaperContainer,
     ActionMenuItemCardSmall,
 } from './styled';
-import Image from 'next/image';
-import { Wifi, Check, Sun, Maximize, Bluetooth, Rss } from 'react-feather';
-import { DisplaySlider } from '@components/index';
-import { colorsConfig } from 'helper/action-colors.config';
-import { useSystemStore } from '@store/index';
 
 const ActionCenterMenu: NextPage = () => {
     const { animation, toggleAnimation } = useSystemStore((state) => state);
+    const [menuActive, setMenuActive] = useState({
+        wifi: false,
+        bluetooth: false,
+        airdrop: false,
+        keyboard_brightness: false,
+    });
 
     const changeAnimation = () => toggleAnimation();
+
+    const toggleMenuItems = (
+        type: 'wifi' | 'bluetooth' | 'airdrop' | 'keyboard_brightness',
+    ) =>
+        setMenuActive((state) => ({
+            ...state,
+            [type]: !state[type],
+        }));
 
     return (
         <ActionMenuContainer>
             <ActionMenuItemCard cardType="wifi_bluetooth_airdrop">
-                <ActionMenuItemCardSmall>
-                    <ActionMenuItemSvg icon="medium" buttonActive={false}>
+                <ActionMenuItemCardSmall
+                    onClick={() => toggleMenuItems('wifi')}
+                >
+                    <ActionMenuItemSvg
+                        icon="medium"
+                        buttonActive={menuActive.wifi}
+                    >
                         <Wifi size="1.2em" />
                     </ActionMenuItemSvg>
                     Wifi
                 </ActionMenuItemCardSmall>
 
-                <ActionMenuItemCardSmall>
-                    <ActionMenuItemSvg icon="medium" buttonActive={false}>
+                <ActionMenuItemCardSmall
+                    onClick={() => toggleMenuItems('bluetooth')}
+                >
+                    <ActionMenuItemSvg
+                        icon="medium"
+                        buttonActive={menuActive.bluetooth}
+                    >
                         <Bluetooth size="1.2em" />
                     </ActionMenuItemSvg>
                     Bluetooth
                 </ActionMenuItemCardSmall>
 
-                <ActionMenuItemCardSmall>
-                    <ActionMenuItemSvg icon="medium" buttonActive={false}>
+                <ActionMenuItemCardSmall
+                    onClick={() => toggleMenuItems('airdrop')}
+                >
+                    <ActionMenuItemSvg
+                        icon="medium"
+                        buttonActive={menuActive.airdrop}
+                    >
                         <Rss size="1.2em" />
                     </ActionMenuItemSvg>
                     AirDrop
@@ -56,8 +86,14 @@ const ActionCenterMenu: NextPage = () => {
                 Animations
             </ActionMenuItemCard>
 
-            <ActionMenuItemCard cardType="keyboard_brightness">
-                <ActionMenuItemSvg icon="small" buttonActive={false}>
+            <ActionMenuItemCard
+                cardType="keyboard_brightness"
+                onClick={() => toggleMenuItems('keyboard_brightness')}
+            >
+                <ActionMenuItemSvg
+                    icon="small"
+                    buttonActive={menuActive.keyboard_brightness}
+                >
                     <Sun size="1.2em" />
                 </ActionMenuItemSvg>
                 Keyboard Brightness
