@@ -88,3 +88,15 @@ export interface systemStores {
 export interface systemPrimaryCss extends CSSProperties {
     '--system-primary-color': string;
 }
+
+export type menuActiveType = {
+    wifi: boolean;
+    bluetooth: boolean;
+    airdrop: boolean;
+    keyboard_brightness: boolean;
+};
+
+export interface actionCenterMenuProps {
+    menuActive: menuActiveType;
+    setMenuActive: Dispatch<SetStateAction<menuActiveType>>;
+}

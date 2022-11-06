@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import { useState } from 'react';
 import { Wifi, Check, Sun, Maximize, Bluetooth, Rss } from 'react-feather';
 import { DisplaySlider } from '@components/index';
 import { colorsConfig } from 'helper/action-colors.config';
@@ -14,16 +13,14 @@ import {
     ActionMenuWallpaperContainer,
     ActionMenuItemCardSmall,
 } from './styled';
+import { actionCenterMenuProps } from 'types/index';
 
-const ActionCenterMenu: NextPage = () => {
+const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
+    menuActive,
+    setMenuActive,
+}) => {
     const { animation, toggleAnimation, fullScreen, toggleFullScreen } =
         useSystemStore((state) => state);
-    const [menuActive, setMenuActive] = useState({
-        wifi: false,
-        bluetooth: false,
-        airdrop: false,
-        keyboard_brightness: false,
-    });
 
     const changeAnimation = () => toggleAnimation();
 

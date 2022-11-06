@@ -1,15 +1,20 @@
 import type { NextPage } from 'next';
-
 import { useState } from 'react';
 import { useDetectClickOutside } from 'react-detect-click-outside';
-
 import { ActionCenterMenu } from '@components/index';
 import { Container, FullDiv } from './styled';
+import { menuActiveType } from 'types/index';
 
 const ActionCenter: NextPage = () => {
     const [isActionVisible, setIsActionVisible] = useState<boolean>(false);
     const actionMenuRef = useDetectClickOutside({
         onTriggered: () => setIsActionVisible(false),
+    });
+    const [menuActive, setMenuActive] = useState<menuActiveType>({
+        wifi: false,
+        bluetooth: false,
+        airdrop: false,
+        keyboard_brightness: false,
     });
 
     const toggleActionDisplay = () => setIsActionVisible((visible) => !visible);
@@ -29,7 +34,12 @@ const ActionCenter: NextPage = () => {
                 </svg>
             </Container>
 
-            {isActionVisible && <ActionCenterMenu />}
+            {isActionVisible && (
+                <ActionCenterMenu
+                    menuActive={menuActive}
+                    setMenuActive={setMenuActive}
+                />
+            )}
         </FullDiv>
     );
 };
