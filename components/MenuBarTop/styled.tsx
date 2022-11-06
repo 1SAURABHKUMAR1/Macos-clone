@@ -73,8 +73,7 @@ const MenuItem = styled.button`
     border-radius: 0.3rem;
     color: hsla(var(--system-color-dark-hsl), 1);
 
-    :hover,
-    :focus-visible {
+    :hover {
         background-color: var(--system-color-primary);
         color: var(--system-color-primary-contrast);
     }

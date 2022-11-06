@@ -94,18 +94,25 @@ const ActionMenuItemCard = styled.section<{
             : ''}
 `;
 
-const ActionMenuItemSvg = styled.span<{ icon: 'small' | 'medium' }>`
-    --svg-background-color: 0%, 1%, 11%;
-    --span-background-color: 240, 3%, 11%;
-    --span-aplha: 0.1;
-
-    /* --svg-background-color: 240, 24%, 100%;
-    --span-aplha: 1;
-    --span-background-color: 211, 100%, 50%; */
+const ActionMenuItemSvg = styled.span<{
+    icon: 'small' | 'medium';
+    buttonActive: boolean;
+}>`
+    ${({ buttonActive }) =>
+        buttonActive
+            ? `
+            --svg-background-color: 240, 24%, 100%;
+            --svg-aplha: 1;
+            background-color: var(--system-primary-color);
+            `
+            : `
+            --svg-background-color: 0%, 1%, 11%;
+            --svg-aplha: 0.1;
+            background-color: hsla(240, 3%, 11% , 0.1 );
+            `}
 
     display: flex;
     justify-content: center;
-    background-color: hsla(var(--span-background-color), 0.1);
     border-radius: 50%;
     transition: all 0.3s ease;
     align-items: center;
@@ -122,9 +129,8 @@ const ActionMenuItemSvg = styled.span<{ icon: 'small' | 'medium' }>`
                 width: 2.2rem !important;
             `
             : ''}
-
     svg {
-        color: hsl(var(--svg-background-color));
+        color: hsla(var(--svg-background-color), var(--svg-aplha));
         font-size: 0.82rem;
     }
 `;

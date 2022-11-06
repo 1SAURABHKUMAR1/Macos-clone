@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import type { MotionValue } from 'framer-motion';
-import type { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction, CSSProperties } from 'react';
 
 export type menuConfig = {
     [string: string]: {
@@ -76,8 +76,15 @@ export interface systemStores {
     wallpaper: wallpaperType;
     brightness: number;
     animation: boolean;
+    fullScreen: boolean;
+    systemColor: colors;
 
     changeWallpaper: (wallpaper: wallpaperType) => void;
     changeBrightness: (brightness: number) => void;
-    toggleAnimaion: () => void;
+    toggleAnimation: () => void;
+    toggleFullScreen: () => void;
+}
+
+export interface systemPrimaryCss extends CSSProperties {
+    '--system-primary-color': string;
 }

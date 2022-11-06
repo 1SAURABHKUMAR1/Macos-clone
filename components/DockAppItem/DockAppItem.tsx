@@ -15,6 +15,7 @@ import {
     DockAppImage,
     DockIsAppOpenDot,
 } from './styled';
+import { useSystemStore } from '@store/index';
 
 const DockAppItem: NextPage<dockItemProps> = ({
     title,
@@ -26,6 +27,7 @@ const DockAppItem: NextPage<dockItemProps> = ({
     const [tooltipEnabled, setToolTipEnabled] = useState<boolean>(false);
     const containerRef = useRef<HTMLButtonElement | null>(null);
     const distance = useMotionValue(distanceLimit);
+    const { animation } = useSystemStore();
 
     const bouncingControls = useAnimationControls();
 
@@ -67,16 +69,17 @@ const DockAppItem: NextPage<dockItemProps> = ({
             return;
         }
         distance.set(distanceLimit);
-    }, true); //FIXME:
+    }, animation); //FIXME:
 
     const openApp = async () => {
         // const isAlreadyOpen = openedApps[app] //FIXME:
         // if(isAlreadyOpen) return ; //FIXME:
 
-        bouncingControls.start({
-            y: [0, -42, 0],
-            transition: { duration: 1.2, ease: 'easeInOut' },
-        });
+        animation &&
+            bouncingControls.start({
+                y: [0, -42, 0],
+                transition: { duration: 1.2, ease: 'easeInOut' },
+            });
 
         // openApps[app] = true //FIXME:
     };

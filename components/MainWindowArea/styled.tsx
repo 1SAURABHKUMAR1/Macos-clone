@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { colors } from 'types';
-import { colorsConfig } from 'helper/action-colors.config';
 
 const WindowArea = styled.div`
     height: 100%;
@@ -27,7 +25,7 @@ const RightClickContextMenuContainer = styled(motion.section)`
     color: #ffffff;
 `;
 
-const RightClickMenuItem = styled.div<{ hoverColor: colors }>`
+const RightClickMenuItem = styled.div`
     display: flex;
     justify-content: flex-start;
     width: 100%;
@@ -39,12 +37,9 @@ const RightClickMenuItem = styled.div<{ hoverColor: colors }>`
     font-size: 0.9rem;
     border-radius: 0.3rem;
 
-    ${({ hoverColor }) =>
-        `:hover
-        {
-            background-color: hsl(${colorsConfig[hoverColor]?.hsl});
-        }
-        `}
+    :hover {
+        background-color: var(--system-color-primary);
+    }
 `;
 
 const RightClickMenuDivider = styled.div`

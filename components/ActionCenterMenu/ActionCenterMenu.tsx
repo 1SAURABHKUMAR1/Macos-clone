@@ -12,35 +12,40 @@ import Image from 'next/image';
 import { Wifi, Check, Sun, Maximize, Bluetooth, Rss } from 'react-feather';
 import { DisplaySlider } from '@components/index';
 import { colorsConfig } from 'helper/action-colors.config';
+import { useSystemStore } from '@store/index';
 
 const ActionCenterMenu: NextPage = () => {
+    const { animation, toggleAnimation } = useSystemStore((state) => state);
+
+    const changeAnimation = () => toggleAnimation();
+
     return (
         <ActionMenuContainer>
             <ActionMenuItemCard cardType="wifi_bluetooth_airdrop">
                 <ActionMenuItemCardSmall>
-                    <ActionMenuItemSvg icon="medium">
+                    <ActionMenuItemSvg icon="medium" buttonActive={false}>
                         <Wifi size="1.2em" />
                     </ActionMenuItemSvg>
                     Wifi
                 </ActionMenuItemCardSmall>
 
                 <ActionMenuItemCardSmall>
-                    <ActionMenuItemSvg icon="medium">
+                    <ActionMenuItemSvg icon="medium" buttonActive={false}>
                         <Bluetooth size="1.2em" />
                     </ActionMenuItemSvg>
                     Bluetooth
                 </ActionMenuItemCardSmall>
 
                 <ActionMenuItemCardSmall>
-                    <ActionMenuItemSvg icon="medium">
+                    <ActionMenuItemSvg icon="medium" buttonActive={false}>
                         <Rss size="1.2em" />
                     </ActionMenuItemSvg>
                     AirDrop
                 </ActionMenuItemCardSmall>
             </ActionMenuItemCard>
 
-            <ActionMenuItemCard cardType="animation">
-                <ActionMenuItemSvg icon="small">
+            <ActionMenuItemCard cardType="animation" onClick={changeAnimation}>
+                <ActionMenuItemSvg icon="small" buttonActive={animation}>
                     <svg viewBox="0 0 24 24" width="1.2em" height="1.2em">
                         <path
                             fill="currentColor"
@@ -52,14 +57,14 @@ const ActionCenterMenu: NextPage = () => {
             </ActionMenuItemCard>
 
             <ActionMenuItemCard cardType="keyboard_brightness">
-                <ActionMenuItemSvg icon="small">
+                <ActionMenuItemSvg icon="small" buttonActive={false}>
                     <Sun size="1.2em" />
                 </ActionMenuItemSvg>
                 Keyboard Brightness
             </ActionMenuItemCard>
 
             <ActionMenuItemCard cardType="full_screen">
-                <ActionMenuItemSvg icon="small">
+                <ActionMenuItemSvg icon="small" buttonActive={false}>
                     <Maximize size="1.2em" />
                 </ActionMenuItemSvg>
                 Full Screen

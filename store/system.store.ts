@@ -7,6 +7,8 @@ const useSystemStore = create<systemStores>()(
         wallpaper: { id: '', image: '' },
         brightness: 100,
         animation: true,
+        fullScreen: false,
+        systemColor: 'cyan',
 
         changeWallpaper: (wallpaper) => {
             set((state) => ({
@@ -22,10 +24,17 @@ const useSystemStore = create<systemStores>()(
             }));
         },
 
-        toggleAnimaion: () => {
+        toggleAnimation: () => {
             set((state) => ({
                 ...state,
                 animation: !state.animation,
+            }));
+        },
+
+        toggleFullScreen: () => {
+            set((state) => ({
+                ...state,
+                fullScreen: !state.fullScreen,
             }));
         },
     })),

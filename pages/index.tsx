@@ -12,6 +12,8 @@ import {
 import { AnimatePresence } from 'framer-motion';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import { useSystemStore } from '@store/index';
+import { systemPrimaryCss } from 'types';
+import { colorsConfig } from 'helper/action-colors.config';
 
 const Container = styled.div`
     height: 100%;
@@ -28,7 +30,7 @@ const Main = styled.div`
 const Home: NextPage = () => {
     const [isBootupLoading, setIsBootupLoading] = useState<boolean>(true);
     const fullScreenHandle = useFullScreenHandle();
-    const { brightness } = useSystemStore((state) => state);
+    const { brightness, systemColor } = useSystemStore((state) => state);
 
     // const toggleFullScreen = () => {
     //     if (fullScreenHandle.active) {
@@ -46,7 +48,14 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Container style={{ filter: `brightness(${brightness}%)` }}>
+            <Container
+                style={
+                    {
+                        filter: `brightness(${brightness}%)`,
+                        '--system-primary-color': `hsl(${colorsConfig[systemColor].hsl})`,
+                    } as systemPrimaryCss
+                }
+            >
                 {!isBootupLoading && (
                     <FullScreen handle={fullScreenHandle}>
                         <Main>

@@ -69,7 +69,7 @@ const MainWindowArea: NextPage = () => {
                         {Object.entries(contextMenuConfigItems).map(
                             ([key, value]) => (
                                 <React.Fragment key={key}>
-                                    <RightClickMenuItem hoverColor="purple">
+                                    <RightClickMenuItem>
                                         {/* FIXME: */}
                                         {value.title}
                                     </RightClickMenuItem>

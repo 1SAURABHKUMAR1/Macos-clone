@@ -150,7 +150,7 @@ const GlobalStyle = createGlobalStyle`
         --system-text-white: hsl(240, 24%, 100%);
         --system-header-hsl: 240deg, 0%, 90%;
         --system-color-dark-hsl: 240, 24%, 100%;
-        --system-color-primary: hsl(211, 100%, 50%);
+        --system-color-primary: hsl(199deg, 78%, 55%);
         --system-color-primary-hsl: 211, 100%, 50%;
         --system-color-primary-contrast: hsl(240, 24%, 100%);
         --system-color-primary-contrast-hsl: 240, 24%, 100%;
