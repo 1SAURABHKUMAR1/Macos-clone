@@ -26,12 +26,12 @@ export const dockConfigApps: dockConfig = {
         title: 'Excel',
         imageSrc: 'excel',
     },
-    systemPrefernce: {
+    'system-preference': {
         title: 'System Preferences',
         imageSrc: 'settings',
         break: true,
     },
-    recycleBin: {
+    bin: {
         title: 'Recycle Bin',
         imageSrc: 'bin',
     },

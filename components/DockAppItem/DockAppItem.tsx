@@ -15,7 +15,7 @@ import {
     DockAppImage,
     DockIsAppOpenDot,
 } from './styled';
-import { useSystemStore } from '@store/index';
+import { useSystemStore, useAppStore } from '@store/index';
 
 const DockAppItem: NextPage<dockItemProps> = ({
     title,
@@ -23,11 +23,13 @@ const DockAppItem: NextPage<dockItemProps> = ({
     dockWidth,
     mouseXPostion,
     distanceLimit,
+    appKey,
 }) => {
     const [tooltipEnabled, setToolTipEnabled] = useState<boolean>(false);
     const containerRef = useRef<HTMLButtonElement | null>(null);
     const distance = useMotionValue(distanceLimit);
     const { animation } = useSystemStore();
+    const { apps, openApp } = useAppStore();
 
     const bouncingControls = useAnimationControls();
 
@@ -69,11 +71,11 @@ const DockAppItem: NextPage<dockItemProps> = ({
             return;
         }
         distance.set(distanceLimit);
-    }, animation); //FIXME:
+    }, animation);
 
-    const openApp = async () => {
-        // const isAlreadyOpen = openedApps[app] //FIXME:
-        // if(isAlreadyOpen) return ; //FIXME:
+    const toggleAppOpen = async () => {
+        const isAlreadyOpen = apps[appKey].open;
+        if (isAlreadyOpen) return;
 
         animation &&
             bouncingControls.start({
@@ -81,7 +83,7 @@ const DockAppItem: NextPage<dockItemProps> = ({
                 transition: { duration: 1.2, ease: 'easeInOut' },
             });
 
-        // openApps[app] = true //FIXME:
+        openApp(appKey);
     };
 
     return (
@@ -90,7 +92,7 @@ const DockAppItem: NextPage<dockItemProps> = ({
                 ref={containerRef}
                 onMouseEnter={() => setToolTipEnabled(true)}
                 onMouseLeave={() => setToolTipEnabled(false)}
-                onClick={openApp}
+                onClick={toggleAppOpen}
             >
                 {tooltipEnabled && (
                     <DockTooltip animate={bouncingControls}>

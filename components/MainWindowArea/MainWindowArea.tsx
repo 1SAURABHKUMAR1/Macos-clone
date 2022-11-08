@@ -10,6 +10,7 @@ import {
     RightClickMenuDivider,
 } from './styled';
 import { contextMenuConfigItems } from 'helper/context-menu.config';
+import { useAppStore } from '@store/index';
 
 const MainWindowArea: NextPage = () => {
     const windowRef = useRef<HTMLDivElement>(null);
@@ -18,6 +19,7 @@ const MainWindowArea: NextPage = () => {
         y: number;
     }>({ x: 0, y: 0 });
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
+    const { apps } = useAppStore((state) => state);
 
     const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
         event.preventDefault();
@@ -49,8 +51,13 @@ const MainWindowArea: NextPage = () => {
                 onContextMenu={handleRightClick}
             >
                 <AnimatePresence>
-                    {/* TODO: open apps based on state using Object.keys */}
-                    <SingleWindow ref={windowRef} />
+                    {Object.entries(apps).map(([key, value]) => (
+                        <React.Fragment key={key}>
+                            {/* TODO: differnet app for launch */}
+                            {/* TODO: pass value as props */}
+                            {value.open && <SingleWindow ref={windowRef} />}
+                        </React.Fragment>
+                    ))}
                 </AnimatePresence>
             </WindowArea>
 
@@ -69,7 +76,7 @@ const MainWindowArea: NextPage = () => {
                             ([key, value]) => (
                                 <React.Fragment key={key}>
                                     <RightClickMenuItem>
-                                        {/* FIXME: */}
+                                        {/* FIXME: onCLick make new folder file and open apps*/}
                                         {value.title}
                                     </RightClickMenuItem>
 

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const WallpaperDiv = styled.div`
-    background-image: url(/wallpaper/Big-Sur.webp);
     z-index: var(--system-z-index-wallpaper);
     height: 100%;
     width: 100%;

@@ -45,7 +45,7 @@ export interface bootupScreenProps {
 }
 
 export type dockConfig = {
-    [string: string]: {
+    [dockItems in apps]?: {
         title: string;
         imageSrc: string;
         break?: boolean;
@@ -58,6 +58,7 @@ export interface dockItemProps {
     mouseXPostion: MotionValue;
     dockWidth: number;
     distanceLimit: number;
+    appKey: apps;
 }
 
 export type contextMenuConfig = {
@@ -67,23 +68,18 @@ export type contextMenuConfig = {
     };
 };
 
-export type wallpaperType = {
-    image: '';
-    id: '';
-};
-
 export interface systemStores {
-    wallpaper: wallpaperType;
     brightness: number;
     animation: boolean;
     fullScreen: boolean;
     systemColor: colors;
+    wallpaper: wallpaper;
 
     changeBrightness: (brightness: number) => void;
     toggleAnimation: () => void;
     toggleFullScreen: () => void;
     changeSystemColor: (color: colors) => void;
-    changeWallpaper: (wallpaper: wallpaperType) => void;
+    changeWallpaper: (wallpaper: wallpaper) => void;
 }
 
 export interface systemPrimaryCss extends CSSProperties {
@@ -100,4 +96,69 @@ export type menuActiveType = {
 export interface actionCenterMenuProps {
     menuActive: menuActiveType;
     setMenuActive: Dispatch<SetStateAction<menuActiveType>>;
+}
+
+export type wallpaper =
+    | 'big-sur'
+    | 'cabin-in-woods'
+    | 'catalina'
+    | 'dome'
+    | 'fox-in-somber-forest'
+    | 'iridescence'
+    | 'lake'
+    | 'lone-dune-wolf'
+    | 'mojave'
+    | 'monterey'
+    | 'peak'
+    | 'somber-forest'
+    | 'the-desert'
+    | 'ventura';
+
+export type wallpaperName =
+    | 'Big Sur'
+    | 'Cabin in the Woods'
+    | 'Catalina'
+    | 'Dome'
+    | 'Fox in Somber Forest'
+    | 'Iridescence'
+    | 'Lake'
+    | 'Lone Dune Wolf'
+    | 'Mojave'
+    | 'Monterey'
+    | 'Peak'
+    | 'Somber Forest'
+    | 'The Desert'
+    | 'Ventura';
+
+export type wallpaperConfig = {
+    [wallpaperKey in wallpaper]: {
+        name: wallpaperName;
+    };
+};
+
+export type apps =
+    | 'wallpaper'
+    | 'finder'
+    | 'vscode'
+    | 'appstore'
+    | 'calender'
+    | 'calculator'
+    | 'launch'
+    | 'system-preference'
+    | 'excel'
+    | 'bin';
+
+export interface appStore {
+    apps: {
+        [app in apps]: {
+            fullScreen: boolean;
+            zIndex: number;
+            open: boolean;
+        };
+    };
+
+    openApp: (app: apps) => void;
+    closeApp: (app: apps) => void;
+    toggleFullScreenApp: (app: apps) => void;
+    changeZIndex: (app: apps, zIndex: number) => void;
 }

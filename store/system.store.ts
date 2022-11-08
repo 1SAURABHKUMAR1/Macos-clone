@@ -8,7 +8,7 @@ const useSystemStore = create<systemStores>()(
         animation: true,
         fullScreen: false,
         systemColor: 'cyan',
-        wallpaper: { id: '', image: '' },
+        wallpaper: 'big-sur',
 
         changeBrightness: (brightness) => {
             set((state) => ({

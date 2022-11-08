@@ -5,6 +5,7 @@ import { useMotionValue } from 'framer-motion';
 import { DockAppItem } from '@components/index';
 import { dockConfigApps } from 'helper/dock-app.config';
 import { TotalDockArea, DockContainer, DockDivider } from './styled';
+import { apps } from 'types/index';
 
 const DockArea: NextPage = () => {
     const mouseX = useMotionValue<number | null>(null);
@@ -30,6 +31,7 @@ const DockArea: NextPage = () => {
                                 mouseXPostion={mouseX}
                                 dockWidth={57.6}
                                 distanceLimit={57.6 * 6}
+                                appKey={key as apps}
                             />
                             {value.break && <DockDivider />}
                         </React.Fragment>

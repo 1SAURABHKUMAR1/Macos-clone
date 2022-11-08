@@ -34,11 +34,12 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
 
     const toggleMenuItems = (
         type: 'wifi' | 'bluetooth' | 'airdrop' | 'keyboard_brightness',
-    ) =>
+    ) => {
         setMenuActive((state) => ({
             ...state,
             [type]: !state[type],
         }));
+    };
 
     const toggleSystemColor = (color: colors) => changeSystemColor(color);
 
