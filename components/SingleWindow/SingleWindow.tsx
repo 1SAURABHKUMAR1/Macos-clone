@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
-import type { RefObject } from 'react';
-import { forwardRef } from 'react';
+import { RefObject } from 'react';
+import { useRef, useState, forwardRef } from 'react';
 import Draggable from 'react-draggable';
 import { Resizable } from 're-resizable';
 import { AppWindow } from '@components/index';
@@ -12,24 +12,34 @@ import {
     AppName,
     AppControlContainer,
     ControlButton,
+    Container,
 } from './styled';
 import { IoClose } from 'react-icons/io5';
 import { HiMinus } from 'react-icons/hi';
 import { GrFormAdd } from 'react-icons/gr';
+import { useAppStore } from '@store/index';
+import { apps } from 'types/index';
 
-const SingleWindow: NextPage<{}, RefObject<HTMLDivElement>> = (
-    _props,
-    windowRef,
-) => {
+const SingleWindow: NextPage<
+    { fullScreen: boolean; zIndex: number; appKey: apps },
+    RefObject<HTMLDivElement>
+> = ({ appKey }, windowRef) => {
     const containerMinimize = useAnimationControls();
+    const { apps, closeApp, toggleFullScreenApp } = useAppStore(
+        (state) => state,
+    );
+    const [windowTransform, setWindowTransform] = useState<string>(
+        () =>
+            containerRef?.current?.resizable?.style?.transform ??
+            'translate(0px, 0px)',
+    );
+    const containerRef = useRef<Resizable>(null);
 
     // const focusApp = (appId : number) => {
-    //     //FIXME: put focused app with appId
+    //     //FIXME: activeapp = appId
     // };
 
-    const closeApp = () => {
-        //TODO:
-    };
+    const closeAppWindow = () => closeApp(appKey);
 
     const minimizeApp = () => {
         //TODO:
@@ -40,12 +50,43 @@ const SingleWindow: NextPage<{}, RefObject<HTMLDivElement>> = (
     };
 
     const maximizeApp = () => {
-        //
+        const isMaximized = !apps[appKey].fullScreen;
+
+        if (containerRef?.current?.resizable) {
+            containerRef.current.resizable.style.transition =
+                'height 0.3s ease, width 0.3s ease, transform 0.3s ease';
+
+            if (isMaximized) {
+                setWindowTransform(
+                    // @ts-ignore
+                    () => containerRef.current.resizable.style.transform,
+                );
+
+                containerRef.current.resizable.style.transform =
+                    'translate(0px, 0px)';
+                containerRef.current.resizable.style.width = '100%';
+                containerRef.current.resizable.style.height = '100%';
+            } else {
+                containerRef.current.resizable.style.transform =
+                    windowTransform;
+                // FIXME:
+                containerRef.current.resizable.style.width = `${37.5 * 16}px`;
+                containerRef.current.resizable.style.height = `${31.25 * 16}px`;
+            }
+
+            setTimeout(() => {
+                containerRef.current?.resizable &&
+                    (containerRef.current.resizable.style.transition = '');
+            }, 400);
+        }
+
+        toggleFullScreenApp(appKey);
     };
 
     return (
         <>
             <Draggable
+                disabled={apps[appKey].fullScreen}
                 defaultPosition={{
                     y:
                         ((windowRef.current?.clientHeight ?? 599) - 37.5 * 16) /
@@ -76,55 +117,64 @@ const SingleWindow: NextPage<{}, RefObject<HTMLDivElement>> = (
                     }}
                     minWidth="500"
                     minHeight="250"
+                    ref={containerRef}
                 >
-                    <AppContainer
-                        style={{
-                            //    TODO: background color based on appConfig
-                            backgroundColor: '#fff',
-                            // zIndex: TODO:
+                    <Container
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{
+                            opacity: 1,
+                            scale: 1,
                         }}
-                        // onClick={() => focusApp()} //FIXME:
-
-                        animate={containerMinimize}
                         exit={{ opacity: 0, scale: 0 }}
                         transition={{ duration: 0.6, ease: 'anticipate' }}
-
-                        // minmize App move down TODO:
                     >
-                        <AppHeader className="app-handle">
-                            <AppControlContainer>
-                                <ControlButton
-                                    buttonType="close"
-                                    onClick={closeApp}
-                                >
-                                    <IoClose />
-                                </ControlButton>
+                        <AppContainer
+                            style={{
+                                //    TODO: background color based on appConfig
+                                backgroundColor: '#fff',
+                                // zIndex: TODO:
+                            }}
+                            // onClick={() => focusApp()} //FIXME:
 
-                                <ControlButton
-                                    buttonType="minmize"
-                                    onClick={minimizeApp}
-                                >
-                                    <HiMinus />
-                                </ControlButton>
+                            animate={containerMinimize}
+                            transition={{ duration: 0.6, ease: 'anticipate' }}
+                        >
+                            <AppHeader className="app-handle">
+                                <AppControlContainer>
+                                    <ControlButton
+                                        buttonType="close"
+                                        onClick={closeAppWindow}
+                                    >
+                                        <IoClose />
+                                    </ControlButton>
 
-                                <ControlButton
-                                    buttonType="maximize"
-                                    onClick={maximizeApp}
-                                >
-                                    <GrFormAdd />
-                                </ControlButton>
-                            </AppControlContainer>
+                                    <ControlButton
+                                        buttonType="minmize"
+                                        onClick={minimizeApp}
+                                    >
+                                        <HiMinus />
+                                    </ControlButton>
 
-                            <AppName>
-                                System Prefernc
-                                {/* FIXME: */}
-                            </AppName>
-                        </AppHeader>
+                                    <ControlButton
+                                        buttonType="maximize"
+                                        onClick={maximizeApp}
+                                    >
+                                        <GrFormAdd />
+                                    </ControlButton>
+                                </AppControlContainer>
 
-                        <MainAppArea>
-                            <AppWindow />
-                        </MainAppArea>
-                    </AppContainer>
+                                <AppName>
+                                    System Prefernc
+                                    {/* FIXME: via app config */}
+                                </AppName>
+                            </AppHeader>
+
+                            <MainAppArea>
+                                <AppWindow />
+                                {/* FIXME: via appNexus */}
+                            </MainAppArea>
+                        </AppContainer>
+                    </Container>
                 </Resizable>
             </Draggable>
         </>

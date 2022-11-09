@@ -56,6 +56,7 @@ const useAppStore = create<appStore>()(
                 zIndex: -2,
             },
         },
+        activeApp: null,
 
         openApp: (app) => {
             set((state) => ({
@@ -67,6 +68,7 @@ const useAppStore = create<appStore>()(
                         open: true,
                     },
                 },
+                activeApp: app,
             }));
         },
 
@@ -78,6 +80,8 @@ const useAppStore = create<appStore>()(
                     [app]: {
                         ...state.apps[app],
                         open: false,
+                        zIndex: -2,
+                        fullScreen: false,
                     },
                 },
             }));
@@ -112,5 +116,3 @@ const useAppStore = create<appStore>()(
 );
 
 export default useAppStore;
-
-// Holds all apps opened

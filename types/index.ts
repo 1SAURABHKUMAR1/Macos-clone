@@ -156,9 +156,17 @@ export interface appStore {
             open: boolean;
         };
     };
+    activeApp: apps | null;
 
     openApp: (app: apps) => void;
     closeApp: (app: apps) => void;
     toggleFullScreenApp: (app: apps) => void;
     changeZIndex: (app: apps, zIndex: number) => void;
+}
+
+export interface windowDimension {
+    clientHeight: number;
+    clientWidth: number;
+    clientTop: number;
+    clientLeft: number;
 }

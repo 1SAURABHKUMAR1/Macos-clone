@@ -11,6 +11,7 @@ import {
 } from './styled';
 import { contextMenuConfigItems } from 'helper/context-menu.config';
 import { useAppStore } from '@store/index';
+import { apps } from 'types/index';
 
 const MainWindowArea: NextPage = () => {
     const windowRef = useRef<HTMLDivElement>(null);
@@ -51,13 +52,19 @@ const MainWindowArea: NextPage = () => {
                 onContextMenu={handleRightClick}
             >
                 <AnimatePresence>
-                    {Object.entries(apps).map(([key, value]) => (
-                        <React.Fragment key={key}>
-                            {/* TODO: differnet app for launch */}
-                            {/* TODO: pass value as props */}
-                            {value.open && <SingleWindow ref={windowRef} />}
-                        </React.Fragment>
-                    ))}
+                    {Object.entries(apps)
+                        .filter(([, value]) => value.open)
+                        .map(([key, value]) => (
+                            <SingleWindow
+                                ref={windowRef}
+                                fullScreen={value.fullScreen}
+                                zIndex={value.zIndex}
+                                appKey={key as apps}
+                                key={key}
+                            />
+                        ))}
+                    {/* TODO: differnet app for launch */}
+                    {/* TODO: pass value as props */}
                 </AnimatePresence>
             </WindowArea>
 

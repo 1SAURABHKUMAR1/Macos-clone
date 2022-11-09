@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Wifi, Check, Sun, Maximize, Bluetooth, Rss } from 'react-feather';
 import { DisplaySlider } from '@components/index';
 import { colorsConfig } from 'helper/action-colors.config';
-import { useSystemStore } from '@store/index';
+import { useAppStore, useSystemStore } from '@store/index';
 import {
     ActionMenuContainer,
     ActionMenuItemCard,
@@ -27,6 +27,7 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
         systemColor,
         changeSystemColor,
     } = useSystemStore((state) => state);
+    const { openApp } = useAppStore((state) => state);
 
     const changeAnimation = () => toggleAnimation();
 
@@ -42,6 +43,8 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
     };
 
     const toggleSystemColor = (color: colors) => changeSystemColor(color);
+
+    const openWallpaperApp = () => openApp('wallpaper');
 
     return (
         <ActionMenuContainer>
@@ -138,7 +141,7 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
                 </ActionMenuColorsContainer>
             </ActionMenuItemCard>
 
-            <ActionMenuItemCard cardType="wallpaper">
+            <ActionMenuItemCard cardType="wallpaper" onClick={openWallpaperApp}>
                 <ActionMenuWallpaperContainer>
                     <Image
                         src="/wallpaper/Big-Sur.webp"

@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-const TotalDockArea = styled.section`
+const TotalDockArea = styled(motion.section)`
     left: 0;
     right: 0;
     bottom: 0;
@@ -9,9 +10,10 @@ const TotalDockArea = styled.section`
     padding: 0.4rem 0.4rem 0.8rem 0.4rem;
     display: flex;
     justify-content: center;
+    z-index: 90;
 `;
 
-const DockContainer = styled.div`
+const DockContainer = styled(motion.div)`
     position: relative;
     height: 100%;
     border-radius: 1.25rem;
