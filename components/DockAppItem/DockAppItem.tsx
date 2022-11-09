@@ -77,11 +77,10 @@ const DockAppItem: NextPage<dockItemProps> = ({
         const isAlreadyOpen = apps[appKey].open;
         if (isAlreadyOpen) return;
 
-        animation &&
-            bouncingControls.start({
-                y: [0, -42, 0],
-                transition: { duration: 1.2, ease: 'easeInOut' },
-            });
+        bouncingControls.start({
+            y: [0, -42, 0],
+            transition: { duration: 1.2, ease: 'easeInOut' },
+        });
 
         openApp(appKey);
     };
@@ -109,7 +108,11 @@ const DockAppItem: NextPage<dockItemProps> = ({
                         draggable="false"
                     />
                 </DockAppImage>
-                <DockIsAppOpenDot />
+                <DockIsAppOpenDot
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: apps[appKey].open ? 1 : 0 }}
+                    transition={{ ease: 'anticipate', duration: 0.2 }}
+                />
             </DockItem>
         </>
     );

@@ -43,9 +43,9 @@ const DockAppImage = styled(motion.span)`
     }
 `;
 
-const DockIsAppOpenDot = styled.span`
-    height: 0.2rem;
-    width: 0.2rem;
+const DockIsAppOpenDot = styled(motion.div)`
+    height: 0.25rem;
+    width: 0.25rem;
     display: flex;
     justify-content: center;
     align-items: center;

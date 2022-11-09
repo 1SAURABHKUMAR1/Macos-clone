@@ -6,7 +6,7 @@ const TotalDockArea = styled(motion.section)`
     right: 0;
     bottom: 0;
     width: 100%;
-    height: 5.5rem;
+    height: 5.9rem;
     padding: 0.4rem 0.4rem 0.8rem 0.4rem;
     display: flex;
     justify-content: center;
