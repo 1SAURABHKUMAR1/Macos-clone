@@ -109,8 +109,6 @@ const useAppStore = create<appStore>()(
         },
 
         changeZIndex: (app, zIndex) => {
-            console.log(app, zIndex);
-
             set((state) => ({
                 ...state,
                 apps: {
@@ -124,7 +122,6 @@ const useAppStore = create<appStore>()(
         },
 
         changeActiveAppZIndex: (zIndex) => {
-            console.log(zIndex);
             set((state) => ({
                 ...state,
                 activeAppZIndex: zIndex,

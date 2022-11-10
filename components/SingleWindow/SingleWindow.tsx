@@ -57,6 +57,7 @@ const SingleWindow: NextPage<
         const isMaximized = !apps[appKey].fullScreen;
 
         if (containerRef?.current?.resizable) {
+            focusApp();
             containerRef.current.resizable.style.transition =
                 'height 0.3s ease, width 0.3s ease, transform 0.3s ease';
 
@@ -113,6 +114,7 @@ const SingleWindow: NextPage<
                     top: windowRef.current?.clientTop,
                     bottom: windowRef.current?.clientHeight,
                 }}
+                onStart={focusApp}
                 handle=".app-handle"
                 defaultClassName="absolute"
             >
@@ -127,6 +129,7 @@ const SingleWindow: NextPage<
                     minHeight="250"
                     ref={containerRef}
                     style={{ zIndex: apps[appKey].zIndex }}
+                    onResizeStart={focusApp}
                 >
                     <Container
                         initial={{ opacity: 0, scale: 0 }}

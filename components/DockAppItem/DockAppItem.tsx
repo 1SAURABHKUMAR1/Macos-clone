@@ -29,7 +29,7 @@ const DockAppItem: NextPage<dockItemProps> = ({
     const containerRef = useRef<HTMLButtonElement | null>(null);
     const distance = useMotionValue(distanceLimit);
     const { animation } = useSystemStore();
-    const { apps, openApp } = useAppStore();
+    const { apps, openApp, toggleActiveApp } = useAppStore();
 
     const bouncingControls = useAnimationControls();
 
@@ -75,7 +75,7 @@ const DockAppItem: NextPage<dockItemProps> = ({
 
     const toggleAppOpen = async () => {
         const isAlreadyOpen = apps[appKey].open;
-        // FIXME: already opened change zIndex and activeApp = appKey
+        toggleActiveApp(appKey);
         if (isAlreadyOpen) return;
 
         bouncingControls.start({
