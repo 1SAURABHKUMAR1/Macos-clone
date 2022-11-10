@@ -1,14 +1,6 @@
 import { colorConfig } from 'types';
 
 export const colorsConfig: colorConfig = {
-    orange: {
-        hsl: '35deg, 100%, 50%',
-    },
-
-    green: {
-        hsl: '135deg, 59%, 49%',
-    },
-
     cyan: {
         hsl: '199deg, 78%, 55%',
     },
@@ -21,11 +13,19 @@ export const colorsConfig: colorConfig = {
         hsl: '241deg, 61%, 59%',
     },
 
+    fuchisa: {
+        hsl: '292deg, 91%, 73%',
+    },
+
+    violet: {
+        hsl: '292deg, 84%, 61%',
+    },
+
     purple: {
         hsl: '280deg, 68%, 60%',
     },
 
-    pink: {
-        hsl: '349deg, 100%, 59%',
+    orange: {
+        hsl: '35deg, 100%, 50%',
     },
 };

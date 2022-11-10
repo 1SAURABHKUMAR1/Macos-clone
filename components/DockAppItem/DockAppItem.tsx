@@ -75,6 +75,7 @@ const DockAppItem: NextPage<dockItemProps> = ({
 
     const toggleAppOpen = async () => {
         const isAlreadyOpen = apps[appKey].open;
+        // FIXME: already opened change zIndex and activeApp = appKey
         if (isAlreadyOpen) return;
 
         bouncingControls.start({

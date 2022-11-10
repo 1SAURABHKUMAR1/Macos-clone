@@ -11,7 +11,6 @@ const AppContainer = styled(motion.div)`
     height: 100%;
     will-change: width, height;
     border-radius: 0.75rem;
-    box-shadow: var(--shadow-app);
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -74,8 +73,9 @@ const ControlButton = styled.button<{
     ${({ buttonType }) =>
         buttonType === 'close'
             ? `
-                background-color: #ff5f56;
-                box-shadow: 0 0 0 1px #e0443e;
+                background-color: var(--close-bg-color);
+                box-shadow: 0 0 0 1px var(--close-box-shadow);
+
 
                 svg {
                     height: 8px;
@@ -85,8 +85,8 @@ const ControlButton = styled.button<{
             `
             : buttonType === 'minmize'
             ? `
-                background-color: #ffbd2e;
-                box-shadow: 0 0 0 1px #dea123; 
+                background-color: var(--minimize-bg-color);
+                box-shadow: 0 0 0 1px var(--minimize-box-shodow); 
 
                 svg {
                     height: 8px;
@@ -96,8 +96,8 @@ const ControlButton = styled.button<{
                 `
             : buttonType === 'maximize'
             ? `     
-                background-color: #27c93f;
-                box-shadow: 0 0 0 1px #1aab29;
+                background-color: var(--maximize-bg-color);
+                box-shadow: 0 0 0 1px var(--maximize-box-shadow);
                 
                 svg {
                     height : 10px;

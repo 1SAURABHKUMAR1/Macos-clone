@@ -27,7 +27,7 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
         systemColor,
         changeSystemColor,
     } = useSystemStore((state) => state);
-    const { openApp } = useAppStore((state) => state);
+    const { openApp, apps } = useAppStore((state) => state);
 
     const changeAnimation = () => toggleAnimation();
 
@@ -44,7 +44,13 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
 
     const toggleSystemColor = (color: colors) => changeSystemColor(color);
 
-    const openWallpaperApp = () => openApp('wallpaper');
+    const openWallpaperApp = () => {
+        const isAlreadyOpen = apps['wallpaper'].open;
+        // FIXME: already open change zIndex and activeApp = 'wallapper'
+        if (isAlreadyOpen) return;
+
+        openApp('wallpaper');
+    };
 
     return (
         <ActionMenuContainer>

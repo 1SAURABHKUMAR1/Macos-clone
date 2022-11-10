@@ -100,6 +100,13 @@ const useAppStore = create<appStore>()(
             }));
         },
 
+        toggleActiveApp: (app) => {
+            set((state) => ({
+                ...state,
+                activeApp: app,
+            }));
+        },
+
         changeZIndex: (app, zIndex) => {
             set((state) => ({
                 ...state,

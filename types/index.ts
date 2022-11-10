@@ -31,14 +31,14 @@ export type colorConfig = {
 };
 
 export type colors =
-    | 'orange'
-    | 'green'
+    | 'violet'
     | 'cyan'
     | 'blue'
     | 'blue'
     | 'indigo'
     | 'purple'
-    | 'pink';
+    | 'fuchisa'
+    | 'orange';
 
 export interface bootupScreenProps {
     setIsBootupLoading: Dispatch<SetStateAction<boolean>>;
@@ -84,6 +84,15 @@ export interface systemStores {
 
 export interface systemPrimaryCss extends CSSProperties {
     '--system-color-primary': string;
+}
+
+export interface appControlsCss extends CSSProperties {
+    '--close-bg-color': string;
+    '--close-box-shadow': string;
+    '--minimize-bg-color': string;
+    '--minimize-box-shodow': string;
+    '--maximize-bg-color': string;
+    '--maximize-box-shadow': string;
 }
 
 export type menuActiveType = {
@@ -161,6 +170,7 @@ export interface appStore {
     openApp: (app: apps) => void;
     closeApp: (app: apps) => void;
     toggleFullScreenApp: (app: apps) => void;
+    toggleActiveApp: (app: apps) => void;
     changeZIndex: (app: apps, zIndex: number) => void;
 }
 

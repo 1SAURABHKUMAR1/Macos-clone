@@ -56,7 +56,7 @@ const Home: NextPage = () => {
                 style={
                     {
                         filter: `brightness(${brightness}%)`,
-                        '--system-color-primary': `hsl(${colorsConfig[systemColor].hsl})`,
+                        '--system-color-primary': `hsl(${colorsConfig[systemColor]?.hsl})`,
                     } as systemPrimaryCss
                 }
             >

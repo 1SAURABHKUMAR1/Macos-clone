@@ -18,16 +18,15 @@ import { IoClose } from 'react-icons/io5';
 import { HiMinus } from 'react-icons/hi';
 import { GrFormAdd } from 'react-icons/gr';
 import { useAppStore } from '@store/index';
-import { apps } from 'types/index';
+import { appControlsCss, apps } from 'types/index';
 
 const SingleWindow: NextPage<
     { fullScreen: boolean; zIndex: number; appKey: apps },
     RefObject<HTMLDivElement>
 > = ({ appKey }, windowRef) => {
     const containerMinimize = useAnimationControls();
-    const { apps, closeApp, toggleFullScreenApp } = useAppStore(
-        (state) => state,
-    );
+    const { apps, closeApp, toggleFullScreenApp, activeApp, toggleActiveApp } =
+        useAppStore((state) => state);
     const [windowTransform, setWindowTransform] = useState<string>(
         () =>
             containerRef?.current?.resizable?.style?.transform ??
@@ -35,9 +34,7 @@ const SingleWindow: NextPage<
     );
     const containerRef = useRef<Resizable>(null);
 
-    // const focusApp = (appId : number) => {
-    //     //FIXME: activeapp = appId
-    // };
+    const focusApp = () => toggleActiveApp(appKey);
 
     const closeAppWindow = () => closeApp(appKey);
 
@@ -98,7 +95,6 @@ const SingleWindow: NextPage<
                         //TODO: according to app width
                         2,
                 }}
-                // onStart={() => focusApp()} //FIXME:
                 bounds={{
                     left: 0,
                     right: windowRef.current?.clientWidth,
@@ -127,15 +123,21 @@ const SingleWindow: NextPage<
                         }}
                         exit={{ opacity: 0, scale: 0 }}
                         transition={{ duration: 0.6, ease: 'anticipate' }}
+                        onClick={focusApp}
                     >
                         <AppContainer
-                            style={{
-                                //    TODO: background color based on appConfig
-                                backgroundColor: '#fff',
-                                // zIndex: TODO:
-                            }}
-                            // onClick={() => focusApp()} //FIXME:
-
+                            //     // zIndex: TODO:
+                            //     //    TODO: background color based on appConfig
+                            style={
+                                activeApp === appKey
+                                    ? {
+                                          backgroundColor: '#fff',
+                                          boxShadow: 'var(--shadow-app)',
+                                      }
+                                    : {
+                                          backgroundColor: '#fff',
+                                      }
+                            }
                             animate={containerMinimize}
                             transition={{ duration: 0.6, ease: 'anticipate' }}
                         >
@@ -144,6 +146,18 @@ const SingleWindow: NextPage<
                                     <ControlButton
                                         buttonType="close"
                                         onClick={closeAppWindow}
+                                        style={
+                                            {
+                                                '--close-bg-color':
+                                                    activeApp === appKey
+                                                        ? '#ff5f56'
+                                                        : '#b6b6b7',
+                                                '--close-box-shadow':
+                                                    activeApp === appKey
+                                                        ? '#e0443e'
+                                                        : '#1b1b1d80',
+                                            } as appControlsCss
+                                        }
                                     >
                                         <IoClose />
                                     </ControlButton>
@@ -151,6 +165,18 @@ const SingleWindow: NextPage<
                                     <ControlButton
                                         buttonType="minmize"
                                         onClick={minimizeApp}
+                                        style={
+                                            {
+                                                '--minimize-bg-color':
+                                                    activeApp === appKey
+                                                        ? '#ffbd2e'
+                                                        : '#b6b6b7',
+                                                '--minimize-box-shodow':
+                                                    activeApp === appKey
+                                                        ? '#dea123'
+                                                        : '#1b1b1d80',
+                                            } as appControlsCss
+                                        }
                                     >
                                         <HiMinus />
                                     </ControlButton>
@@ -158,6 +184,18 @@ const SingleWindow: NextPage<
                                     <ControlButton
                                         buttonType="maximize"
                                         onClick={maximizeApp}
+                                        style={
+                                            {
+                                                '--maximize-bg-color':
+                                                    activeApp === appKey
+                                                        ? '#27c93f'
+                                                        : '#b6b6b7',
+                                                '--maximize-box-shadow':
+                                                    activeApp === appKey
+                                                        ? '#1aab29'
+                                                        : '#1b1b1d80',
+                                            } as appControlsCss
+                                        }
                                     >
                                         <GrFormAdd />
                                     </ControlButton>
