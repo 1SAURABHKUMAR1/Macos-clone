@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { RefObject } from 'react';
+import { RefObject, useEffect } from 'react';
 import { useRef, useState, forwardRef } from 'react';
 import Draggable from 'react-draggable';
 import { Resizable } from 're-resizable';
@@ -25,8 +25,15 @@ const SingleWindow: NextPage<
     RefObject<HTMLDivElement>
 > = ({ appKey }, windowRef) => {
     const containerMinimize = useAnimationControls();
-    const { apps, closeApp, toggleFullScreenApp, activeApp, toggleActiveApp } =
-        useAppStore((state) => state);
+    const {
+        apps,
+        closeApp,
+        toggleFullScreenApp,
+        activeApp,
+        toggleActiveApp,
+        changeZIndex,
+        activeAppZIndex,
+    } = useAppStore((state) => state);
     const [windowTransform, setWindowTransform] = useState<string>(
         () =>
             containerRef?.current?.resizable?.style?.transform ??
@@ -66,7 +73,7 @@ const SingleWindow: NextPage<
             } else {
                 containerRef.current.resizable.style.transform =
                     windowTransform;
-                // FIXME:
+                // TODO:
                 containerRef.current.resizable.style.width = `${37.5 * 16}px`;
                 containerRef.current.resizable.style.height = `${31.25 * 16}px`;
             }
@@ -79,6 +86,11 @@ const SingleWindow: NextPage<
 
         toggleFullScreenApp(appKey);
     };
+
+    useEffect(() => {
+        activeApp === appKey && changeZIndex(appKey, activeAppZIndex);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeApp]);
 
     return (
         <>
@@ -114,6 +126,7 @@ const SingleWindow: NextPage<
                     minWidth="500"
                     minHeight="250"
                     ref={containerRef}
+                    style={{ zIndex: apps[appKey].zIndex }}
                 >
                     <Container
                         initial={{ opacity: 0, scale: 0 }}
@@ -126,7 +139,6 @@ const SingleWindow: NextPage<
                         onClick={focusApp}
                     >
                         <AppContainer
-                            //     // zIndex: TODO:
                             //     //    TODO: background color based on appConfig
                             style={
                                 activeApp === appKey

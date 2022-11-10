@@ -8,55 +8,56 @@ const useAppStore = create<appStore>()(
             wallpaper: {
                 fullScreen: false,
                 open: false,
-                zIndex: -2,
+                zIndex: 0,
             },
             'system-preference': {
                 fullScreen: false,
                 open: false,
-                zIndex: -2,
+                zIndex: 0,
             },
             appstore: {
                 fullScreen: false,
                 open: false,
-                zIndex: -2,
+                zIndex: 0,
             },
             calculator: {
                 fullScreen: false,
                 open: false,
-                zIndex: -2,
+                zIndex: 0,
             },
             calender: {
                 fullScreen: false,
                 open: false,
-                zIndex: -2,
+                zIndex: 0,
             },
             excel: {
                 fullScreen: false,
                 open: false,
-                zIndex: -2,
+                zIndex: 0,
             },
             finder: {
                 fullScreen: false,
                 open: false,
-                zIndex: -2,
+                zIndex: 0,
             },
             launch: {
                 fullScreen: false,
                 open: false,
-                zIndex: -2,
+                zIndex: 0,
             },
             vscode: {
                 fullScreen: false,
                 open: false,
-                zIndex: -2,
+                zIndex: 0,
             },
             bin: {
                 fullScreen: false,
                 open: false,
-                zIndex: -2,
+                zIndex: 0,
             },
         },
         activeApp: null,
+        activeAppZIndex: 0,
 
         openApp: (app) => {
             set((state) => ({
@@ -108,6 +109,8 @@ const useAppStore = create<appStore>()(
         },
 
         changeZIndex: (app, zIndex) => {
+            console.log(app, zIndex);
+
             set((state) => ({
                 ...state,
                 apps: {
@@ -117,6 +120,14 @@ const useAppStore = create<appStore>()(
                         zIndex: zIndex,
                     },
                 },
+            }));
+        },
+
+        changeActiveAppZIndex: (zIndex) => {
+            console.log(zIndex);
+            set((state) => ({
+                ...state,
+                activeAppZIndex: zIndex,
             }));
         },
     })),

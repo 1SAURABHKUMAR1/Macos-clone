@@ -166,12 +166,14 @@ export interface appStore {
         };
     };
     activeApp: apps | null;
+    activeAppZIndex: number;
 
     openApp: (app: apps) => void;
     closeApp: (app: apps) => void;
     toggleFullScreenApp: (app: apps) => void;
     toggleActiveApp: (app: apps) => void;
     changeZIndex: (app: apps, zIndex: number) => void;
+    changeActiveAppZIndex: (zIndex: number) => void;
 }
 
 export interface windowDimension {

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { MouseEvent, useState } from 'react';
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { SingleWindow } from '@components/index';
 import {
@@ -11,7 +11,7 @@ import {
 } from './styled';
 import { contextMenuConfigItems } from 'helper/context-menu.config';
 import { useAppStore } from '@store/index';
-import { apps } from 'types/index';
+import { apps as AppType } from 'types/index';
 
 const MainWindowArea: NextPage = () => {
     const windowRef = useRef<HTMLDivElement>(null);
@@ -20,7 +20,13 @@ const MainWindowArea: NextPage = () => {
         y: number;
     }>({ x: 0, y: 0 });
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
-    const { apps } = useAppStore((state) => state);
+    const {
+        apps,
+        activeApp,
+        activeAppZIndex,
+        changeActiveAppZIndex,
+        changeZIndex,
+    } = useAppStore((state) => state);
 
     const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
         event.preventDefault();
@@ -44,6 +50,40 @@ const MainWindowArea: NextPage = () => {
 
     const hideContextMenu = () => setIsMenuActive(() => false);
 
+    useEffect(() => {
+        const sanitizeZIndex = async () => {
+            if (
+                !Object.values(apps)
+                    .filter((apps) => apps.zIndex > 0)
+                    .some((apps) => apps.zIndex >= 40)
+            )
+                return;
+
+            const lowest = Math.min(
+                ...Object.values(apps)
+                    .map((apps) => apps.zIndex)
+                    .filter((zindex) => zindex > 0)
+                    .filter((item, pos, self) => self.indexOf(item) == pos),
+            );
+
+            changeActiveAppZIndex(activeAppZIndex - lowest);
+
+            Object.entries(apps).forEach(([key, value]) => {
+                value.zIndex > lowest &&
+                    changeZIndex(key as AppType, value.zIndex - lowest);
+            });
+        };
+
+        sanitizeZIndex();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [apps]);
+
+    useEffect(() => {
+        changeActiveAppZIndex(activeAppZIndex + 1);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeApp]);
+
     return (
         <>
             <WindowArea
@@ -59,7 +99,7 @@ const MainWindowArea: NextPage = () => {
                                 ref={windowRef}
                                 fullScreen={value.fullScreen}
                                 zIndex={value.zIndex}
-                                appKey={key as apps}
+                                appKey={key as AppType}
                                 key={key}
                             />
                         ))}
