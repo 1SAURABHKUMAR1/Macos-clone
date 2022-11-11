@@ -27,7 +27,9 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
         systemColor,
         changeSystemColor,
     } = useSystemStore((state) => state);
-    const { openApp, apps, toggleActiveApp } = useAppStore((state) => state);
+    const { openApp, apps, toggleActiveApp, toggleMinimizeApp } = useAppStore(
+        (state) => state,
+    );
 
     const changeAnimation = () => toggleAnimation();
 
@@ -47,6 +49,7 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
     const openWallpaperApp = () => {
         const isAlreadyOpen = apps['wallpaper'].open;
         toggleActiveApp('wallpaper');
+        apps['wallpaper'].minimized && toggleMinimizeApp('wallpaper');
         if (isAlreadyOpen) return;
 
         openApp('wallpaper');

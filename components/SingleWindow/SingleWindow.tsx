@@ -17,12 +17,12 @@ import { IoClose } from 'react-icons/io5';
 import { HiMinus } from 'react-icons/hi';
 import { GrFormAdd } from 'react-icons/gr';
 import { useAppStore } from '@store/index';
-import { appControlsCss, apps } from 'types/index';
+import { appControlsCss, singleWindowProps } from 'types/index';
 
-const SingleWindow: NextPage<
-    { fullScreen: boolean; zIndex: number; appKey: apps },
-    RefObject<HTMLDivElement>
-> = ({ appKey, fullScreen, zIndex }, windowRef) => {
+const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
+    { appKey, fullScreen, zIndex, minimized },
+    windowRef,
+) => {
     const {
         closeApp,
         toggleFullScreenApp,
@@ -30,6 +30,7 @@ const SingleWindow: NextPage<
         toggleActiveApp,
         changeZIndex,
         activeAppZIndex,
+        toggleMinimizeApp,
     } = useAppStore((state) => state);
     const [windowTransform, setWindowTransform] = useState<string>(
         () =>
@@ -37,30 +38,29 @@ const SingleWindow: NextPage<
             'translate(0px, 0px)',
     );
     const containerRef = useRef<Resizable>(null);
-    const [isMinimizig, setIsMinimizing] = useState(false);
 
     const itemVariants: Variants = {
         inital: {
             opacity: 0,
             scale: 0,
-            transition: { duration: 0.6, ease: 'anticipate' },
+            transition: { duration: 0.7, ease: 'anticipate' },
         },
         minimize: {
             y: '100vh',
             opacity: 1,
             scale: 0,
-            transition: { duration: 0.6, ease: 'anticipate' },
+            transition: { duration: 0.8, ease: 'anticipate' },
         },
         normal: {
             y: '0vh',
             opacity: 1,
             scale: 1,
-            transition: { duration: 0.6, ease: 'anticipate' },
+            transition: { duration: 0.8, ease: 'anticipate' },
         },
         close: {
             opacity: 0,
             scale: 0,
-            transition: { duration: 0.6, ease: 'anticipate' },
+            transition: { duration: 0.7, ease: 'anticipate' },
         },
     };
 
@@ -69,12 +69,8 @@ const SingleWindow: NextPage<
     const closeAppWindow = () => closeApp(appKey);
 
     const minimizeApp = () => {
-        //TODO:
-        setIsMinimizing(true);
-
-        setTimeout(() => {
-            setIsMinimizing(false);
-        }, 1000);
+        toggleMinimizeApp(appKey);
+        fullScreen && toggleFullScreenApp(appKey);
     };
 
     const maximizeApp = () => {
@@ -166,7 +162,7 @@ const SingleWindow: NextPage<
                                   }
                         }
                         initial="inital"
-                        animate={!isMinimizig ? 'normal' : 'minimize'}
+                        animate={minimized ? 'minimize' : 'normal'}
                         exit="close"
                         onClick={focusApp}
                         variants={itemVariants}

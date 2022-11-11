@@ -29,7 +29,7 @@ const DockAppItem: NextPage<dockItemProps> = ({
     const containerRef = useRef<HTMLButtonElement | null>(null);
     const distance = useMotionValue(distanceLimit);
     const { animation } = useSystemStore();
-    const { apps, openApp, toggleActiveApp } = useAppStore();
+    const { apps, openApp, toggleActiveApp, toggleMinimizeApp } = useAppStore();
 
     const bouncingControls = useAnimationControls();
 
@@ -76,6 +76,7 @@ const DockAppItem: NextPage<dockItemProps> = ({
     const toggleAppOpen = async () => {
         const isAlreadyOpen = apps[appKey].open;
         toggleActiveApp(appKey);
+        apps[appKey].minimized && toggleMinimizeApp(appKey);
         if (isAlreadyOpen) return;
 
         bouncingControls.start({

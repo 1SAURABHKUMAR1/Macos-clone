@@ -161,6 +161,7 @@ export interface appStore {
     apps: {
         [app in apps]: {
             fullScreen: boolean;
+            minimized: boolean;
             zIndex: number;
             open: boolean;
         };
@@ -171,6 +172,7 @@ export interface appStore {
     openApp: (app: apps) => void;
     closeApp: (app: apps) => void;
     toggleFullScreenApp: (app: apps) => void;
+    toggleMinimizeApp: (app: apps) => void;
     toggleActiveApp: (app: apps) => void;
     changeZIndex: (app: apps, zIndex: number) => void;
     changeActiveAppZIndex: (zIndex: number) => void;
@@ -182,3 +184,10 @@ export interface windowDimension {
     clientTop: number;
     clientLeft: number;
 }
+
+export type singleWindowProps = {
+    fullScreen: boolean;
+    minimized: boolean;
+    zIndex: number;
+    appKey: apps;
+};

@@ -7,51 +7,61 @@ const useAppStore = create<appStore>()(
         apps: {
             wallpaper: {
                 fullScreen: false,
+                minimized: false,
                 open: false,
                 zIndex: 0,
             },
             'system-preference': {
                 fullScreen: false,
+                minimized: false,
                 open: false,
                 zIndex: 0,
             },
             appstore: {
                 fullScreen: false,
+                minimized: false,
                 open: false,
                 zIndex: 0,
             },
             calculator: {
                 fullScreen: false,
+                minimized: false,
                 open: false,
                 zIndex: 0,
             },
             calender: {
                 fullScreen: false,
+                minimized: false,
                 open: false,
                 zIndex: 0,
             },
             excel: {
                 fullScreen: false,
+                minimized: false,
                 open: false,
                 zIndex: 0,
             },
             finder: {
                 fullScreen: false,
+                minimized: false,
                 open: false,
                 zIndex: 0,
             },
             launch: {
                 fullScreen: false,
+                minimized: false,
                 open: false,
                 zIndex: 0,
             },
             vscode: {
                 fullScreen: false,
+                minimized: false,
                 open: false,
                 zIndex: 0,
             },
             bin: {
                 fullScreen: false,
+                minimized: false,
                 open: false,
                 zIndex: 0,
             },
@@ -125,6 +135,19 @@ const useAppStore = create<appStore>()(
             set((state) => ({
                 ...state,
                 activeAppZIndex: zIndex,
+            }));
+        },
+
+        toggleMinimizeApp: (app) => {
+            set((state) => ({
+                ...state,
+                apps: {
+                    ...state.apps,
+                    [app]: {
+                        ...state.apps[app],
+                        minimized: !state.apps[app].minimized,
+                    },
+                },
             }));
         },
     })),

@@ -100,6 +100,7 @@ const MainWindowArea: NextPage = () => {
                                 fullScreen={value.fullScreen}
                                 zIndex={value.zIndex}
                                 appKey={key as AppType}
+                                minimized={value.minimized}
                                 key={key}
                             />
                         ))}
