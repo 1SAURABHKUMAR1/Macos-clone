@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 import { RefObject, useEffect } from 'react';
+import type { Variants } from 'framer-motion';
 import { useRef, useState, forwardRef } from 'react';
 import Draggable from 'react-draggable';
 import { Resizable } from 're-resizable';
 import { AppWindow } from '@components/index';
-import { useAnimationControls } from 'framer-motion';
 import {
     AppContainer,
     AppHeader,
@@ -12,7 +12,6 @@ import {
     AppName,
     AppControlContainer,
     ControlButton,
-    Container,
 } from './styled';
 import { IoClose } from 'react-icons/io5';
 import { HiMinus } from 'react-icons/hi';
@@ -23,10 +22,8 @@ import { appControlsCss, apps } from 'types/index';
 const SingleWindow: NextPage<
     { fullScreen: boolean; zIndex: number; appKey: apps },
     RefObject<HTMLDivElement>
-> = ({ appKey }, windowRef) => {
-    const containerMinimize = useAnimationControls();
+> = ({ appKey, fullScreen, zIndex }, windowRef) => {
     const {
-        apps,
         closeApp,
         toggleFullScreenApp,
         activeApp,
@@ -40,6 +37,32 @@ const SingleWindow: NextPage<
             'translate(0px, 0px)',
     );
     const containerRef = useRef<Resizable>(null);
+    const [isMinimizig, setIsMinimizing] = useState(false);
+
+    const itemVariants: Variants = {
+        inital: {
+            opacity: 0,
+            scale: 0,
+            transition: { duration: 0.6, ease: 'anticipate' },
+        },
+        minimize: {
+            y: '100vh',
+            opacity: 1,
+            scale: 0,
+            transition: { duration: 0.6, ease: 'anticipate' },
+        },
+        normal: {
+            y: '0vh',
+            opacity: 1,
+            scale: 1,
+            transition: { duration: 0.6, ease: 'anticipate' },
+        },
+        close: {
+            opacity: 0,
+            scale: 0,
+            transition: { duration: 0.6, ease: 'anticipate' },
+        },
+    };
 
     const focusApp = () => toggleActiveApp(appKey);
 
@@ -47,17 +70,17 @@ const SingleWindow: NextPage<
 
     const minimizeApp = () => {
         //TODO:
-        containerMinimize.start({
-            transform: 'translateY(100vh)',
-            width: '0px',
-        });
+        setIsMinimizing(true);
+
+        setTimeout(() => {
+            setIsMinimizing(false);
+        }, 1000);
     };
 
     const maximizeApp = () => {
-        const isMaximized = !apps[appKey].fullScreen;
+        const isMaximized = !fullScreen;
 
         if (containerRef?.current?.resizable) {
-            focusApp();
             containerRef.current.resizable.style.transition =
                 'height 0.3s ease, width 0.3s ease, transform 0.3s ease';
 
@@ -96,15 +119,14 @@ const SingleWindow: NextPage<
     return (
         <>
             <Draggable
-                disabled={apps[appKey].fullScreen}
+                disabled={fullScreen}
                 defaultPosition={{
                     y:
-                        ((windowRef.current?.clientHeight ?? 599) - 37.5 * 16) /
+                        (windowRef.current?.clientHeight - 31.15 * 16) /
                         //TODO: according to app height
                         2,
                     x:
-                        ((windowRef.current?.clientWidth ?? 1000) -
-                            37.15 * 16) /
+                        (windowRef.current?.clientWidth - 37.5 * 16) /
                         //TODO: according to app width
                         2,
                 }}
@@ -128,106 +150,98 @@ const SingleWindow: NextPage<
                     minWidth="500"
                     minHeight="250"
                     ref={containerRef}
-                    style={{ zIndex: apps[appKey].zIndex }}
                     onResizeStart={focusApp}
+                    style={{ zIndex }}
                 >
-                    <Container
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{
-                            opacity: 1,
-                            scale: 1,
-                        }}
-                        exit={{ opacity: 0, scale: 0 }}
-                        transition={{ duration: 0.6, ease: 'anticipate' }}
+                    <AppContainer
+                        // TODO: background color based on appConfig
+                        style={
+                            activeApp === appKey
+                                ? {
+                                      backgroundColor: '#fff',
+                                      boxShadow: 'var(--shadow-app)',
+                                  }
+                                : {
+                                      backgroundColor: '#fff',
+                                  }
+                        }
+                        initial="inital"
+                        animate={!isMinimizig ? 'normal' : 'minimize'}
+                        exit="close"
                         onClick={focusApp}
+                        variants={itemVariants}
                     >
-                        <AppContainer
-                            //     //    TODO: background color based on appConfig
-                            style={
-                                activeApp === appKey
-                                    ? {
-                                          backgroundColor: '#fff',
-                                          boxShadow: 'var(--shadow-app)',
-                                      }
-                                    : {
-                                          backgroundColor: '#fff',
-                                      }
-                            }
-                            animate={containerMinimize}
-                            transition={{ duration: 0.6, ease: 'anticipate' }}
-                        >
-                            <AppHeader className="app-handle">
-                                <AppControlContainer>
-                                    <ControlButton
-                                        buttonType="close"
-                                        onClick={closeAppWindow}
-                                        style={
-                                            {
-                                                '--close-bg-color':
-                                                    activeApp === appKey
-                                                        ? '#ff5f56'
-                                                        : '#b6b6b7',
-                                                '--close-box-shadow':
-                                                    activeApp === appKey
-                                                        ? '#e0443e'
-                                                        : '#1b1b1d80',
-                                            } as appControlsCss
-                                        }
-                                    >
-                                        <IoClose />
-                                    </ControlButton>
+                        <AppHeader className="app-handle">
+                            <AppControlContainer>
+                                <ControlButton
+                                    buttonType="close"
+                                    onClick={closeAppWindow}
+                                    style={
+                                        {
+                                            '--close-bg-color':
+                                                activeApp === appKey
+                                                    ? '#ff5f56'
+                                                    : '#b6b6b7',
+                                            '--close-box-shadow':
+                                                activeApp === appKey
+                                                    ? '#e0443e'
+                                                    : '#1b1b1d80',
+                                        } as appControlsCss
+                                    }
+                                >
+                                    <IoClose />
+                                </ControlButton>
 
-                                    <ControlButton
-                                        buttonType="minmize"
-                                        onClick={minimizeApp}
-                                        style={
-                                            {
-                                                '--minimize-bg-color':
-                                                    activeApp === appKey
-                                                        ? '#ffbd2e'
-                                                        : '#b6b6b7',
-                                                '--minimize-box-shodow':
-                                                    activeApp === appKey
-                                                        ? '#dea123'
-                                                        : '#1b1b1d80',
-                                            } as appControlsCss
-                                        }
-                                    >
-                                        <HiMinus />
-                                    </ControlButton>
+                                <ControlButton
+                                    buttonType="minmize"
+                                    onClick={minimizeApp}
+                                    style={
+                                        {
+                                            '--minimize-bg-color':
+                                                activeApp === appKey
+                                                    ? '#ffbd2e'
+                                                    : '#b6b6b7',
+                                            '--minimize-box-shodow':
+                                                activeApp === appKey
+                                                    ? '#dea123'
+                                                    : '#1b1b1d80',
+                                        } as appControlsCss
+                                    }
+                                >
+                                    <HiMinus />
+                                </ControlButton>
 
-                                    <ControlButton
-                                        buttonType="maximize"
-                                        onClick={maximizeApp}
-                                        style={
-                                            {
-                                                '--maximize-bg-color':
-                                                    activeApp === appKey
-                                                        ? '#27c93f'
-                                                        : '#b6b6b7',
-                                                '--maximize-box-shadow':
-                                                    activeApp === appKey
-                                                        ? '#1aab29'
-                                                        : '#1b1b1d80',
-                                            } as appControlsCss
-                                        }
-                                    >
-                                        <GrFormAdd />
-                                    </ControlButton>
-                                </AppControlContainer>
+                                <ControlButton
+                                    buttonType="maximize"
+                                    onClick={maximizeApp}
+                                    style={
+                                        {
+                                            '--maximize-bg-color':
+                                                activeApp === appKey
+                                                    ? '#27c93f'
+                                                    : '#b6b6b7',
+                                            '--maximize-box-shadow':
+                                                activeApp === appKey
+                                                    ? '#1aab29'
+                                                    : '#1b1b1d80',
+                                        } as appControlsCss
+                                    }
+                                >
+                                    <GrFormAdd />
+                                </ControlButton>
+                            </AppControlContainer>
 
-                                <AppName>
-                                    System Prefernc
-                                    {/* FIXME: via app config */}
-                                </AppName>
-                            </AppHeader>
+                            <AppName>
+                                System Prefernc
+                                {/* FIXME: via app config */}
+                            </AppName>
+                        </AppHeader>
 
-                            <MainAppArea>
-                                <AppWindow />
-                                {/* FIXME: via appNexus */}
-                            </MainAppArea>
-                        </AppContainer>
-                    </Container>
+                        <MainAppArea>
+                            <AppWindow />
+                            {/* FIXME: via appNexus */}
+                        </MainAppArea>
+                    </AppContainer>
                 </Resizable>
             </Draggable>
         </>
