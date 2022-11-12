@@ -10,6 +10,7 @@ import {
     RightClickMenuDivider,
 } from './styled';
 import { contextMenuConfigItems } from 'helper/context-menu.config';
+import { appConfig } from 'helper/app.config';
 import { useAppStore } from '@store/index';
 import { apps as AppType } from 'types/index';
 
@@ -101,11 +102,16 @@ const MainWindowArea: NextPage = () => {
                                 zIndex={value.zIndex}
                                 appKey={key as AppType}
                                 minimized={value.minimized}
+                                width={appConfig[key as AppType].width}
+                                backgroundColor={
+                                    appConfig[key as AppType].backgroundColor
+                                }
+                                height={appConfig[key as AppType].height}
+                                title={appConfig[key as AppType].title}
                                 key={key}
                             />
                         ))}
                     {/* TODO: differnet app for launch */}
-                    {/* TODO: pass value as props */}
                 </AnimatePresence>
             </WindowArea>
 

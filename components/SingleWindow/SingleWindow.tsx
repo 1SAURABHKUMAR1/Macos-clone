@@ -20,7 +20,16 @@ import { useAppStore } from '@store/index';
 import { appControlsCss, singleWindowProps } from 'types/index';
 
 const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
-    { appKey, fullScreen, zIndex, minimized },
+    {
+        appKey,
+        fullScreen,
+        zIndex,
+        minimized,
+        backgroundColor,
+        height,
+        title,
+        width,
+    },
     windowRef,
 ) => {
     const {
@@ -93,9 +102,10 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
             } else {
                 containerRef.current.resizable.style.transform =
                     windowTransform;
-                // TODO:
-                containerRef.current.resizable.style.width = `${37.5 * 16}px`;
-                containerRef.current.resizable.style.height = `${31.25 * 16}px`;
+                containerRef.current.resizable.style.width = `${width * 16}px`;
+                containerRef.current.resizable.style.height = `${
+                    height * 16
+                }px`;
             }
 
             setTimeout(() => {
@@ -117,14 +127,8 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
             <Draggable
                 disabled={fullScreen}
                 defaultPosition={{
-                    y:
-                        (windowRef.current?.clientHeight - 31.15 * 16) /
-                        //TODO: according to app height
-                        2,
-                    x:
-                        (windowRef.current?.clientWidth - 37.5 * 16) /
-                        //TODO: according to app width
-                        2,
+                    y: (windowRef.current?.clientHeight - height * 16) / 2,
+                    x: (windowRef.current?.clientWidth - width * 16) / 2,
                 }}
                 bounds={{
                     left: 0,
@@ -138,10 +142,9 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
             >
                 <Resizable
                     bounds="window"
-                    //   TODO: width and height changes based on height and based on appConfig with minWidth and minHeight
                     defaultSize={{
-                        width: `${37.5 * 16}px`,
-                        height: `${31.25 * 16}px`,
+                        width: `${width * 16}px`,
+                        height: `${height * 16}px`,
                     }}
                     minWidth="500"
                     minHeight="250"
@@ -150,15 +153,14 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
                     style={{ zIndex }}
                 >
                     <AppContainer
-                        // TODO: background color based on appConfig
                         style={
                             activeApp === appKey
                                 ? {
-                                      backgroundColor: '#fff',
+                                      backgroundColor,
                                       boxShadow: 'var(--shadow-app)',
                                   }
                                 : {
-                                      backgroundColor: '#fff',
+                                      backgroundColor,
                                   }
                         }
                         initial="inital"
@@ -227,10 +229,7 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
                                 </ControlButton>
                             </AppControlContainer>
 
-                            <AppName>
-                                System Prefernc
-                                {/* FIXME: via app config */}
-                            </AppName>
+                            <AppName>{title}</AppName>
                         </AppHeader>
 
                         <MainAppArea>

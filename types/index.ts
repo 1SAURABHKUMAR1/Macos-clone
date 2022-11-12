@@ -46,8 +46,8 @@ export interface bootupScreenProps {
 
 export type dockConfig = {
     [dockItems in apps]?: {
-        title: string;
-        imageSrc: string;
+        title: appsTitle;
+        imageSrc: appsImageSrc;
         break?: boolean;
     };
 };
@@ -157,6 +157,30 @@ export type apps =
     | 'excel'
     | 'bin';
 
+export type appsTitle =
+    | 'Wallpaper'
+    | 'Finder'
+    | 'VS Code'
+    | 'App Store'
+    | 'Calender'
+    | 'Calculator'
+    | 'Launch'
+    | 'System Preferences'
+    | 'Excel'
+    | 'Recycle Bin';
+
+export type appsImageSrc =
+    | '' //TODO:
+    | 'finder'
+    | 'vscode'
+    | '' //TODO:
+    | 'calender'
+    | 'calculator'
+    | 'launch'
+    | 'settings'
+    | 'excel'
+    | 'bin';
+
 export interface appStore {
     apps: {
         [app in apps]: {
@@ -190,4 +214,18 @@ export type singleWindowProps = {
     minimized: boolean;
     zIndex: number;
     appKey: apps;
+    title: appsTitle;
+    height: number;
+    width: number;
+    backgroundColor: string;
+};
+
+export type appConfig = {
+    [appItems in apps]: {
+        title: appsTitle;
+        imageSrc: appsImageSrc;
+        height: number;
+        width: number;
+        backgroundColor: string;
+    };
 };
