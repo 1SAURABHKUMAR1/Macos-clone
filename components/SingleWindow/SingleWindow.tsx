@@ -4,7 +4,7 @@ import type { Variants } from 'framer-motion';
 import { useRef, useState, forwardRef } from 'react';
 import Draggable from 'react-draggable';
 import { Resizable } from 're-resizable';
-import { AppWindow } from '@components/index';
+import { SwitchApps } from '@components/index';
 import {
     AppContainer,
     AppHeader,
@@ -233,8 +233,7 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
                         </AppHeader>
 
                         <MainAppArea>
-                            <AppWindow />
-                            {/* FIXME: via appNexus */}
+                            <SwitchApps />
                         </MainAppArea>
                     </AppContainer>
                 </Resizable>

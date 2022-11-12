@@ -9,8 +9,9 @@ import MenuBar from '@components/MenuBarTop/MenuBar';
 import TopBarTime from '@components/TopBarTime/TopBarTime';
 import DisplaySlider from '@components/DisplaySlider/DisplaySlider';
 import DockAppItem from '@components/DockAppItem/DockAppItem';
-import AppWindow from '@components/AppsWIndow/AppWindow';
+import SwitchApps from '@components/Apps/SwitchApps/SwitchApps';
 import SingleWindow from '@components/SingleWindow/SingleWindow';
+import Launch from '@components/Apps/Launch/Launch';
 
 export {
     BootupScreen,
@@ -24,6 +25,7 @@ export {
     DisplaySlider,
     DockAppItem,
     ActionCenterMenu,
-    AppWindow,
+    SwitchApps,
     SingleWindow,
+    Launch,
 };

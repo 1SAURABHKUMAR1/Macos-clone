@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { MouseEvent, useState } from 'react';
 import React, { useRef, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { SingleWindow } from '@components/index';
+import { Launch, SingleWindow } from '@components/index';
 import {
     RightClickContextMenuContainer,
     WindowArea,
@@ -96,20 +96,29 @@ const MainWindowArea: NextPage = () => {
                     {Object.entries(apps)
                         .filter(([, value]) => value.open)
                         .map(([key, value]) => (
-                            <SingleWindow
-                                ref={windowRef}
-                                fullScreen={value.fullScreen}
-                                zIndex={value.zIndex}
-                                appKey={key as AppType}
-                                minimized={value.minimized}
-                                width={appConfig[key as AppType].width}
-                                backgroundColor={
-                                    appConfig[key as AppType].backgroundColor
-                                }
-                                height={appConfig[key as AppType].height}
-                                title={appConfig[key as AppType].title}
-                                key={key}
-                            />
+                            <React.Fragment key={key}>
+                                {key === 'launch' ? (
+                                    <Launch key={key} />
+                                ) : (
+                                    <SingleWindow
+                                        ref={windowRef}
+                                        fullScreen={value.fullScreen}
+                                        zIndex={value.zIndex}
+                                        appKey={key as AppType}
+                                        minimized={value.minimized}
+                                        width={appConfig[key as AppType].width}
+                                        backgroundColor={
+                                            appConfig[key as AppType]
+                                                .backgroundColor
+                                        }
+                                        height={
+                                            appConfig[key as AppType].height
+                                        }
+                                        title={appConfig[key as AppType].title}
+                                        key={key}
+                                    />
+                                )}
+                            </React.Fragment>
                         ))}
                     {/* TODO: differnet app for launch */}
                 </AnimatePresence>
