@@ -1,9 +1,7 @@
 import type { NextPage } from 'next';
-import { RefObject, useEffect } from 'react';
-import type { Variants } from 'framer-motion';
-import { useRef, useState, forwardRef } from 'react';
-import Draggable from 'react-draggable';
-import { Resizable } from 're-resizable';
+import type { RefObject } from 'react';
+import { Variants } from 'framer-motion';
+import { useRef, useState, forwardRef, useEffect } from 'react';
 import { SwitchApps } from '@components/index';
 import {
     AppContainer,
@@ -18,6 +16,7 @@ import { HiMinus } from 'react-icons/hi';
 import { GrFormAdd } from 'react-icons/gr';
 import { useAppStore } from '@store/index';
 import { appControlsCss, singleWindowProps } from 'types/index';
+import { Rnd } from 'react-rnd';
 
 const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
     {
@@ -43,10 +42,10 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
     } = useAppStore((state) => state);
     const [windowTransform, setWindowTransform] = useState<string>(
         () =>
-            containerRef?.current?.resizable?.style?.transform ??
+            containerRef?.current?.resizable?.resizable?.style?.transform ??
             'translate(0px, 0px)',
     );
-    const containerRef = useRef<Resizable>(null);
+    const containerRef = useRef<Rnd>(null);
 
     const itemVariants: Variants = {
         inital: {
@@ -85,32 +84,34 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
     const maximizeApp = () => {
         const isMaximized = !fullScreen;
 
-        if (containerRef?.current?.resizable) {
-            containerRef.current.resizable.style.transition =
+        if (containerRef?.current?.resizable?.resizable) {
+            containerRef.current.resizable.resizable.style.transition =
                 'height 0.3s ease, width 0.3s ease, transform 0.3s ease';
 
             if (isMaximized) {
                 setWindowTransform(
-                    // @ts-ignore
-                    () => containerRef.current.resizable.style.transform,
+                    containerRef.current.resizable.resizable.style.transform,
                 );
 
-                containerRef.current.resizable.style.transform =
+                containerRef.current.resizable.resizable.style.transform =
                     'translate(0px, 0px)';
-                containerRef.current.resizable.style.width = '100%';
-                containerRef.current.resizable.style.height = '100%';
+                containerRef.current.resizable.resizable.style.width = '100%';
+                containerRef.current.resizable.resizable.style.height = '100%';
             } else {
-                containerRef.current.resizable.style.transform =
+                containerRef.current.resizable.resizable.style.transform =
                     windowTransform;
-                containerRef.current.resizable.style.width = `${width * 16}px`;
-                containerRef.current.resizable.style.height = `${
+                containerRef.current.resizable.resizable.style.width = `${
+                    width * 16
+                }px`;
+                containerRef.current.resizable.resizable.style.height = `${
                     height * 16
                 }px`;
             }
 
             setTimeout(() => {
-                containerRef.current?.resizable &&
-                    (containerRef.current.resizable.style.transition = '');
+                containerRef.current?.resizable?.resizable &&
+                    (containerRef.current.resizable.resizable.style.transition =
+                        '');
             }, 400);
         }
 
@@ -122,122 +123,123 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeApp]);
 
+    const zIndexMinimize = () => {
+        if (containerRef?.current?.resizable?.resizable?.style && minimized) {
+            containerRef.current.resizable.resizable.style.zIndex = '-1';
+        }
+    };
+
+    const zIndexNormal = () => {
+        if (containerRef?.current?.resizable?.resizable?.style && !minimized) {
+            containerRef.current.resizable.resizable.style.zIndex =
+                zIndex.toString();
+        }
+    };
+
     return (
         <>
-            <Draggable
-                disabled={fullScreen}
-                defaultPosition={{
+            <Rnd
+                default={{
                     y: (windowRef.current?.clientHeight - height * 16) / 2,
                     x: (windowRef.current?.clientWidth - width * 16) / 2,
+                    width: width * 16,
+                    height: height * 16,
                 }}
-                bounds={{
-                    left: 0,
-                    right: windowRef.current?.clientWidth,
-                    top: windowRef.current?.clientTop,
-                    bottom: windowRef.current?.clientHeight,
-                }}
-                onStart={focusApp}
-                handle=".app-handle"
-                defaultClassName="absolute"
+                style={{ zIndex, cursor: 'inherit' }}
+                minWidth="500"
+                minHeight="250"
+                dragHandleClassName="app-handle"
+                disableDragging={fullScreen}
+                onResizeStart={focusApp}
+                onDragStart={focusApp}
+                bounds=".windows"
+                enableResizing={!fullScreen}
+                ref={containerRef}
             >
-                <Resizable
-                    bounds="window"
-                    defaultSize={{
-                        width: `${width * 16}px`,
-                        height: `${height * 16}px`,
-                    }}
-                    minWidth="500"
-                    minHeight="250"
-                    ref={containerRef}
-                    onResizeStart={focusApp}
-                    style={{ zIndex }}
-                >
-                    <AppContainer
-                        style={
+                <AppContainer
+                    style={{
+                        backgroundColor,
+                        boxShadow:
                             activeApp === appKey
-                                ? {
-                                      backgroundColor,
-                                      boxShadow: 'var(--shadow-app)',
-                                  }
-                                : {
-                                      backgroundColor,
-                                  }
-                        }
-                        initial="inital"
-                        animate={minimized ? 'minimize' : 'normal'}
-                        exit="close"
-                        onClick={focusApp}
-                        variants={itemVariants}
-                    >
-                        <AppHeader className="app-handle">
-                            <AppControlContainer>
-                                <ControlButton
-                                    buttonType="close"
-                                    onClick={closeAppWindow}
-                                    style={
-                                        {
-                                            '--close-bg-color':
-                                                activeApp === appKey
-                                                    ? '#ff5f56'
-                                                    : '#b6b6b7',
-                                            '--close-box-shadow':
-                                                activeApp === appKey
-                                                    ? '#e0443e'
-                                                    : '#1b1b1d80',
-                                        } as appControlsCss
-                                    }
-                                >
-                                    <IoClose />
-                                </ControlButton>
+                                ? 'var(--shadow-app)'
+                                : 'unset',
+                    }}
+                    initial="inital"
+                    animate={minimized ? 'minimize' : 'normal'}
+                    exit="close"
+                    onClick={focusApp}
+                    variants={itemVariants}
+                    onAnimationComplete={zIndexMinimize}
+                    onAnimationStart={zIndexNormal}
+                >
+                    <AppHeader className="app-handle">
+                        <AppControlContainer>
+                            <ControlButton
+                                buttonType="close"
+                                onClick={closeAppWindow}
+                                style={
+                                    {
+                                        '--close-bg-color':
+                                            activeApp === appKey
+                                                ? '#ff5f56'
+                                                : '#b6b6b7',
+                                        '--close-box-shadow':
+                                            activeApp === appKey
+                                                ? '#e0443e'
+                                                : '#1b1b1d80',
+                                    } as appControlsCss
+                                }
+                            >
+                                <IoClose />
+                            </ControlButton>
 
-                                <ControlButton
-                                    buttonType="minmize"
-                                    onClick={minimizeApp}
-                                    style={
-                                        {
-                                            '--minimize-bg-color':
-                                                activeApp === appKey
-                                                    ? '#ffbd2e'
-                                                    : '#b6b6b7',
-                                            '--minimize-box-shodow':
-                                                activeApp === appKey
-                                                    ? '#dea123'
-                                                    : '#1b1b1d80',
-                                        } as appControlsCss
-                                    }
-                                >
-                                    <HiMinus />
-                                </ControlButton>
+                            <ControlButton
+                                buttonType="minmize"
+                                onClick={minimizeApp}
+                                style={
+                                    {
+                                        '--minimize-bg-color':
+                                            activeApp === appKey
+                                                ? '#ffbd2e'
+                                                : '#b6b6b7',
+                                        '--minimize-box-shodow':
+                                            activeApp === appKey
+                                                ? '#dea123'
+                                                : '#1b1b1d80',
+                                    } as appControlsCss
+                                }
+                            >
+                                <HiMinus />
+                            </ControlButton>
 
-                                <ControlButton
-                                    buttonType="maximize"
-                                    onClick={maximizeApp}
-                                    style={
-                                        {
-                                            '--maximize-bg-color':
-                                                activeApp === appKey
-                                                    ? '#27c93f'
-                                                    : '#b6b6b7',
-                                            '--maximize-box-shadow':
-                                                activeApp === appKey
-                                                    ? '#1aab29'
-                                                    : '#1b1b1d80',
-                                        } as appControlsCss
-                                    }
-                                >
-                                    <GrFormAdd />
-                                </ControlButton>
-                            </AppControlContainer>
+                            <ControlButton
+                                buttonType="maximize"
+                                onClick={maximizeApp}
+                                style={
+                                    {
+                                        '--maximize-bg-color':
+                                            activeApp === appKey
+                                                ? '#27c93f'
+                                                : '#b6b6b7',
+                                        '--maximize-box-shadow':
+                                            activeApp === appKey
+                                                ? '#1aab29'
+                                                : '#1b1b1d80',
+                                    } as appControlsCss
+                                }
+                            >
+                                <GrFormAdd />
+                            </ControlButton>
+                        </AppControlContainer>
 
-                            <AppName>{title}</AppName>
-                        </AppHeader>
+                        <AppName>{title}</AppName>
+                    </AppHeader>
 
-                        <MainAppArea>
-                            <SwitchApps />
-                        </MainAppArea>
-                    </AppContainer>
-                </Resizable>
-            </Draggable>
+                    <MainAppArea>
+                        <SwitchApps />
+                    </MainAppArea>
+                </AppContainer>
+            </Rnd>
         </>
     );
 };

@@ -65,9 +65,17 @@ const Home: NextPage = () => {
                         <Main>
                             <TopBarArea />
 
-                            <MainWindowArea />
-
-                            <DockArea />
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    flex: 1,
+                                }}
+                                className="windows"
+                            >
+                                <MainWindowArea />
+                                <DockArea />
+                            </div>
                         </Main>
 
                         <Wallpaper />
