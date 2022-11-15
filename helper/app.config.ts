@@ -10,7 +10,7 @@ export const appConfig: appConfigType = {
     },
     finder: {
         title: 'Finder',
-        imageSrc: 'launch',
+        imageSrc: 'finder',
         height: 31.25,
         width: 37.5,
         backgroundColor: '#fff',
@@ -51,7 +51,7 @@ export const appConfig: appConfigType = {
         backgroundColor: '#fff',
     },
     'system-preference': {
-        title: 'System Preferences',
+        title: 'Settings',
         imageSrc: 'settings',
         height: 31.25,
         width: 37.5,
@@ -72,3 +72,5 @@ export const appConfig: appConfigType = {
         backgroundColor: '#fff',
     },
 };
+
+// TODO: add morre apps

@@ -10,7 +10,7 @@ const TotalDockArea = styled(motion.section)`
     padding: 0.4rem 0.4rem 0.8rem 0.4rem;
     display: flex;
     justify-content: center;
-    z-index: 90;
+    z-index: 900;
 `;
 
 const DockContainer = styled(motion.div)`

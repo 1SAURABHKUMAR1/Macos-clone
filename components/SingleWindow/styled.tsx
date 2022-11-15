@@ -1,11 +1,6 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-const Container = styled(motion.div)`
-    height: 100%;
-    width: 100%;
-`;
-
 const AppContainer = styled(motion.div)`
     width: 100%;
     height: 100%;
@@ -121,5 +116,4 @@ export {
     MainAppArea,
     AppControlContainer,
     ControlButton,
-    Container,
 };

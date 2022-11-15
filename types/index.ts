@@ -165,7 +165,7 @@ export type appsTitle =
     | 'Calender'
     | 'Calculator'
     | 'Launch'
-    | 'System Preferences'
+    | 'Settings'
     | 'Excel'
     | 'Recycle Bin';
 

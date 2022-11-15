@@ -27,7 +27,7 @@ export const dockConfigApps: dockConfig = {
         imageSrc: 'excel',
     },
     'system-preference': {
-        title: 'System Preferences',
+        title: 'Settings',
         imageSrc: 'settings',
         break: true,
     },

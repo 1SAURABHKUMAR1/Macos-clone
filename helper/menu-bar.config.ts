@@ -9,7 +9,7 @@ export const MenuConfig: menuConfig = {
                 break: true,
             },
             'system-preferences': {
-                title: 'System Preferences...',
+                title: 'Settings...',
             },
             'app-store': {
                 title: 'App Store...',
