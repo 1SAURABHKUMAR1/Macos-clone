@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
-import { useEffect } from 'react';
+import type { ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
 import {
     LaunchMainContainer,
     LaunchContainer,
@@ -26,12 +27,7 @@ const Launch: NextPage = () => {
         toggleMinimizeApp,
         openApp,
     } = useAppStore((state) => state);
-
-    useEffect(() => {
-        toggleFullScreenApp('launch');
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const [searchValue, setSearchValue] = useState<string>('');
 
     const closeLaunchApp = () => closeApp('launch');
 
@@ -47,6 +43,14 @@ const Launch: NextPage = () => {
         closeLaunchApp();
     };
 
+    const changeSearchValue = (event: ChangeEvent<HTMLInputElement>) =>
+        setSearchValue(() => event.target.value.toLowerCase());
+
+    useEffect(() => {
+        toggleFullScreenApp('launch');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <>
             <LaunchMainContainer
@@ -57,7 +61,10 @@ const Launch: NextPage = () => {
             >
                 <LaunchContainer>
                     <LaunchHeader>
-                        <LaunchInput placeholder="Search" />
+                        <LaunchInput
+                            placeholder="Search"
+                            onChange={changeSearchValue}
+                        />
 
                         <LaunchAction onClick={closeLaunchApp}>
                             <X size="1.5em" fontWeight="700" />
@@ -66,7 +73,13 @@ const Launch: NextPage = () => {
 
                     <LaunchAppModal>
                         {Object.entries(appConfig)
-                            .filter((app) => app[1].title !== 'Launch')
+                            .filter(
+                                ([, value]) =>
+                                    value.title !== 'Launch' &&
+                                    value.title
+                                        .toLowerCase()
+                                        .includes(searchValue),
+                            )
                             .map(([key, value]) => (
                                 <LaunchAppContainer
                                     key={key}
