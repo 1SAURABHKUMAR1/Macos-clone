@@ -91,8 +91,9 @@ const useAppStore = create<appStore>()(
                     [app]: {
                         ...state.apps[app],
                         open: false,
-                        zIndex: -2,
+                        zIndex: 0,
                         fullScreen: false,
+                        minimized: false,
                     },
                 },
             }));

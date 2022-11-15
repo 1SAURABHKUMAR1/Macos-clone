@@ -170,10 +170,10 @@ export type appsTitle =
     | 'Recycle Bin';
 
 export type appsImageSrc =
-    | '' //TODO:
+    | 'wallpaper'
     | 'finder'
     | 'vscode'
-    | '' //TODO:
+    | 'app-store'
     | 'calender'
     | 'calculator'
     | 'launch'

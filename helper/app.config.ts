@@ -3,7 +3,7 @@ import { appConfig as appConfigType } from 'types';
 export const appConfig: appConfigType = {
     wallpaper: {
         title: 'Wallpaper',
-        imageSrc: '',
+        imageSrc: 'wallpaper',
         height: 31.25,
         width: 37.5,
         backgroundColor: '#fff',
@@ -24,7 +24,7 @@ export const appConfig: appConfigType = {
     },
     appstore: {
         title: 'App Store',
-        imageSrc: '',
+        imageSrc: 'app-store',
         height: 31.25,
         width: 37.5,
         backgroundColor: '#fff',

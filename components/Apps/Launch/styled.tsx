@@ -14,13 +14,14 @@ const LaunchMainContainer = styled(motion.div)`
     backdrop-filter: blur(14px);
     z-index: 400;
     flex: 1;
-    background-color: rgba(10, 10, 10, 0.15);
+    background-color: rgba(10, 10, 10, 0.17);
     overflow: auto;
     transition: all 900ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
 `;
 
 const LaunchContainer = styled.div`
     margin: auto;
+    width: 100%;
     max-width: 55rem;
     height: 100%;
     display: flex;
@@ -71,13 +72,15 @@ const LaunchAction = styled.button`
 `;
 
 const LaunchAppModal = styled.section`
-    display: flex;
-    padding: 5rem 1rem 2rem 1rem;
-    flex-wrap: wrap;
-    overflow: auto;
+    padding: 4rem 1rem 2.5rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(6.5rem, 1fr));
+    overflow-y: auto;
     gap: 1.9rem;
-    align-items: center;
     text-align: center;
+    height: 100%;
+    width: 100%;
 `;
 
 const LaunchAppContainer = styled.button`
@@ -126,5 +129,3 @@ export {
     LaunchAppIcon,
     LaunchAppName,
 };
-
-// TODO: padding or use max width, replace flex by grid , icons
