@@ -236,7 +236,7 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
                     </AppHeader>
 
                     <MainAppArea>
-                        <SwitchApps />
+                        <SwitchApps appId={appKey} />
                     </MainAppArea>
                 </AppContainer>
             </Rnd>

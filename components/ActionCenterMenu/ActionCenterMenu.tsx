@@ -14,6 +14,7 @@ import {
     ActionMenuItemCardSmall,
 } from './styled';
 import { actionCenterMenuProps, colors } from 'types/index';
+import { wallpapersConfig } from 'helper/wallpaper.config';
 
 const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
     menuActive,
@@ -26,6 +27,7 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
         toggleFullScreen,
         systemColor,
         changeSystemColor,
+        wallpaper,
     } = useSystemStore((state) => state);
     const { openApp, apps, toggleActiveApp, toggleMinimizeApp } = useAppStore(
         (state) => state,
@@ -153,7 +155,7 @@ const ActionCenterMenu: NextPage<actionCenterMenuProps> = ({
             <ActionMenuItemCard cardType="wallpaper" onClick={openWallpaperApp}>
                 <ActionMenuWallpaperContainer>
                     <Image
-                        src="/wallpaper/Big-Sur.webp"
+                        src={`/wallpaper/${wallpapersConfig[wallpaper].name}.webp`}
                         alt="action-wallpaper"
                         layout="fixed"
                         height="100%"

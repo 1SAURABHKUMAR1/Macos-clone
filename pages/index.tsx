@@ -27,6 +27,12 @@ const Main = styled.div`
     flex-direction: column;
 `;
 
+const GroupContainer = styled.section`
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+`;
+
 const Home: NextPage = () => {
     const [isBootupLoading, setIsBootupLoading] = useState<boolean>(true);
     const { brightness, systemColor, fullScreen } = useSystemStore(
@@ -65,17 +71,10 @@ const Home: NextPage = () => {
                         <Main>
                             <TopBarArea />
 
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    flex: 1,
-                                }}
-                                className="windows"
-                            >
+                            <GroupContainer className="windows">
                                 <MainWindowArea />
                                 <DockArea />
-                            </div>
+                            </GroupContainer>
                         </Main>
 
                         <Wallpaper />

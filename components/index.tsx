@@ -9,9 +9,19 @@ import MenuBar from '@components/MenuBarTop/MenuBar';
 import TopBarTime from '@components/TopBarTime/TopBarTime';
 import DisplaySlider from '@components/DisplaySlider/DisplaySlider';
 import DockAppItem from '@components/DockAppItem/DockAppItem';
-import SwitchApps from '@components/Apps/SwitchApps/SwitchApps';
+import SwitchApps from '@components/Apps/SwitchApps';
 import SingleWindow from '@components/SingleWindow/SingleWindow';
 import Launch from '@components/Apps/Launch/Launch';
+import WallpaperApp from '@components/Apps/Wallpaper/Wallpaper';
+import Finder from '@components/Apps/Finder/Finder';
+import VsCode from '@components/Apps/VSCode/VsCode';
+import Appstore from '@components/Apps/AppStore/Appstore';
+import Calender from '@components/Apps/Calender/Calender';
+import Calculator from '@components/Apps/Calculator/Calculator';
+import Settings from '@components/Apps/Settings/Settings';
+import Excel from '@components/Apps/Excel/Excel';
+import RecycleBin from '@components/Apps/RecycleBin/RecycleBin';
+import NotFound from '@components/Apps/NotFound/NotFound';
 
 export {
     BootupScreen,
@@ -28,4 +38,14 @@ export {
     SwitchApps,
     SingleWindow,
     Launch,
+    WallpaperApp,
+    Finder,
+    Appstore,
+    Calculator,
+    Calender,
+    Excel,
+    RecycleBin,
+    Settings,
+    VsCode,
+    NotFound,
 };
