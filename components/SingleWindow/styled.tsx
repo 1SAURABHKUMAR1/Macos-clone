@@ -10,28 +10,18 @@ const AppContainer = styled(motion.div)`
     flex-direction: column;
     position: absolute;
     opacity: 1;
+    backdrop-filter: blur(35px);
 `;
 
 const AppHeader = styled.div`
-    padding: 0.6rem 1rem;
     width: 100%;
     top: 0;
     left: 0;
     position: relative;
     border-radius: 0.75rem 0.75rem 0 0;
-    border-bottom: solid 0.9px #1b1b1d4d;
-    background-color: #f8fafc;
     display: flex;
     align-items: center;
-`;
-
-const AppName = styled.span`
-    text-align: center;
-    width: 100%;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+    padding: 1.08rem;
 `;
 
 const AppControlContainer = styled.div`
@@ -40,7 +30,7 @@ const AppControlContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, auto);
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.62rem;
 
     :hover {
         button {
@@ -106,13 +96,11 @@ const ControlButton = styled.button<{
 const MainAppArea = styled.div`
     height: 100%;
     width: 100%;
-    overflow: auto;
 `;
 
 export {
     AppContainer,
     AppHeader,
-    AppName,
     MainAppArea,
     AppControlContainer,
     ControlButton,

@@ -157,8 +157,6 @@ export type apps =
     | 'excel'
     | 'bin';
 
-// TODO: add about
-
 export type appsTitle =
     | 'Wallpaper'
     | 'Finder'
@@ -216,7 +214,6 @@ export type singleWindowProps = {
     minimized: boolean;
     zIndex: number;
     appKey: apps;
-    title: appsTitle;
     height: number;
     width: number;
     backgroundColor: string;
@@ -234,4 +231,38 @@ export type appConfig = {
 
 export interface SwitchAppsProps {
     appId: apps;
+}
+
+export type handleClickType =
+    | 'inputDigit'
+    | 'clearAll'
+    | 'inputDot'
+    | 'inputPercent'
+    | 'toggleSign'
+    | 'clearDisplay'
+    | 'performOperation';
+
+export type OperationKeys = '/' | '*' | '-' | '+' | '=';
+
+export type CalculatorOperations = {
+    [key in OperationKeys]: {
+        func: (prevValue: number, nextValue: number) => number;
+    };
+};
+
+export type useCalculatorType = () => {
+    calculatorValues: {
+        value: number;
+        display: string;
+        operator: string | null;
+        waitingForOperand: boolean;
+    };
+    handleClick: (type: handleClickType, payload?: string) => void;
+};
+
+export interface calculatorValues {
+    value: number;
+    display: string;
+    operator: string | null;
+    waitingForOperand: boolean;
 }

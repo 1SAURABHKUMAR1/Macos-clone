@@ -114,7 +114,6 @@ const MainWindowArea: NextPage = () => {
                                         height={
                                             appConfig[key as AppType].height
                                         }
-                                        title={appConfig[key as AppType].title}
                                         key={key}
                                     />
                                 )}

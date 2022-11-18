@@ -7,7 +7,6 @@ import {
     AppContainer,
     AppHeader,
     MainAppArea,
-    AppName,
     AppControlContainer,
     ControlButton,
 } from './styled';
@@ -19,16 +18,7 @@ import { appControlsCss, singleWindowProps } from 'types/index';
 import { Rnd } from 'react-rnd';
 
 const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
-    {
-        appKey,
-        fullScreen,
-        zIndex,
-        minimized,
-        backgroundColor,
-        height,
-        title,
-        width,
-    },
+    { appKey, fullScreen, zIndex, minimized, backgroundColor, height, width },
     windowRef,
 ) => {
     const {
@@ -145,9 +135,9 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
                     width: width * 16,
                     height: height * 16,
                 }}
-                style={{ zIndex, cursor: 'inherit' }}
-                minWidth="500"
-                minHeight="250"
+                style={{ zIndex, cursor: 'inherit', borderRadius: '0.75rem' }}
+                minWidth="250"
+                minHeight="400"
                 dragHandleClassName="app-handle"
                 disableDragging={fullScreen}
                 onResizeStart={focusApp}
@@ -231,8 +221,6 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
                                 <GrFormAdd />
                             </ControlButton>
                         </AppControlContainer>
-
-                        <AppName>{title}</AppName>
                     </AppHeader>
 
                     <MainAppArea>
