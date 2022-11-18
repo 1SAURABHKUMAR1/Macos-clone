@@ -96,16 +96,6 @@ const useCalculator: useCalculatorType = () => {
                 // eslint-disable-next-line no-case-declarations
                 const inputValue = parseFloat(calculatorValues.display);
 
-                if (calculatorValues.value === null) {
-                    setCalculatorValues((state) => ({
-                        ...state,
-                        value: inputValue,
-                        operator: payload as string,
-                        waitingForOperand: true,
-                    }));
-                    break;
-                }
-
                 if (calculatorValues.operator) {
                     const currentValue = calculatorValues.value || 0;
                     const newValue = calculatorOperations[
@@ -119,14 +109,14 @@ const useCalculator: useCalculatorType = () => {
                         operator: payload as string,
                         waitingForOperand: true,
                     }));
-
                     break;
                 }
 
                 setCalculatorValues((state) => ({
                     ...state,
+                    value: inputValue,
                     operator: payload as string,
-                    waitingForOperand: false,
+                    waitingForOperand: true,
                 }));
                 break;
 
