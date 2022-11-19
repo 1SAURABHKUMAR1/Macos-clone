@@ -3,11 +3,11 @@ import styled from 'styled-components';
 const MainContainer = styled.div`
     height: 100%;
     width: 100%;
-    display: grid;
-    grid-template-rows: auto 1fr;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    color: #f9fafb;
-    fill: #f9fafb;
+    color: #fefefe;
+    fill: #fefefe;
 `;
 
 const ResultContainer = styled.div`
@@ -34,6 +34,7 @@ const ButtonContainer = styled.section`
     grid-template-rows: repeat(5, 1fr);
     gap: 0.07rem;
     margin: 0.125rem;
+    flex: 1;
 `;
 
 const CalculatorButton = styled.button<{

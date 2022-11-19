@@ -27,14 +27,14 @@ export const appConfig: appConfigType = {
         imageSrc: 'app-store',
         height: 31,
         width: 39,
-        backgroundColor: '#fff',
+        backgroundColor: '#1b1b1d',
     },
     calender: {
         title: 'Calender',
         imageSrc: 'calender',
         height: 31,
-        width: 39,
-        backgroundColor: '#fff',
+        width: 38,
+        backgroundColor: '#1b1b1d',
     },
     calculator: {
         title: 'Calculator',
