@@ -59,7 +59,7 @@ const CalenderControlButton = styled.button`
 const CalenderArea = styled.section`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: auto repeat(5, 1fr);
+    grid-template-rows: auto repeat(6, 1fr);
     flex: 1;
     font-size: 0.95rem;
     margin-top: 0.3rem;
@@ -85,21 +85,42 @@ const CalenderDayBlock = styled.div`
     &:nth-child(7n) {
         border-right: none;
     }
-    &:nth-child(n + 36) {
+    &:nth-child(n + 43) {
         border-bottom: none;
     }
 `;
 
-const CalenderDate = styled.div`
-    height: 1.5rem;
-    width: 1.5rem;
+const CalenderDate = styled.div<{
+    month: 'prev' | 'current' | 'upcoming';
+    currentDate?: boolean;
+}>`
+    height: 1.7rem;
+    width: 1.7rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0.5rem;
     font-weight: 500;
-    font-size: 1.02rem;
+    font-size: 0.9rem;
+
+    ${({ month }) =>
+        month === 'prev'
+            ? `
+                color: var(--system-color-grey-500);
+            `
+            : month === 'current'
+            ? `
+                color: #fff;
+            `
+            : month === 'upcoming'
+            ? `
+                color: var(--system-color-grey-500);
+            `
+            : ''}
+
+    ${({ currentDate }) =>
+        currentDate === true ? 'background-color: #ec4d3c;' : ''}
 `;
 
 export {

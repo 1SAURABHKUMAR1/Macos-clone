@@ -266,3 +266,17 @@ export interface calculatorValues {
     operator: string | null;
     waitingForOperand: boolean;
 }
+
+export interface calenderType {
+    date: Date;
+}
+
+export type getMonthDaysType = (
+    currentDate: Date,
+) => [
+    daysInPrevMonth: Array<any>,
+    daysInCurrentMonth: Array<any>,
+    daysInUpcomingMonth: Array<any>,
+];
+
+export type getDaysType = (lower: number, upper: number) => Array<number>;

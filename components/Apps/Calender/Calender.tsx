@@ -1,4 +1,6 @@
 import type { NextPage } from 'next';
+import { useState } from 'react';
+import { format, addMonths } from 'date-fns';
 import {
     MainContainer,
     CalenderHeader,
@@ -7,54 +9,41 @@ import {
     CalenderYear,
     CalenderControlButtonContainer,
     CalenderControlButton,
-    CalenderArea,
-    CalenderWeekDay,
-    CalenderDayBlock,
-    CalenderDate,
 } from './styled';
+import { CalenderMainArea } from '@components/index';
 
 const Calender: NextPage = () => {
+    const [date, setDate] = useState(() => new Date());
+
+    const getToday = () => setDate(() => new Date());
+
+    const prevMonth = () => setDate(() => addMonths(date, -1));
+
+    const nextMonth = () => setDate(() => addMonths(date, 1));
+
     return (
         <>
             <MainContainer>
                 <CalenderHeader>
                     <CalenderMonthYear>
-                        <CalenderMonth>November</CalenderMonth>
-                        <CalenderYear>2020</CalenderYear>
+                        <CalenderMonth>{format(date, 'MMMM')}</CalenderMonth>
+                        <CalenderYear>{format(date, 'yyyy')}</CalenderYear>
                     </CalenderMonthYear>
 
                     <CalenderControlButtonContainer>
-                        <CalenderControlButton>{'<'}</CalenderControlButton>
-                        <CalenderControlButton>Today</CalenderControlButton>
-                        <CalenderControlButton>{'>'}</CalenderControlButton>
+                        <CalenderControlButton onClick={prevMonth}>
+                            {'<'}
+                        </CalenderControlButton>
+                        <CalenderControlButton onClick={getToday}>
+                            Today
+                        </CalenderControlButton>
+                        <CalenderControlButton onClick={nextMonth}>
+                            {'>'}
+                        </CalenderControlButton>
                     </CalenderControlButtonContainer>
                 </CalenderHeader>
 
-                <CalenderArea>
-                    <CalenderWeekDay>Mon</CalenderWeekDay>
-                    <CalenderWeekDay>Mon</CalenderWeekDay>
-                    <CalenderWeekDay>Mon</CalenderWeekDay>
-                    <CalenderWeekDay>Mon</CalenderWeekDay>
-                    <CalenderWeekDay>Mon</CalenderWeekDay>
-                    <CalenderWeekDay>Mon</CalenderWeekDay>
-                    <CalenderWeekDay>Mon</CalenderWeekDay>
-                    {/* 
-                            if(date not in month) color: var(--system-color-grey-500); 
-                            if(current date) background-color: #ec4d3c; 
-                            <CalenderDayBlock>
-                                <CalenderDate>1</CalenderDate>
-                            </CalenderDayBlock>
-                    */}
-                    {Array(35)
-                        .fill(0)
-                        .map((_, index) => (
-                            <>
-                                <CalenderDayBlock>
-                                    <CalenderDate>{index}</CalenderDate>
-                                </CalenderDayBlock>
-                            </>
-                        ))}
-                </CalenderArea>
+                <CalenderMainArea date={date} />
             </MainContainer>
         </>
     );

@@ -22,6 +22,7 @@ import Settings from '@components/Apps/Settings/Settings';
 import Excel from '@components/Apps/Excel/Excel';
 import RecycleBin from '@components/Apps/RecycleBin/RecycleBin';
 import NotFound from '@components/Apps/NotFound/NotFound';
+import CalenderMainArea from '@components/Apps/Calender/CalenderMainArea';
 
 export {
     BootupScreen,
@@ -48,4 +49,5 @@ export {
     Settings,
     VsCode,
     NotFound,
+    CalenderMainArea,
 };

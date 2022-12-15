@@ -24,7 +24,8 @@
             "@styles/*": ["styles/*"],
             "@hooks/*": ["hooks/*"],
             "@types/*": ["types/*"],
-            "@store/*": ["store/*"]
+            "@store/*": ["store/*"],
+            "@helper/*": ["helper/*"]
         },
         "newLine": "crlf"
     },
