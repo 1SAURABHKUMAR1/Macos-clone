@@ -119,7 +119,6 @@ const MainWindowArea: NextPage = () => {
                                 )}
                             </React.Fragment>
                         ))}
-                    {/* TODO: differnet app for launch */}
                 </AnimatePresence>
             </WindowArea>
 

@@ -6,7 +6,7 @@ export const appConfig: appConfigType = {
         imageSrc: 'wallpaper',
         height: 31,
         width: 39,
-        backgroundColor: '#fff',
+        backgroundColor: '#1b1b1d',
     },
     finder: {
         title: 'Finder',

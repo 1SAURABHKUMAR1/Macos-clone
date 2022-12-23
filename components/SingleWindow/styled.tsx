@@ -94,8 +94,11 @@ const ControlButton = styled.button<{
 `;
 
 const MainAppArea = styled.div`
-    height: 100%;
     width: 100%;
+    display: flex;
+    flex: 1;
+    padding-bottom: 0.25rem;
+    overflow: hidden;
 `;
 
 export {

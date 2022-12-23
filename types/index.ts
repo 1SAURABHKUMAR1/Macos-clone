@@ -109,6 +109,8 @@ export interface actionCenterMenuProps {
 
 export type wallpaper =
     | 'big-sur'
+    | 'big-sur-dark'
+    | 'solar-grad'
     | 'cabin-in-woods'
     | 'catalina'
     | 'dome'
@@ -121,10 +123,24 @@ export type wallpaper =
     | 'peak'
     | 'somber-forest'
     | 'the-desert'
-    | 'ventura';
+    | 'ventura'
+    | 'kyptonaian-sunset'
+    | 'city-sunset'
+    | 'blade-runner'
+    | 'city-train'
+    | 'dreams'
+    | 'hangout'
+    | 'night-with-cat'
+    | 'titans'
+    | 'dune'
+    | 'dark-night'
+    | 'midnight-sunrise'
+    | 'tron';
 
 export type wallpaperName =
     | 'Big Sur'
+    | 'Big Sur Dark'
+    | 'Solar Grad'
     | 'Cabin in the Woods'
     | 'Catalina'
     | 'Dome'
@@ -137,11 +153,24 @@ export type wallpaperName =
     | 'Peak'
     | 'Somber Forest'
     | 'The Desert'
-    | 'Ventura';
+    | 'Ventura'
+    | 'Kyptonaian Sunset'
+    | 'City Sunset'
+    | 'Blade Runner'
+    | 'City Train'
+    | 'Dreams'
+    | 'Hangout'
+    | 'Night With Cat'
+    | 'Titans'
+    | 'Dune'
+    | 'Dark Night'
+    | 'Midnight Sunrise'
+    | 'Tron';
 
 export type wallpaperConfig = {
     [wallpaperKey in wallpaper]: {
         name: wallpaperName;
+        type: 'dynamic' | 'desktop';
     };
 };
 
