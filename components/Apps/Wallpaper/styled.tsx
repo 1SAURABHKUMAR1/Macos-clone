@@ -34,6 +34,8 @@ const HeaderImage = styled.div`
 
 const HeaderText = styled.h2`
     text-align: center;
+    font-weight: 600;
+    font-size: 1.4rem;
 `;
 
 const WallpaperArea = styled.section`
@@ -44,8 +46,8 @@ const WallpaperArea = styled.section`
 `;
 
 const WallpaperAreaText = styled.h2`
-    /* font-size:  ; 
-    font-weight*/
+    font-weight: 400;
+    font-size: 1.35rem;
 `;
 
 const WallpaperImagesContainer = styled.div<{ type: 'dynamic' | 'desktop' }>`
@@ -60,7 +62,7 @@ const WallpaperImagesContainer = styled.div<{ type: 'dynamic' | 'desktop' }>`
             `
             : type === 'desktop'
             ? `
-                grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr)) !important;
+                grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr));
             `
             : ''}
 `;
@@ -77,7 +79,7 @@ const SingleWallpaper = styled.div<{ type: 'dynamic' | 'desktop' }>`
             `
             : type === 'desktop'
             ? `
-                aspect-ratio: 15 / 10;
+                aspect-ratio: 16 / 9;
             `
             : ''}
 

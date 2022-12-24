@@ -196,7 +196,8 @@ export type appsTitle =
     | 'Launch'
     | 'Settings'
     | 'Excel'
-    | 'Recycle Bin';
+    | 'Recycle Bin'
+    | 'Wallpaper';
 
 export type appsImageSrc =
     | 'wallpaper'
@@ -208,7 +209,8 @@ export type appsImageSrc =
     | 'launch'
     | 'settings'
     | 'excel'
-    | 'bin';
+    | 'bin'
+    | 'wallpaper';
 
 export interface appStore {
     apps: {

@@ -10,6 +10,10 @@ export const dockConfigApps: dockConfig = {
         title: 'Finder',
         imageSrc: 'finder',
     },
+    wallpaper: {
+        title: 'Wallpaper',
+        imageSrc: 'wallpaper',
+    },
     calculator: {
         title: 'Calculator',
         imageSrc: 'calculator',

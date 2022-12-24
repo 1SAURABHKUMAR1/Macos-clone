@@ -4,8 +4,8 @@ export const appConfig: appConfigType = {
     wallpaper: {
         title: 'Wallpaper',
         imageSrc: 'wallpaper',
-        height: 31,
-        width: 39,
+        height: 35,
+        width: 45,
         backgroundColor: '#1b1b1d',
     },
     finder: {
