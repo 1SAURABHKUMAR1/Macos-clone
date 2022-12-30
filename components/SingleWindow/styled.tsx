@@ -97,8 +97,9 @@ const MainAppArea = styled.div`
     width: 100%;
     display: flex;
     flex: 1;
-    padding-bottom: 0.25rem;
     overflow: hidden;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
 `;
 
 export {

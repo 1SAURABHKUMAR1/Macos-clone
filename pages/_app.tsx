@@ -2,6 +2,10 @@ import type { AppProps } from 'next/app';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;170;200;271;300;400;500;700;900&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Oswald:wght@200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+
     * {
         padding: 0;
         margin: 0;
@@ -25,7 +29,6 @@ const GlobalStyle = createGlobalStyle`
         cursor: var(--system-cursor-default), auto;
         overflow: hidden;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
         line-height: 1;
     }
 
@@ -120,29 +123,24 @@ const GlobalStyle = createGlobalStyle`
     }
 
     ::-webkit-scrollbar {
-        width: 5px;
+        width: 18px;
     }
 
     ::-webkit-scrollbar-track {
         background-color: transparent;
-        border-radius: .75rem;
-        width: 5px;
-        transition-duration: .4s
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: #888;
-        border-radius: .75rem;
-        width: 5px;
+        border-radius: 2rem;
         transition-duration: .4s;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
-        background-color: #666;
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--active-grey);
+        border-radius: 2rem;
+        border: 4.5px solid transparent;
+        background-clip: content-box;
     }
 
-    ::-webkit-scrollbar-thumb:active {
-        background-color: #444;
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #4b5563;
     }
 
     /* variables */
@@ -210,6 +208,11 @@ const GlobalStyle = createGlobalStyle`
         --shadow-app : inset 0 0 0 0.9px #ffffff33, 0px 0px 23px 4px #0000008f;
         --shadow-context-menu : hsla(0, 0%, 0%, 0.3) 0px 0px 11px 0px,
                                 inset 0 0 0 0.9px #ffffff4d, 0 0 0 1.2px #1b1b1d4d;
+        --white-text: #fff;
+        --mid-grey: #f9fafb;
+        --active-grey: #d1d5db;
+        --hover-grey: #e5e7eb;
+        --excel-green: #34a853;
     }
 
     #__next {
