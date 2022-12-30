@@ -42,7 +42,7 @@ const ToolbarContainer = styled.section`
     border-bottom: var(--active-grey) 1px solid;
     display: flex;
     align-items: center;
-    padding: 0.45rem 1.4rem;
+    padding: 0.65rem 1.4rem;
     overflow-x: auto;
     column-gap: 1.2rem;
     position: relative;
@@ -156,10 +156,8 @@ const CellRowColumnContainer = styled.section`
     position: relative;
     top: 0px;
     width: 100%;
+    height: 100%;
     background-color: var(--mid-grey);
-    display: flex;
-    flex-direction: column;
-    flex: 1;
     overflow: auto;
     scrollbar-width: thin;
 `;
