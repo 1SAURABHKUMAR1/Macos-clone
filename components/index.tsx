@@ -23,6 +23,9 @@ import Excel from '@components/Apps/Excel/Excel';
 import RecycleBin from '@components/Apps/RecycleBin/RecycleBin';
 import NotFound from '@components/Apps/NotFound/NotFound';
 import CalenderMainArea from '@components/Apps/Calender/CalenderMainArea';
+import CellContainer from '@components/Apps/Excel/CellContainer';
+import Formula from '@components/Apps/Excel/Formula';
+import Toolbar from '@components/Apps/Excel/Toolbar';
 
 export {
     BootupScreen,
@@ -50,4 +53,7 @@ export {
     VsCode,
     NotFound,
     CalenderMainArea,
+    CellContainer,
+    Formula,
+    Toolbar,
 };
