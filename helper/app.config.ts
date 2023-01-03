@@ -41,7 +41,7 @@ export const appConfig: appConfigType = {
         imageSrc: 'calculator',
         height: 26.173,
         width: 19.5,
-        backgroundColor: 'hsl(0deg 0% 27% / 65%)',
+        backgroundColor: 'hsl(0deg 0% 27% / 85%)',
     },
     launch: {
         title: 'Launch',
@@ -61,7 +61,7 @@ export const appConfig: appConfigType = {
         title: 'Excel',
         imageSrc: 'excel',
         height: 35,
-        width: 60,
+        width: 55,
         backgroundColor: '#fff',
     },
     bin: {

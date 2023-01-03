@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import type { MotionValue } from 'framer-motion';
 import type { Dispatch, SetStateAction, CSSProperties } from 'react';
+import { columnTotal, rowTotal } from 'helper/excel.config';
 
 export type menuConfig = {
     [string: string]: {
@@ -311,3 +312,14 @@ export type getMonthDaysType = (
 ];
 
 export type getDaysType = (lower: number, upper: number) => Array<number>;
+
+export interface excelStore {
+    cellValue: string;
+    cellData: null[][];
+
+    changeCellValue: (columnIndex: number, rowIndex: number) => void;
+}
+
+export type findRowColumn = (
+    address: string,
+) => [columnIndex: number, rowIndex: number];

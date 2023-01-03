@@ -45,13 +45,13 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
         },
         minimize: {
             y: '100vh',
-            opacity: 1,
+            opacity: 1.5,
             scale: 0,
             transition: { duration: 0.8, ease: 'anticipate' },
         },
         normal: {
             y: '0vh',
-            opacity: 1,
+            opacity: 1.5,
             scale: 1,
             transition: { duration: 0.8, ease: 'anticipate' },
         },

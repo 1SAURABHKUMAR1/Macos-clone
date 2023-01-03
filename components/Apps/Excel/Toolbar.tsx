@@ -35,7 +35,7 @@ const Toolbar: NextPage = () => {
                     <MdContentPaste />
                 </ToolbarIcon>
 
-                <ToolbarSelectItem>
+                <ToolbarSelectItem value="Roboto">
                     <ToolbarSelectOption value="Inter">
                         Inter
                     </ToolbarSelectOption>
@@ -54,14 +54,12 @@ const Toolbar: NextPage = () => {
                     </ToolbarSelectOption>
                 </ToolbarSelectItem>
 
-                <ToolbarSelectItem>
+                <ToolbarSelectItem value="16">
                     <ToolbarSelectOption value="12">12</ToolbarSelectOption>
                     <ToolbarSelectOption value="13">13</ToolbarSelectOption>
                     <ToolbarSelectOption value="14">14</ToolbarSelectOption>
                     <ToolbarSelectOption value="15">15</ToolbarSelectOption>
-                    <ToolbarSelectOption value="16" selected>
-                        16
-                    </ToolbarSelectOption>
+                    <ToolbarSelectOption value="16">16</ToolbarSelectOption>
                     <ToolbarSelectOption value="17">17</ToolbarSelectOption>
                     <ToolbarSelectOption value="18">18</ToolbarSelectOption>
                 </ToolbarSelectItem>

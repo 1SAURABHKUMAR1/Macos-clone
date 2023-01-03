@@ -100,7 +100,7 @@ const FormulaAndCellContainer = styled.section`
     background-color: var(--mid-grey);
     border-bottom: var(--active-grey) 1px solid;
     display: flex;
-    padding: 0.45rem 1.4rem;
+    padding: 0.65rem 1.4rem;
     align-items: center;
     column-gap: 1.3rem;
     overflow: scroll;

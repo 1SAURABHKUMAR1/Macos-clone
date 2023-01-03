@@ -10,7 +10,7 @@ const AppContainer = styled(motion.div)`
     flex-direction: column;
     position: absolute;
     opacity: 1;
-    backdrop-filter: blur(35px);
+    /* backdrop-filter: blur(35px); */
 `;
 
 const AppHeader = styled.div`

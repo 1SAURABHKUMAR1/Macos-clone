@@ -12,8 +12,13 @@ import {
     CellRow,
     Cell,
 } from './styled';
+import useExcelStore from '@store/excel.store';
 
 const CellContainer: NextPage = () => {
+    const { changeCellValue, cellValue, cellData } = useExcelStore(
+        (state) => state,
+    );
+
     return (
         <>
             <CellRowColumnContainer>
@@ -38,13 +43,22 @@ const CellContainer: NextPage = () => {
                         ))}
                     </ColumnAddressContainer>
 
-                    {[...Array(rowTotal)].map((_, index) => (
-                        <CellRow key={index}>
-                            {[...Array(columnTotal)].map((_, index) => (
+                    {cellData.map((row, rowIndex) => (
+                        <CellRow key={rowIndex}>
+                            {row.map((_, columnIndex) => (
                                 <Cell
-                                    key={index}
+                                    key={columnIndex}
                                     contentEditable
                                     spellCheck={false}
+                                    onClick={() =>
+                                        changeCellValue(columnIndex, rowIndex)
+                                    }
+                                    active={
+                                        cellValue ===
+                                        `${String.fromCharCode(
+                                            65 + columnIndex,
+                                        )}${rowIndex + 1}`
+                                    }
                                 />
                             ))}
                         </CellRow>
