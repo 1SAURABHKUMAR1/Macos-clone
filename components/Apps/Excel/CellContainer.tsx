@@ -24,11 +24,11 @@ const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
 
 const CellContainer: NextPage = () => {
     const {
-        // cell_data,
+        cell_data,
         changeColumnRowIndex,
         column_index,
         row_index,
-        // changeRefCell,
+        changeRefCell,
     } = useExcelStore((state) => state);
 
     const CellRenderer = ({
@@ -80,11 +80,12 @@ const CellContainer: NextPage = () => {
                         : undefined
                 }
                 key={key}
-                // ref={(elementRef) =>
-                //     elementRef &&
-                //     !cell_data[rowIndex][columnIndex].current &&
-                //     changeRefCell(columnIndex, rowIndex, elementRef)
-                // }
+                ref={(elementRef) =>
+                    elementRef &&
+                    cell_data[rowIndex - 1][columnIndex - 1].current !==
+                        elementRef &&
+                    changeRefCell(columnIndex - 1, rowIndex - 1, elementRef)
+                }
             >
                 {columnIndex}, {rowIndex}
             </div>
