@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import type { MotionValue } from 'framer-motion';
-import type { Dispatch, SetStateAction, CSSProperties } from 'react';
+import type { Dispatch, SetStateAction, CSSProperties, RefObject } from 'react';
 import { columnTotal, rowTotal } from 'helper/excel.config';
 
 export type menuConfig = {
@@ -314,12 +314,40 @@ export type getMonthDaysType = (
 export type getDaysType = (lower: number, upper: number) => Array<number>;
 
 export interface excelStore {
-    cellValue: string;
-    cellData: null[][];
+    cell_data: cellProperties[][];
+    column_index: number;
+    row_index: number;
 
-    changeCellValue: (columnIndex: number, rowIndex: number) => void;
+    changeColumnRowIndex: (columnIndex: number, rowIndex: number) => void;
+    changeRefCell: (
+        columnIndex: number,
+        rowIndex: number,
+        ref: HTMLDivElement,
+    ) => void;
+    resetCellData: () => void;
 }
 
 export type findRowColumn = (
     address: string,
 ) => [columnIndex: number, rowIndex: number];
+
+export type cellProperties = {
+    bold: false;
+    italic: false;
+    underline: false;
+    textAlign: 'left';
+    fontFamily: 'Inter';
+    fontSize: '16';
+    fontColor: '#000000';
+    backgroundColor: '#f9fafb';
+    value: '';
+    formula: '';
+    current: HTMLDivElement | null;
+};
+
+export interface cellRenderer {
+    columnIndex: number;
+    key: string;
+    rowIndex: number;
+    style: CSSProperties;
+}

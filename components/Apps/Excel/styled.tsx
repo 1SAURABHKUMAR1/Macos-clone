@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import type { CSSProperties } from 'react';
 
 const MainContainer = styled.section`
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
@@ -160,98 +161,65 @@ const CellRowColumnContainer = styled.section`
     background-color: var(--mid-grey);
     overflow: auto;
     scrollbar-width: thin;
-`;
 
-const LeftDummyBox = styled.div`
-    top: 0px;
-    left: 0px;
-    width: 2.5rem;
-    height: 2rem;
-    position: sticky;
-    z-index: 10;
-    padding: 0.3rem;
-    background-color: var(--mid-grey);
-    border-bottom: 1px solid var(--active-grey);
-    border-right: 1px solid var(--active-grey);
-`;
+    .row-cell:hover {
+        background-color: var(--active-grey) !important;
+    }
 
-const InnerDummyBox = styled.div`
-    width: 100%;
-    height: 1.4rem;
-    background-color: var(--active-grey);
-    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-`;
+    .column-cell:hover {
+        background-color: var(--active-grey) !important;
+    }
 
-const RowAddressContainer = styled.div`
-    position: sticky;
-    top: 2rem;
-    left: 0px;
-    z-index: 1;
-    max-width: 2.5rem;
-`;
-
-const CellsContainer = styled.div`
-    position: absolute;
-    top: 0px;
-    left: 2.5rem;
-    width: auto;
-`;
-
-const ColumnAddressContainer = styled.div`
-    display: flex;
-    position: sticky;
-    top: 0px;
-`;
-
-const SingleRowNumber = styled.div`
-    border-bottom: 1px solid var(--active-grey);
-    border-right: 1px solid var(--active-grey);
-    height: 2rem;
-    width: 2.5rem;
-    padding: 0.4rem;
-    text-align: center;
-    z-index: 5;
-    background-color: var(--mid-grey);
-
-    :hover {
-        background-color: var(--active-grey);
+    .cell {
+        border: 2px solid var(--excel-green) !important;
     }
 `;
 
-const SingleColumnNumber = styled.div`
-    border-bottom: var(--active-grey) 1px solid;
-    border-right: var(--active-grey) 1px solid;
-    height: 2rem;
-    width: 5rem;
-    padding: 0.4rem;
-    text-align: center;
-    z-index: 5;
-    background-color: var(--mid-grey);
+const LeftDummyBox: CSSProperties = {
+    top: '0px',
+    left: '0px',
+    padding: '0.3rem',
+    backgroundColor: 'var(--mid-grey)',
+    borderBottom: '1px solid var(--active-grey)',
+    borderRight: '1px solid var(--active-grey)',
+};
 
-    :hover {
-        background-color: var(--active-grey);
-    }
-`;
+const InnerDummyBox: CSSProperties = {
+    width: '100%',
+    height: '1.4rem',
+    backgroundColor: 'var(--active-grey)',
+    clipPath: 'polygon(100% 0, 0% 100%, 100% 100%)',
+};
 
-const CellRow = styled.div`
-    display: flex;
-    align-items: center;
-`;
+const RowNumber: CSSProperties = {
+    borderBottom: '1px solid var(--active-grey)',
+    borderRight: '1px solid var(--active-grey)',
+    padding: '0.4rem',
+    textAlign: 'center',
+    zIndex: 5,
+    backgroundColor: 'var(--mid-grey)',
+};
 
-const Cell = styled.div<{ active?: boolean }>`
-    border-bottom: 1px solid var(--active-grey);
-    border-right: 1px solid var(--active-grey);
-    height: 2rem;
-    width: 5rem;
-    padding: 0.4rem;
-    cursor: cell;
-    outline: none;
-    overflow: hidden;
-    white-space: nowrap;
+const ColumnNumber: CSSProperties = {
+    borderBottom: 'var(--active-grey) 1px solid',
+    borderRight: 'var(--active-grey) 1px solid',
+    height: '2rem',
+    width: '5rem',
+    padding: '0.4rem',
+    textAlign: 'center',
+    zIndex: '5',
+    backgroundColor: 'var(--mid-grey)',
+};
 
-    ${({ active }) =>
-        active === true && 'border: 2px solid var(--excel-green);'}
-`;
+const Cell: CSSProperties = {
+    borderBottom: '1px solid var(--active-grey)',
+    borderRight: '1px solid var(--active-grey)',
+    padding: '0.4rem',
+    cursor: '0.4rem',
+    outline: 'none',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+};
 
 const SheetContainer = styled.section`
     background-color: var(--mid-grey);
@@ -297,12 +265,8 @@ export {
     CellRowColumnContainer,
     LeftDummyBox,
     InnerDummyBox,
-    RowAddressContainer,
-    ColumnAddressContainer,
-    CellsContainer,
-    SingleRowNumber,
-    SingleColumnNumber,
-    CellRow,
+    RowNumber,
+    ColumnNumber,
     Cell,
     SheetContainer,
     SheetIcon,

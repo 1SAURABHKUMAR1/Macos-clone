@@ -10,8 +10,18 @@ import {
     SheetIcon,
     SheetList,
 } from './styled';
+import { useEffect } from 'react';
+import useExcelStore from '@store/excel.store';
 
 const Excel: NextPage = () => {
+    const { resetCellData } = useExcelStore((state) => state);
+
+    useEffect(() => {
+        resetCellData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    // FIXME:
+
     return (
         <>
             <MainContainer>

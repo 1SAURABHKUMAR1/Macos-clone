@@ -20,6 +20,7 @@ import {
     ToolbarSelectOption,
     ToolbarInput,
 } from './styled';
+import { memo } from 'react';
 
 const Toolbar: NextPage = () => {
     return (
@@ -35,7 +36,7 @@ const Toolbar: NextPage = () => {
                     <MdContentPaste />
                 </ToolbarIcon>
 
-                <ToolbarSelectItem value="Roboto">
+                <ToolbarSelectItem defaultValue="Roboto">
                     <ToolbarSelectOption value="Inter">
                         Inter
                     </ToolbarSelectOption>
@@ -54,7 +55,7 @@ const Toolbar: NextPage = () => {
                     </ToolbarSelectOption>
                 </ToolbarSelectItem>
 
-                <ToolbarSelectItem value="16">
+                <ToolbarSelectItem defaultValue="16">
                     <ToolbarSelectOption value="12">12</ToolbarSelectOption>
                     <ToolbarSelectOption value="13">13</ToolbarSelectOption>
                     <ToolbarSelectOption value="14">14</ToolbarSelectOption>
@@ -107,4 +108,4 @@ const Toolbar: NextPage = () => {
     );
 };
 
-export default Toolbar;
+export default memo(Toolbar);

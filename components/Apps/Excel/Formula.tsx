@@ -12,8 +12,12 @@ import {
 import { findRowAndCol, columnTotal, rowTotal } from '@helper/excel.config';
 
 const Formula: NextPage = () => {
-    const { cellValue, changeCellValue } = useExcelStore((state) => state);
-    const [cellAddress, setCellAddress] = useState<string>(() => cellValue);
+    const { column_index, row_index, changeColumnRowIndex } = useExcelStore(
+        (state) => state,
+    );
+    const [cellAddress, setCellAddress] = useState<string>(
+        () => `${String.fromCharCode(65 + column_index)}${row_index + 1}`,
+    );
 
     const focusCellChangeAddress = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter' && cellAddress !== '') {
@@ -22,14 +26,19 @@ const Formula: NextPage = () => {
             if (
                 rowIndex + 1 > rowTotal ||
                 columnIndex + 1 > columnTotal ||
-                rowIndex <= -1 ||
+                rowIndex < 0 ||
                 columnIndex < 0
             ) {
-                setCellAddress(() => cellValue);
+                setCellAddress(
+                    () =>
+                        `${String.fromCharCode(65 + column_index)}${
+                            row_index + 1
+                        }`,
+                );
                 return;
             }
 
-            changeCellValue(columnIndex, rowIndex);
+            changeColumnRowIndex(columnIndex, rowIndex);
         }
     };
 
@@ -37,9 +46,11 @@ const Formula: NextPage = () => {
         setCellAddress(event.target.value);
 
     useEffect(() => {
-        cellAddress !== cellValue && setCellAddress(() => cellValue);
+        setCellAddress(
+            () => `${String.fromCharCode(65 + column_index)}${row_index + 1}`,
+        );
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cellValue]);
+    }, [row_index, column_index]);
 
     return (
         <>

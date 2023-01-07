@@ -1,72 +1,125 @@
 import type { NextPage } from 'next';
+import type { FC } from 'react';
+import { memo } from 'react';
 import { columnTotal, rowTotal } from 'helper/excel.config';
+import useExcelStore from '@store/excel.store';
+import {
+    AutoSizer as _AutoSizer,
+    MultiGrid as _MultiGrid,
+    MultiGridProps,
+    AutoSizerProps,
+} from 'react-virtualized';
+import { cellRenderer } from 'types/index';
 import {
     CellRowColumnContainer,
     LeftDummyBox,
     InnerDummyBox,
-    RowAddressContainer,
-    CellsContainer,
-    ColumnAddressContainer,
-    SingleRowNumber,
-    SingleColumnNumber,
-    CellRow,
+    RowNumber,
+    ColumnNumber,
     Cell,
 } from './styled';
-import useExcelStore from '@store/excel.store';
+
+const MultiGrid = _MultiGrid as unknown as FC<MultiGridProps>;
+const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
 
 const CellContainer: NextPage = () => {
-    const { changeCellValue, cellValue, cellData } = useExcelStore(
-        (state) => state,
-    );
+    const {
+        // cell_data,
+        changeColumnRowIndex,
+        column_index,
+        row_index,
+        // changeRefCell,
+    } = useExcelStore((state) => state);
+
+    const CellRenderer = ({
+        columnIndex,
+        key,
+        rowIndex,
+        style,
+    }: cellRenderer) => {
+        if (columnIndex === 0 && rowIndex === 0) {
+            return (
+                <div key={key} style={{ ...style, ...LeftDummyBox }}>
+                    <div style={{ ...InnerDummyBox }} />
+                </div>
+            );
+        }
+
+        if (columnIndex === 0) {
+            return (
+                <div
+                    key={key}
+                    className={columnIndex === 0 ? 'row-cell' : undefined}
+                    style={{ ...style, ...RowNumber }}
+                >
+                    {rowIndex}
+                </div>
+            );
+        }
+
+        if (rowIndex === 0) {
+            return (
+                <div key={key} style={{ ...style, ...ColumnNumber }}>
+                    {String.fromCharCode(65 + columnIndex - 1)}
+                </div>
+            );
+        }
+
+        return (
+            <div
+                style={{ ...style, ...Cell }}
+                contentEditable
+                spellCheck={false}
+                onClick={() =>
+                    changeColumnRowIndex(columnIndex - 1, rowIndex - 1)
+                }
+                className={
+                    columnIndex === column_index + 1 &&
+                    rowIndex === row_index + 1
+                        ? 'cell'
+                        : undefined
+                }
+                key={key}
+                // ref={(elementRef) =>
+                //     elementRef &&
+                //     !cell_data[rowIndex][columnIndex].current &&
+                //     changeRefCell(columnIndex, rowIndex, elementRef)
+                // }
+            >
+                {columnIndex}, {rowIndex}
+            </div>
+        );
+    };
+
+    const ColumnWidth = ({ index }: { index: number }) =>
+        index === 0 ? 40 : 80;
 
     return (
         <>
             <CellRowColumnContainer>
-                <LeftDummyBox>
-                    <InnerDummyBox />
-                </LeftDummyBox>
-
-                <RowAddressContainer>
-                    {[...Array(rowTotal)].map((_, index) => (
-                        <SingleRowNumber key={index}>
-                            {index + 1}
-                        </SingleRowNumber>
-                    ))}
-                </RowAddressContainer>
-
-                <CellsContainer>
-                    <ColumnAddressContainer>
-                        {[...Array(columnTotal)].map((_, index) => (
-                            <SingleColumnNumber key={index}>
-                                {String.fromCharCode(65 + index)}
-                            </SingleColumnNumber>
-                        ))}
-                    </ColumnAddressContainer>
-
-                    {cellData.map((row, rowIndex) => (
-                        <CellRow key={rowIndex}>
-                            {row.map((_, columnIndex) => (
-                                <Cell
-                                    key={columnIndex}
-                                    contentEditable
-                                    spellCheck={false}
-                                    onClick={() =>
-                                        changeCellValue(columnIndex, rowIndex)
-                                    }
-                                    active={
-                                        cellValue ===
-                                        `${String.fromCharCode(
-                                            65 + columnIndex,
-                                        )}${rowIndex + 1}`
-                                    }
-                                />
-                            ))}
-                        </CellRow>
-                    ))}
-                </CellsContainer>
+                <AutoSizer>
+                    {({ height, width }) => (
+                        <MultiGrid
+                            fixedColumnCount={1}
+                            fixedRowCount={1}
+                            cellRenderer={CellRenderer}
+                            columnWidth={ColumnWidth}
+                            columnCount={columnTotal + 1}
+                            enableFixedColumnScroll
+                            enableFixedRowScroll
+                            height={height}
+                            width={width}
+                            rowHeight={32}
+                            rowCount={rowTotal + 1}
+                            hideTopRightGridScrollbar
+                            hideBottomLeftGridScrollbar
+                        />
+                    )}
+                </AutoSizer>
+                {/* </CellsContainer> */}
             </CellRowColumnContainer>
         </>
     );
 };
 
-export default CellContainer;
+export default memo(CellContainer);
