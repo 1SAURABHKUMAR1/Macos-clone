@@ -12,9 +12,9 @@ import {
 import { findRowAndCol, columnTotal, rowTotal } from '@helper/excel.config';
 
 const Formula: NextPage = () => {
-    const { column_index, row_index, changeColumnRowIndex } = useExcelStore(
-        (state) => state,
-    );
+    const { cell_data, column_index, row_index, changeColumnRowIndex } =
+        useExcelStore((state) => state);
+
     const [cellAddress, setCellAddress] = useState<string>(
         () => `${String.fromCharCode(65 + column_index)}${row_index + 1}`,
     );
@@ -49,6 +49,9 @@ const Formula: NextPage = () => {
         setCellAddress(
             () => `${String.fromCharCode(65 + column_index)}${row_index + 1}`,
         );
+
+        cell_data[row_index][column_index].current?.click();
+        cell_data[row_index][column_index].current?.focus();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [row_index, column_index]);
 

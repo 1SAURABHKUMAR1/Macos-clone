@@ -86,9 +86,7 @@ const CellContainer: NextPage = () => {
                         elementRef &&
                     changeRefCell(columnIndex - 1, rowIndex - 1, elementRef)
                 }
-            >
-                {columnIndex}, {rowIndex}
-            </div>
+            />
         );
     };
 

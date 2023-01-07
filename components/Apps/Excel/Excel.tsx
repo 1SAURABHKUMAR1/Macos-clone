@@ -17,7 +17,9 @@ const Excel: NextPage = () => {
     const { resetCellData } = useExcelStore((state) => state);
 
     useEffect(() => {
-        resetCellData();
+        return () => {
+            resetCellData();
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // FIXME:
