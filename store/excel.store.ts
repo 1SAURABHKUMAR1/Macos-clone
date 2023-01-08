@@ -18,6 +18,7 @@ const useExcelStore = create<excelStore>()(
                 value: '',
                 formula: '',
                 current: null,
+                // FIXME: typescitp for all values
             }),
         ),
         column_index: 0,

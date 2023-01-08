@@ -65,9 +65,24 @@ const CellContainer: NextPage = () => {
             );
         }
 
+        const cellData = cell_data[rowIndex - 1][columnIndex - 1];
+
         return (
             <div
-                style={{ ...style, ...Cell }}
+                style={{
+                    ...style,
+                    ...Cell,
+                    fontWeight: cellData.bold ? 'bold' : 'unset',
+                    fontStyle: cellData.italic ? 'italic' : 'unset',
+                    textDecorationLine: cellData.underline
+                        ? 'underline'
+                        : 'unset',
+                    textAlign: cellData.textAlign,
+                    fontFamily: cellData.fontFamily,
+                    fontSize: cellData.fontSize,
+                    color: cellData.fontColor,
+                    backgroundColor: cellData.backgroundColor,
+                }}
                 contentEditable
                 spellCheck={false}
                 onClick={() =>
@@ -82,11 +97,12 @@ const CellContainer: NextPage = () => {
                 key={key}
                 ref={(elementRef) =>
                     elementRef &&
-                    cell_data[rowIndex - 1][columnIndex - 1].current !==
-                        elementRef &&
+                    cellData.current !== elementRef &&
                     changeRefCell(columnIndex - 1, rowIndex - 1, elementRef)
                 }
-            />
+            >
+                {cellData.value}
+            </div>
         );
     };
 
