@@ -68,7 +68,7 @@ const CellContainer: NextPage = () => {
         const cellData = cell_data[rowIndex - 1][columnIndex - 1];
 
         return (
-            <div
+            <input
                 style={{
                     ...style,
                     ...Cell,
@@ -100,9 +100,12 @@ const CellContainer: NextPage = () => {
                     cellData.current !== elementRef &&
                     changeRefCell(columnIndex - 1, rowIndex - 1, elementRef)
                 }
-            >
-                {cellData.value}
-            </div>
+                value={cellData.value}
+                onChange={() => {
+                    //
+                }}
+                // onChange use debounce with value
+            />
         );
     };
 

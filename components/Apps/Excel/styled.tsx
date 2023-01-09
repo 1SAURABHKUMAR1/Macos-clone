@@ -213,10 +213,13 @@ const ColumnNumber: CSSProperties = {
 };
 
 const Cell: CSSProperties = {
+    borderLeft: 'none',
+    borderTop: 'none',
+    appearance: 'none',
     borderBottom: '1px solid var(--active-grey)',
     borderRight: '1px solid var(--active-grey)',
     padding: '0.4rem',
-    cursor: '0.4rem',
+    cursor: 'cell',
     outline: 'none',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
