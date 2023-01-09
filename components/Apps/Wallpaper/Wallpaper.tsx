@@ -25,7 +25,6 @@ const Wallpaper: NextPage = () => {
                         backgroundImage: `url("/wallpaper/${wallpapersConfig[wallpaper].name}.webp")`,
                     }}
                 />
-                {/* TODO: change to laptop */}
 
                 <HeaderText>
                     {wallpapersConfig[wallpaper].name} Macbook

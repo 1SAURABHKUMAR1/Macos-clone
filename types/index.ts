@@ -324,6 +324,7 @@ export interface excelStore {
         rowIndex: number,
         ref: HTMLDivElement,
     ) => void;
+    updateWholeCellData: (cell_data: cellProperties[][]) => void;
     resetCellData: () => void;
 }
 
@@ -331,17 +332,27 @@ export type findRowColumn = (
     address: string,
 ) => [columnIndex: number, rowIndex: number];
 
+export type fontFamily =
+    | 'Inter'
+    | 'Roboto'
+    | 'Montserrat'
+    | 'Sans'
+    | 'Oswald'
+    | 'Poppins';
+
+export type fontSize = '12' | '13' | '13' | '14' | '15' | '16' | '17' | '18';
+
 export type cellProperties = {
-    bold: false;
-    italic: false;
-    underline: false;
-    textAlign: 'left';
-    fontFamily: 'Inter';
-    fontSize: '16';
-    fontColor: '#000000';
-    backgroundColor: '#f9fafb';
-    value: '';
-    formula: '';
+    bold: boolean;
+    italic: boolean;
+    underline: boolean;
+    textAlign: 'left' | 'center' | 'right';
+    fontFamily: fontFamily;
+    fontSize: fontSize;
+    fontColor: string;
+    backgroundColor: string;
+    value: string;
+    formula: string;
     current: HTMLDivElement | null;
 };
 

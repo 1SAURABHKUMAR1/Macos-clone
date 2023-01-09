@@ -23,7 +23,7 @@ const NavigationBar = styled.section`
     align-items: center;
     padding: 0.65rem 0.7rem;
     color: var(--white-text);
-    overflow: auto;
+    overflow-y: hidden;
     scrollbar-width: none;
 
     ::-webkit-scrollbar {
@@ -44,6 +44,7 @@ const ToolbarContainer = styled.section`
     display: flex;
     align-items: center;
     padding: 0.65rem 1.4rem;
+    overflow-y: hidden;
     overflow-x: auto;
     column-gap: 1.2rem;
     position: relative;
@@ -104,7 +105,7 @@ const FormulaAndCellContainer = styled.section`
     padding: 0.65rem 1.4rem;
     align-items: center;
     column-gap: 1.3rem;
-    overflow: scroll;
+    overflow: hidden;
     scrollbar-width: none;
 
     ::-webkit-scrollbar {

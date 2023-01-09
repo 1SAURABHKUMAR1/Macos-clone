@@ -18,7 +18,6 @@ const useExcelStore = create<excelStore>()(
                 value: '',
                 formula: '',
                 current: null,
-                // FIXME: typescitp for all values
             }),
         ),
         column_index: 0,
@@ -32,38 +31,31 @@ const useExcelStore = create<excelStore>()(
             }));
         },
 
-        changeRefCell(columnIndex, rowIndex, ref) {
+        changeRefCell: (columnIndex, rowIndex, ref) => {
+            set((state) => {
+                const cellData = state.cell_data;
+                cellData[rowIndex][columnIndex] = {
+                    ...cellData[rowIndex][columnIndex],
+                    current: ref,
+                };
+
+                return {
+                    ...state,
+                    cell_data: cellData,
+                };
+            });
+        },
+
+        updateWholeCellData: (cell_data) => {
             set((state) => ({
                 ...state,
-                cell_data: Object.assign([...state.cell_data], {
-                    [rowIndex]: Object.assign([...state.cell_data[rowIndex]], {
-                        [columnIndex]: {
-                            ...state.cell_data[rowIndex][columnIndex],
-                            current: ref,
-                        },
-                    }),
-                }),
+                cell_data,
             }));
         },
 
         resetCellData: () => {
             set((state) => ({
                 ...state,
-                cell_data: Array.from(Array(rowTotal), () =>
-                    Array(columnTotal).fill({
-                        bold: false,
-                        italic: false,
-                        underline: false,
-                        textAlign: 'left',
-                        fontFamily: 'Inter',
-                        fontSize: '16',
-                        fontColor: '#000000',
-                        backgroundColor: '#f9fafb',
-                        value: '',
-                        formula: '',
-                        current: null,
-                    }),
-                ),
                 column_index: 0,
                 row_index: 0,
             }));

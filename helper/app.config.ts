@@ -61,7 +61,7 @@ export const appConfig: appConfigType = {
         title: 'Excel',
         imageSrc: 'excel',
         height: 35,
-        width: 50,
+        width: 53,
         backgroundColor: '#fff',
     },
     bin: {

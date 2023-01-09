@@ -10,10 +10,12 @@ import {
     MainWindowArea,
 } from '@components/index';
 import { AnimatePresence } from 'framer-motion';
-import { useSystemStore } from '@store/index';
-import { systemPrimaryCss } from 'types';
+import { useSystemStore, useExcelStore } from '@store/index';
+import { cellProperties, systemPrimaryCss } from 'types';
 import { colorsConfig } from 'helper/action-colors.config';
 import screenfull from 'screenfull';
+import localforage from 'localforage';
+import { useDebounce } from '@hooks/index';
 
 const Container = styled.div`
     height: 100%;
@@ -33,11 +35,29 @@ const GroupContainer = styled.section`
     flex: 1;
 `;
 
+const excelCellData = localforage.createInstance({
+    name: 'excel-cell-data',
+});
+
 const Home: NextPage = () => {
     const [isBootupLoading, setIsBootupLoading] = useState<boolean>(true);
     const { brightness, systemColor, fullScreen } = useSystemStore(
         (state) => state,
     );
+    const { cell_data, updateWholeCellData } = useExcelStore((state) => state);
+    const debouncedCellValue = useDebounce<cellProperties[][]>(cell_data, 500);
+
+    useEffect(() => {
+        const retrieveCellData = async () => {
+            const cellData = await excelCellData.getItem<cellProperties[][]>(
+                'excel-cell-data',
+            );
+            if (cellData) updateWholeCellData(cellData);
+        };
+
+        retrieveCellData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         if (screenfull.isEnabled) {
@@ -49,6 +69,18 @@ const Home: NextPage = () => {
             screenfull.exit();
         }
     }, [fullScreen]);
+
+    useEffect(() => {
+        const saveCellData = async () => {
+            const cellData = debouncedCellValue;
+            cellData.forEach((row) =>
+                row.forEach((cell) => (cell.current = null)),
+            );
+            await excelCellData.setItem('excel-cell-data', cellData);
+        };
+
+        saveCellData();
+    }, [debouncedCellValue]);
 
     return (
         <>

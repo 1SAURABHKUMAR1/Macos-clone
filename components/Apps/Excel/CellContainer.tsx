@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import type { FC } from 'react';
 import { memo } from 'react';
 import { columnTotal, rowTotal } from 'helper/excel.config';
-import useExcelStore from '@store/excel.store';
+import { useExcelStore } from '@store/index';
 import {
     AutoSizer as _AutoSizer,
     MultiGrid as _MultiGrid,
@@ -78,7 +78,7 @@ const CellContainer: NextPage = () => {
                         ? 'underline'
                         : 'unset',
                     textAlign: cellData.textAlign,
-                    fontFamily: cellData.fontFamily,
+                    fontFamily: cellData.fontFamily as unknown as string,
                     fontSize: cellData.fontSize,
                     color: cellData.fontColor,
                     backgroundColor: cellData.backgroundColor,
