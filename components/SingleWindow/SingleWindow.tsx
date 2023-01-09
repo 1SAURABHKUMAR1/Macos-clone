@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import type { RefObject } from 'react';
-import { Variants } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { useRef, useState, forwardRef, useEffect } from 'react';
 import { SwitchApps } from '@components/index';
 import {
@@ -16,6 +16,31 @@ import { GrFormAdd } from 'react-icons/gr';
 import { useAppStore } from '@store/index';
 import { appControlsCss, singleWindowProps } from 'types/index';
 import { Rnd } from 'react-rnd';
+
+const containerVarient: Variants = {
+    inital: {
+        opacity: 0,
+        scale: 0,
+        transition: { duration: 0.7, ease: 'anticipate' },
+    },
+    minimize: {
+        y: '100vh',
+        opacity: 1.5,
+        scale: 0,
+        transition: { duration: 0.8, ease: 'anticipate' },
+    },
+    normal: {
+        y: '0vh',
+        opacity: 1.5,
+        scale: 1,
+        transition: { duration: 0.8, ease: 'anticipate' },
+    },
+    close: {
+        opacity: 0,
+        scale: 0,
+        transition: { duration: 0.7, ease: 'anticipate' },
+    },
+};
 
 const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
     { appKey, fullScreen, zIndex, minimized, backgroundColor, height, width },
@@ -36,31 +61,6 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
             'translate(0px, 0px)',
     );
     const containerRef = useRef<Rnd>(null);
-
-    const itemVariants: Variants = {
-        inital: {
-            opacity: 0,
-            scale: 0,
-            transition: { duration: 0.7, ease: 'anticipate' },
-        },
-        minimize: {
-            y: '100vh',
-            opacity: 1.5,
-            scale: 0,
-            transition: { duration: 0.8, ease: 'anticipate' },
-        },
-        normal: {
-            y: '0vh',
-            opacity: 1.5,
-            scale: 1,
-            transition: { duration: 0.8, ease: 'anticipate' },
-        },
-        close: {
-            opacity: 0,
-            scale: 0,
-            transition: { duration: 0.7, ease: 'anticipate' },
-        },
-    };
 
     const focusApp = () => toggleActiveApp(appKey);
 
@@ -158,7 +158,7 @@ const SingleWindow: NextPage<singleWindowProps, RefObject<HTMLDivElement>> = (
                     animate={minimized ? 'minimize' : 'normal'}
                     exit="close"
                     onClick={focusApp}
-                    variants={itemVariants}
+                    variants={containerVarient}
                     onAnimationComplete={zIndexMinimize}
                     onAnimationStart={zIndexNormal}
                 >

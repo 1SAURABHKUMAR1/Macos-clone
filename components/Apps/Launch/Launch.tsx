@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import type { ChangeEvent } from 'react';
+import { Variants } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import {
     LaunchMainContainer,
@@ -17,6 +18,21 @@ import { X } from 'react-feather';
 import { appConfig } from 'helper/app.config';
 import Image from 'next/image';
 import { apps } from 'types/index';
+
+const containerVarient: Variants = {
+    inital: {
+        opacity: 0,
+        transition: { duration: 0.7, ease: 'anticipate' },
+    },
+    normal: {
+        opacity: 1.5,
+        transition: { duration: 0.8, ease: 'anticipate' },
+    },
+    close: {
+        opacity: 0,
+        transition: { duration: 0.9, ease: 'backOut' },
+    },
+};
 
 const Launch: NextPage = () => {
     const {
@@ -54,10 +70,10 @@ const Launch: NextPage = () => {
     return (
         <>
             <LaunchMainContainer
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: 'anticipate' }}
+                initial="inital"
+                animate="normal"
+                exit="close"
+                variants={containerVarient}
             >
                 <LaunchContainer>
                     <LaunchHeader>

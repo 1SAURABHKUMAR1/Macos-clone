@@ -16,7 +16,8 @@ const LaunchMainContainer = styled(motion.div)`
     flex: 1;
     background-color: rgba(10, 10, 10, 0.17);
     overflow: auto;
-    transition: all 900ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    /* transition: all 900ms cubic-bezier(0.6, -0.28, 0.735, 0.045); */
+    will-change: width, height;
 `;
 
 const LaunchContainer = styled.div`
