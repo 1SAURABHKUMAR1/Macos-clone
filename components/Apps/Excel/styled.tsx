@@ -91,9 +91,11 @@ const ToolbarSelectOption = styled.option`
 `;
 
 const ToolbarInput = styled.input`
-    max-width: 1.5rem;
+    max-width: 1.4rem;
     position: absolute;
     opacity: 0;
+    border: none;
+    height: 1.4rem;
 `;
 
 const FormulaAndCellContainer = styled.section`

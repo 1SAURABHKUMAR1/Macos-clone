@@ -325,7 +325,27 @@ export interface excelStore {
         ref: HTMLDivElement,
     ) => void;
     updateWholeCellData: (cell_data: cellProperties[][]) => void;
-    resetCellData: () => void;
+    updateCellValue: (
+        key:
+            | 'bold'
+            | 'italic'
+            | 'underline'
+            | 'backgroundColor'
+            | 'fontColor'
+            | 'fontSize'
+            | 'fontFamily'
+            | 'textAlign',
+        value:
+            | boolean
+            | string
+            | fontSize
+            | fontFamily
+            | 'left'
+            | 'center'
+            | 'right',
+    ) => void;
+    resetWholeExcel: () => void;
+    resetRowColumnIndex: () => void;
 }
 
 export type findRowColumn = (

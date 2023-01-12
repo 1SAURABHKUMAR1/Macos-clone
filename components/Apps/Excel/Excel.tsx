@@ -14,11 +14,11 @@ import { useEffect } from 'react';
 import useExcelStore from '@store/excel.store';
 
 const Excel: NextPage = () => {
-    const { resetCellData } = useExcelStore((state) => state);
+    const { resetRowColumnIndex } = useExcelStore((state) => state);
 
     useEffect(() => {
         return () => {
-            resetCellData();
+            resetRowColumnIndex();
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

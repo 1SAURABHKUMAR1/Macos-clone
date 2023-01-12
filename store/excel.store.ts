@@ -53,7 +53,46 @@ const useExcelStore = create<excelStore>()(
             }));
         },
 
-        resetCellData: () => {
+        updateCellValue: (key, value) => {
+            set((state) => {
+                const cellData = state.cell_data;
+                const row_index = state.row_index;
+                const column_index = state.column_index;
+                cellData[row_index][column_index] = {
+                    ...cellData[row_index][column_index],
+                    [key]: value,
+                };
+                return {
+                    ...state,
+                    cell_data: cellData,
+                };
+            });
+        },
+
+        resetWholeExcel: () => {
+            set((state) => ({
+                ...state,
+                cell_data: Array.from(Array(rowTotal), () =>
+                    Array(columnTotal).fill({
+                        bold: false,
+                        italic: false,
+                        underline: false,
+                        textAlign: 'left',
+                        fontFamily: 'Inter',
+                        fontSize: '16',
+                        fontColor: '#000000',
+                        backgroundColor: '#f9fafb',
+                        value: '',
+                        formula: '',
+                        current: null,
+                    }),
+                ),
+                column_index: 0,
+                row_index: 0,
+            }));
+        },
+
+        resetRowColumnIndex: () => {
             set((state) => ({
                 ...state,
                 column_index: 0,

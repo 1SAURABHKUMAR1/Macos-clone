@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import type { KeyboardEvent, ChangeEvent } from 'react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import useExcelStore from '@store/excel.store';
+import { useExcelStore } from '@store/index';
 import {
     FormulaAndCellContainer,
     FormulaBarCellAddress,

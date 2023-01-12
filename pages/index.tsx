@@ -80,7 +80,7 @@ const Home: NextPage = () => {
         };
 
         saveCellData();
-    }, [debouncedCellValue]);
+    }, [debouncedCellValue]); //FIXME: useEffect doesnt work with 2d aray dep
 
     return (
         <>
