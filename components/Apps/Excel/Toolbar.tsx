@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import {
     MdContentCopy,
     MdContentCut,
@@ -17,6 +17,7 @@ import { BiBold, BiItalic } from 'react-icons/bi';
 import { useExcelStore } from '@store/index';
 import { fontFamily, fontSize } from 'types/index';
 import localforage from 'localforage';
+import { useDebounce } from '@hooks/index';
 import {
     ToolbarContainer,
     ToolbarSelectItem,
@@ -37,6 +38,37 @@ const Toolbar: NextPage = () => {
         updateCellValue,
         resetWholeExcel,
     } = useExcelStore((state) => state);
+    const [backgroundColor, setBackgroundColor] = useState(
+        cell_data[row_index][column_index].backgroundColor,
+    );
+    const [fontColor, setFontColor] = useState(
+        cell_data[row_index][column_index].fontColor,
+    );
+
+    const debounceBgColor = useDebounce<string>(backgroundColor, 400);
+    const debounceFontColor = useDebounce<string>(fontColor, 400);
+
+    useEffect(() => {
+        cell_data[row_index][column_index].backgroundColor !==
+            debounceBgColor &&
+            updateCellValue('backgroundColor', debounceBgColor);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [debounceBgColor]);
+
+    useEffect(() => {
+        cell_data[row_index][column_index].fontColor !== debounceFontColor &&
+            updateCellValue('fontColor', debounceFontColor);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [debounceFontColor]);
+
+    useEffect(() => {
+        setBackgroundColor(cell_data[row_index][column_index].backgroundColor);
+        setFontColor(cell_data[row_index][column_index].fontColor);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cell_data, column_index, row_index]);
 
     const deleteSheet = () => {
         resetWholeExcel();
@@ -208,10 +240,8 @@ const Toolbar: NextPage = () => {
                 <ToolbarIcon>
                     <ToolbarInput
                         type="color"
-                        value={cell_data[row_index][column_index].fontColor}
-                        onChange={(event) =>
-                            updateCellValue('fontColor', event.target.value)
-                        }
+                        value={debounceFontColor}
+                        onChange={(event) => setFontColor(event.target.value)}
                     />
                     <AiOutlineFontColors />
                 </ToolbarIcon>
@@ -219,14 +249,9 @@ const Toolbar: NextPage = () => {
                 <ToolbarIcon>
                     <ToolbarInput
                         type="color"
-                        value={
-                            cell_data[row_index][column_index].backgroundColor
-                        }
+                        value={debounceBgColor}
                         onChange={(event) =>
-                            updateCellValue(
-                                'backgroundColor',
-                                event.target.value,
-                            )
+                            setBackgroundColor(event.target.value)
                         }
                     />
                     <AiOutlineBgColors />
