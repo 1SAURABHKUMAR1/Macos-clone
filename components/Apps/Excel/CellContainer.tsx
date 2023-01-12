@@ -29,6 +29,7 @@ const CellContainer: NextPage = () => {
         column_index,
         row_index,
         changeRefCell,
+        updateCellValue,
     } = useExcelStore((state) => state);
 
     const CellRenderer = ({
@@ -101,10 +102,9 @@ const CellContainer: NextPage = () => {
                     changeRefCell(columnIndex - 1, rowIndex - 1, elementRef)
                 }
                 value={cellData.value}
-                onChange={() => {
-                    //
-                }}
-                // onChange use debounce with value
+                onChange={(event) =>
+                    updateCellValue('value', event.target.value)
+                }
             />
         );
     };

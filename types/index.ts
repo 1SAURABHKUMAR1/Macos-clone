@@ -334,7 +334,8 @@ export interface excelStore {
             | 'fontColor'
             | 'fontSize'
             | 'fontFamily'
-            | 'textAlign',
+            | 'textAlign'
+            | 'value',
         value:
             | boolean
             | string
