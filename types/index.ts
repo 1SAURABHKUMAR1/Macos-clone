@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import type { MotionValue } from 'framer-motion';
-import type { Dispatch, SetStateAction, CSSProperties, RefObject } from 'react';
-import { columnTotal, rowTotal } from 'helper/excel.config';
+import type { Dispatch, SetStateAction, CSSProperties } from 'react';
+import type { IconType } from 'react-icons';
 
 export type menuConfig = {
     [string: string]: {
@@ -383,4 +383,30 @@ export interface cellRenderer {
     key: string;
     rowIndex: number;
     style: CSSProperties;
+}
+
+export interface ToolbarToggleProps {
+    type:
+        | 'bold'
+        | 'italic'
+        | 'underline'
+        | 'backgroundColor'
+        | 'fontColor'
+        | 'fontSize'
+        | 'fontFamily'
+        | 'textAlign';
+    Icon: IconType;
+    updateCellValueConditon: string | boolean;
+    activeCssCheck?: string;
+}
+
+export interface ToolbarSelectProps {
+    type: 'fontFamily' | 'fontSize';
+    optionsArray: Array<number | string>;
+}
+
+export interface ToolbarColorInputProps {
+    type: 'backgroundColor' | 'fontColor';
+    delay: number;
+    Icon: IconType;
 }

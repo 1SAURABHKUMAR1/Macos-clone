@@ -26,6 +26,12 @@ import CalenderMainArea from '@components/Apps/Calender/CalenderMainArea';
 import CellContainer from '@components/Apps/Excel/CellContainer';
 import Formula from '@components/Apps/Excel/Formula';
 import Toolbar from '@components/Apps/Excel/Toolbar';
+import ToolbarCutCopyPaste from '@components/Apps/Excel/ToolbarCutCopyPaste';
+import ToolbarDownloadUpload from '@components/Apps/Excel/ToolbarDownloadUpload';
+import ToolbarToggle from '@components/Apps/Excel/ToolbarToggle';
+import ToolbarSelect from '@components/Apps/Excel/ToolbarSelect';
+import ToolbarColorInput from '@components/Apps/Excel/ToolbarColorInput';
+import Tooltip from '@components/Tooltip/Tooltip';
 
 export {
     BootupScreen,
@@ -56,4 +62,10 @@ export {
     CellContainer,
     Formula,
     Toolbar,
+    ToolbarCutCopyPaste,
+    ToolbarDownloadUpload,
+    ToolbarToggle,
+    ToolbarSelect,
+    ToolbarColorInput,
+    Tooltip,
 };

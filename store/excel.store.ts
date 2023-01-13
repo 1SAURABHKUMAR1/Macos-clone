@@ -54,6 +54,7 @@ const useExcelStore = create<excelStore>()(
         },
 
         updateCellValue: (key, value) => {
+            console.log(key, value);
             set((state) => {
                 const cellData = state.cell_data;
                 const row_index = state.row_index;
