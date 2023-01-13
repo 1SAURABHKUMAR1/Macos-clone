@@ -15,7 +15,6 @@ import { cellProperties, systemPrimaryCss } from 'types';
 import { colorsConfig } from 'helper/action-colors.config';
 import screenfull from 'screenfull';
 import localforage from 'localforage';
-import { useDebounce } from '@hooks/index';
 
 const Container = styled.div`
     height: 100%;
@@ -44,8 +43,7 @@ const Home: NextPage = () => {
     const { brightness, systemColor, fullScreen } = useSystemStore(
         (state) => state,
     );
-    const { cell_data, updateWholeCellData } = useExcelStore((state) => state);
-    const debouncedCellValue = useDebounce<cellProperties[][]>(cell_data, 500);
+    const { updateWholeCellData } = useExcelStore((state) => state);
 
     useEffect(() => {
         const retrieveCellData = async () => {
@@ -69,18 +67,6 @@ const Home: NextPage = () => {
             screenfull.exit();
         }
     }, [fullScreen]);
-
-    useEffect(() => {
-        const saveCellData = async () => {
-            const cellData = debouncedCellValue;
-            cellData.forEach((row) =>
-                row.forEach((cell) => (cell.current = null)),
-            );
-            await excelCellData.setItem('excel-cell-data', cellData);
-        };
-
-        saveCellData();
-    }, [debouncedCellValue]); //FIXME: useEffect doesnt work with 2d aray dep
 
     return (
         <>

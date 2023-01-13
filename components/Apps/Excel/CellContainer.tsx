@@ -80,7 +80,7 @@ const CellContainer: NextPage = () => {
                         : 'unset',
                     textAlign: cellData.textAlign,
                     fontFamily: cellData.fontFamily as unknown as string,
-                    fontSize: cellData.fontSize,
+                    fontSize: `${cellData.fontSize}px`,
                     color: cellData.fontColor,
                     backgroundColor: cellData.backgroundColor,
                 }}

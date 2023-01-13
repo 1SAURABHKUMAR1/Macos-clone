@@ -345,6 +345,7 @@ export interface excelStore {
             | 'center'
             | 'right',
     ) => void;
+    updateCellFormula: (formula: string) => void;
     resetWholeExcel: () => void;
     resetRowColumnIndex: () => void;
 }

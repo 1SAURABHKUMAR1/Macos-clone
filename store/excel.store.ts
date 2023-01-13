@@ -69,6 +69,22 @@ const useExcelStore = create<excelStore>()(
             });
         },
 
+        updateCellFormula: (formula) => {
+            set((state) => {
+                const cellData = state.cell_data;
+                const row_index = state.row_index;
+                const column_index = state.column_index;
+                cellData[row_index][column_index] = {
+                    ...cellData[row_index][column_index],
+                    formula,
+                };
+                return {
+                    ...state,
+                    cell_data: cellData,
+                };
+            });
+        },
+
         resetWholeExcel: () => {
             set((state) => ({
                 ...state,

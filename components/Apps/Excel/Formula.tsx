@@ -12,8 +12,13 @@ import {
 import { findRowAndCol, columnTotal, rowTotal } from '@helper/excel.config';
 
 const Formula: NextPage = () => {
-    const { cell_data, column_index, row_index, changeColumnRowIndex } =
-        useExcelStore((state) => state);
+    const {
+        cell_data,
+        column_index,
+        row_index,
+        changeColumnRowIndex,
+        updateCellFormula,
+    } = useExcelStore((state) => state);
 
     const [cellAddress, setCellAddress] = useState<string>(
         () => `${String.fromCharCode(65 + column_index)}${row_index + 1}`,
@@ -42,8 +47,11 @@ const Formula: NextPage = () => {
         }
     };
 
-    const changeFormualaInput = (event: ChangeEvent<HTMLInputElement>) =>
+    const changeCellAddress = (event: ChangeEvent<HTMLInputElement>) =>
         setCellAddress(event.target.value);
+
+    const changeFormulaInput = (event: ChangeEvent<HTMLInputElement>) =>
+        updateCellFormula(event.target.value);
 
     useEffect(() => {
         setCellAddress(
@@ -61,7 +69,7 @@ const Formula: NextPage = () => {
                 <FormulaBarCellAddress
                     spellCheck={false}
                     value={cellAddress}
-                    onChange={changeFormualaInput}
+                    onChange={changeCellAddress}
                     onKeyDown={focusCellChangeAddress}
                 />
 
@@ -76,7 +84,11 @@ const Formula: NextPage = () => {
                     />
                 </FormulaBarIcon>
 
-                <FormulaBarInput spellCheck={false} />
+                <FormulaBarInput
+                    spellCheck={false}
+                    value={cell_data[row_index][column_index].formula}
+                    onChange={changeFormulaInput}
+                />
             </FormulaAndCellContainer>
         </>
     );

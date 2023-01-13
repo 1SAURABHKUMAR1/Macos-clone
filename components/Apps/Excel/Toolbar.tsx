@@ -12,6 +12,7 @@ import {
     MdOutlineCloudDownload,
     MdOutlineCloudUpload,
 } from 'react-icons/md';
+import { RiSave3Fill } from 'react-icons/ri';
 import { AiOutlineBgColors, AiOutlineFontColors } from 'react-icons/ai';
 import { BiBold, BiItalic } from 'react-icons/bi';
 import { useExcelStore } from '@store/index';
@@ -73,6 +74,12 @@ const Toolbar: NextPage = () => {
     const deleteSheet = () => {
         resetWholeExcel();
         excelCellData.removeItem('excel-cell-data');
+    };
+
+    const saveSheet = async () => {
+        const cellData = cell_data;
+        cellData.forEach((row) => row.forEach((cell) => (cell.current = null)));
+        await excelCellData.setItem('excel-cell-data', cellData);
     };
 
     return (
@@ -235,6 +242,10 @@ const Toolbar: NextPage = () => {
 
                 <ToolbarIcon onClick={deleteSheet}>
                     <MdOutlineDelete />
+                </ToolbarIcon>
+
+                <ToolbarIcon onClick={saveSheet}>
+                    <RiSave3Fill />
                 </ToolbarIcon>
 
                 <ToolbarIcon>
