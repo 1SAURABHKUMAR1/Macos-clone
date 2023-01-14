@@ -13,6 +13,7 @@ import { contextMenuConfigItems } from 'helper/context-menu.config';
 import { appConfig } from 'helper/app.config';
 import { useAppStore } from '@store/index';
 import { apps as AppType } from 'types/index';
+import { Toaster } from 'react-hot-toast';
 
 const MainWindowArea: NextPage = () => {
     const windowRef = useRef<HTMLDivElement>(null);
@@ -100,22 +101,27 @@ const MainWindowArea: NextPage = () => {
                                 {key === 'launch' ? (
                                     <Launch key={key} />
                                 ) : (
-                                    <SingleWindow
-                                        ref={windowRef}
-                                        fullScreen={value.fullScreen}
-                                        zIndex={value.zIndex}
-                                        appKey={key as AppType}
-                                        minimized={value.minimized}
-                                        width={appConfig[key as AppType].width}
-                                        backgroundColor={
-                                            appConfig[key as AppType]
-                                                .backgroundColor
-                                        }
-                                        height={
-                                            appConfig[key as AppType].height
-                                        }
-                                        key={key}
-                                    />
+                                    <>
+                                        <SingleWindow
+                                            ref={windowRef}
+                                            fullScreen={value.fullScreen}
+                                            zIndex={value.zIndex}
+                                            appKey={key as AppType}
+                                            minimized={value.minimized}
+                                            width={
+                                                appConfig[key as AppType].width
+                                            }
+                                            backgroundColor={
+                                                appConfig[key as AppType]
+                                                    .backgroundColor
+                                            }
+                                            height={
+                                                appConfig[key as AppType].height
+                                            }
+                                            key={key}
+                                        />
+                                        <Toaster position="top-right" />
+                                    </>
                                 )}
                             </React.Fragment>
                         ))}
