@@ -209,10 +209,6 @@ const GlobalStyle = createGlobalStyle`
         --active-grey: #d1d5db;
         --hover-grey: #e5e7eb;
         --excel-green: #34a853;
-        --tooltip-text-color: white;
-        --tooltip-background-color: black;
-        --tooltip-margin: 30px;
-        --tooltip-arrow-size: 6px;
     }
 
     #__next {

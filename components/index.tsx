@@ -31,7 +31,6 @@ import ToolbarDownloadUpload from '@components/Apps/Excel/ToolbarDownloadUpload'
 import ToolbarToggle from '@components/Apps/Excel/ToolbarToggle';
 import ToolbarSelect from '@components/Apps/Excel/ToolbarSelect';
 import ToolbarColorInput from '@components/Apps/Excel/ToolbarColorInput';
-import Tooltip from '@components/Tooltip/Tooltip';
 
 export {
     BootupScreen,
@@ -67,5 +66,4 @@ export {
     ToolbarToggle,
     ToolbarSelect,
     ToolbarColorInput,
-    Tooltip,
 };
