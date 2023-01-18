@@ -9,7 +9,7 @@ import {
     MultiGridProps,
     AutoSizerProps,
 } from 'react-virtualized';
-import { cellRenderer } from 'types/index';
+import { CellContainerType, cellRenderer } from 'types/index';
 import {
     CellRowColumnContainer,
     LeftDummyBox,
@@ -22,7 +22,10 @@ import {
 const MultiGrid = _MultiGrid as unknown as FC<MultiGridProps>;
 const AutoSizer = _AutoSizer as unknown as FC<AutoSizerProps>;
 
-const CellContainer: NextPage = () => {
+const CellContainer: NextPage<CellContainerType> = ({
+    changeChildrenValue,
+    removeChildrenAndParent,
+}) => {
     const {
         cell_data,
         changeColumnRowIndex,
@@ -30,6 +33,7 @@ const CellContainer: NextPage = () => {
         row_index,
         changeRefCell,
         updateCellValue,
+        updateCellFormula,
     } = useExcelStore((state) => state);
 
     const CellRenderer = ({
@@ -102,9 +106,18 @@ const CellContainer: NextPage = () => {
                     changeRefCell(columnIndex - 1, rowIndex - 1, elementRef)
                 }
                 value={cellData.value}
-                onChange={(event) =>
-                    updateCellValue('value', event.target.value)
-                }
+                onChange={(event) => {
+                    updateCellValue('value', event.target.value);
+                    cellData.formula && updateCellFormula('');
+
+                    if (cellData.children || cellData.parent) {
+                        removeChildrenAndParent();
+                        changeChildrenValue({
+                            rowIndex: rowIndex - 1,
+                            columnIndex: columnIndex - 1,
+                        });
+                    }
+                }}
             />
         );
     };

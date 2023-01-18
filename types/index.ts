@@ -1,6 +1,11 @@
 /* eslint-disable no-unused-vars */
 import type { MotionValue } from 'framer-motion';
-import type { Dispatch, SetStateAction, CSSProperties } from 'react';
+import type {
+    Dispatch,
+    SetStateAction,
+    CSSProperties,
+    KeyboardEvent,
+} from 'react';
 import type { IconType } from 'react-icons';
 
 export type menuConfig = {
@@ -346,6 +351,20 @@ export interface excelStore {
             | 'right',
     ) => void;
     updateCellFormula: (formula: string) => void;
+    updateChildrenParentArray: (
+        key: 'parent' | 'children',
+        childParentArray: (
+            | { child_row_index: number; child_column_index: number }
+            | { parent_row_index: number; parent_column_index: number }
+        )[],
+        row_index: number,
+        column_index: number,
+    ) => void;
+    updateCellValueIndex: (
+        value: string,
+        rowIndex: number,
+        columnIndex: number,
+    ) => void;
     resetWholeExcel: () => void;
     resetRowColumnIndex: () => void;
 }
@@ -376,6 +395,8 @@ export type cellProperties = {
     value: string;
     formula: string;
     current: HTMLDivElement | null;
+    children: { child_row_index: number; child_column_index: number }[];
+    parent: { parent_row_index: number; parent_column_index: number }[];
 };
 
 export interface cellRenderer {
@@ -410,3 +431,25 @@ export interface ToolbarColorInputProps {
     delay: number;
     Icon: IconType;
 }
+
+export type evaluteFormulaType = (
+    formula: string,
+    cell_data: cellProperties[][],
+) => string;
+
+export type FormulaType = {
+    computeFormula: (event: KeyboardEvent<HTMLInputElement>) => void;
+};
+
+export type changeChildrenValueType = {
+    rowIndex: number;
+    columnIndex: number;
+};
+
+export type CellContainerType = {
+    changeChildrenValue: ({
+        rowIndex,
+        columnIndex,
+    }: changeChildrenValueType) => void;
+    removeChildrenAndParent: () => void;
+};

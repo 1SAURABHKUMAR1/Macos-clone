@@ -18,6 +18,8 @@ const useExcelStore = create<excelStore>()(
                 value: '',
                 formula: '',
                 current: null,
+                children: [],
+                parent: [],
             }),
         ),
         column_index: 0,
@@ -85,6 +87,39 @@ const useExcelStore = create<excelStore>()(
             });
         },
 
+        updateCellValueIndex: (value, rowIndex, columnIndex) => {
+            set((state) => {
+                const cellData = state.cell_data;
+                cellData[rowIndex][columnIndex] = {
+                    ...cellData[rowIndex][columnIndex],
+                    value: value,
+                };
+                return {
+                    ...state,
+                    cell_data: cellData,
+                };
+            });
+        },
+
+        updateChildrenParentArray: (
+            key,
+            childParentArray,
+            row_index,
+            column_index,
+        ) => {
+            set((state) => {
+                const cellData = state.cell_data;
+                cellData[row_index][column_index] = {
+                    ...cellData[row_index][column_index],
+                    [key]: childParentArray,
+                };
+                return {
+                    ...state,
+                    cell_data: cellData,
+                };
+            });
+        },
+
         resetWholeExcel: () => {
             set((state) => ({
                 ...state,
@@ -101,6 +136,8 @@ const useExcelStore = create<excelStore>()(
                         value: '',
                         formula: '',
                         current: null,
+                        parent: [],
+                        children: [],
                     }),
                 ),
                 column_index: 0,

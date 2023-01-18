@@ -11,9 +11,12 @@ import {
 } from './styled';
 import { useEffect } from 'react';
 import useExcelStore from '@store/excel.store';
+import useExcel from '@hooks/useExcel';
 
 const Excel: NextPage = () => {
     const { resetRowColumnIndex } = useExcelStore((state) => state);
+    const { changeChildrenValue, computeFormula, removeChildrenParent } =
+        useExcel();
 
     useEffect(() => {
         return () => {
@@ -35,9 +38,12 @@ const Excel: NextPage = () => {
 
                 <Toolbar />
 
-                <Formula />
+                <Formula computeFormula={computeFormula} />
 
-                <CellContainer />
+                <CellContainer
+                    changeChildrenValue={changeChildrenValue}
+                    removeChildrenAndParent={removeChildrenParent}
+                />
 
                 <SheetContainer>
                     <SheetIcon>
