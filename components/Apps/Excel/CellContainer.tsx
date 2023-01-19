@@ -88,7 +88,6 @@ const CellContainer: NextPage<CellContainerType> = ({
                     color: cellData.fontColor,
                     backgroundColor: cellData.backgroundColor,
                 }}
-                contentEditable
                 spellCheck={false}
                 onClick={() =>
                     changeColumnRowIndex(columnIndex - 1, rowIndex - 1)
@@ -147,7 +146,6 @@ const CellContainer: NextPage<CellContainerType> = ({
                         />
                     )}
                 </AutoSizer>
-                {/* </CellsContainer> */}
             </CellRowColumnContainer>
         </>
     );

@@ -5,23 +5,27 @@ import { columnTotal, rowTotal } from 'helper/excel.config';
 
 const useExcelStore = create<excelStore>()(
     devtools((set) => ({
-        cell_data: Array.from(Array(rowTotal), () =>
-            Array(columnTotal).fill({
-                bold: false,
-                italic: false,
-                underline: false,
-                textAlign: 'left',
-                fontFamily: 'Inter',
-                fontSize: '16',
-                fontColor: '#000000',
-                backgroundColor: '#f9fafb',
-                value: '',
-                formula: '',
-                current: null,
-                children: [],
-                parent: [],
-            }),
-        ),
+        cell_data: Array(rowTotal)
+            .fill(null)
+            .map(() =>
+                Array(columnTotal)
+                    .fill(null)
+                    .map(() => ({
+                        bold: false,
+                        italic: false,
+                        underline: false,
+                        textAlign: 'left',
+                        fontFamily: 'Inter',
+                        fontSize: '16',
+                        fontColor: '#000000',
+                        backgroundColor: '#f9fafb',
+                        value: '',
+                        formula: '',
+                        current: null,
+                        children: [],
+                        parent: [],
+                    })),
+            ),
         column_index: 0,
         row_index: 0,
 

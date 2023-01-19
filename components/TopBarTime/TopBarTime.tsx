@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
 import { TimeContainer } from './styled';
@@ -20,4 +20,4 @@ const TopBarTime: NextPage = () => {
     );
 };
 
-export default TopBarTime;
+export default memo(TopBarTime);

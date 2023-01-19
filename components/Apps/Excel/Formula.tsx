@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import type { ChangeEvent } from 'react';
+import { ChangeEvent, memo } from 'react';
 import { useExcelStore } from '@store/index';
 import {
     FormulaAndCellContainer,
@@ -52,4 +52,4 @@ const Formula: NextPage<FormulaType> = ({ computeFormula }) => {
     );
 };
 
-export default Formula;
+export default memo(Formula);
