@@ -21,6 +21,7 @@ import {
     ToolbarToggle,
 } from '@components/index';
 import { ToolbarContainer, ToolbarIcon } from './styled';
+import { cellProperties } from 'types/index';
 
 const excelCellData = localforage.createInstance({
     name: 'excel-cell-data',
@@ -36,8 +37,18 @@ const Toolbar: NextPage = () => {
     };
 
     const saveSheet = async () => {
-        const cellData = cell_data;
-        cellData.forEach((row) => row.forEach((cell) => (cell.current = null)));
+        let cellData: cellProperties[][] = [];
+
+        cell_data.forEach((row, rowIndex) => {
+            cellData.push([]);
+            row.forEach((cell, columnIndex) =>
+                cellData[rowIndex].push({
+                    ...cell_data[rowIndex][columnIndex],
+                    current: null,
+                }),
+            );
+        });
+
         await excelCellData.setItem('excel-cell-data', cellData);
     };
 

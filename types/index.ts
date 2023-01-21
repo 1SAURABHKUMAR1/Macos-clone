@@ -453,3 +453,31 @@ export type CellContainerType = {
     }: changeChildrenValueType) => void;
     removeChildrenAndParent: () => void;
 };
+
+type Color = string;
+
+type BorderStyle =
+    | 'hair'
+    | 'dotted'
+    | 'dashDotDot'
+    | 'dashDot'
+    | 'dashed'
+    | 'thin'
+    | 'mediumDashDotDot'
+    | 'slantDashDot'
+    | 'mediumDashDot'
+    | 'mediumDashed'
+    | 'medium'
+    | 'double'
+    | 'thick';
+
+export type cellStyle = {
+    align?: 'left' | 'center' | 'right';
+    fontFamily?: string;
+    fontSize?: number;
+    fontWeight?: 'bold';
+    fontStyle?: 'italic';
+    color?: string;
+    backgroundColor?: string;
+    value: string;
+};
